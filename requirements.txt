@@ -1,0 +1,4 @@
+torch>=2.1
+transformers>=4.40,<5  # jina-bert remote code imports find_pruneable_heads_and_indices, removed in v5
+einops  # harmless if unused; some jina remote-code revisions import it
+pytest
