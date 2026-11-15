@@ -21,7 +21,13 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from latechunk.chunking import fixed_token_chunks  # noqa: E402
 from latechunk.data import doc_text, download_beir, load_beir  # noqa: E402
-from latechunk.encoding import Encoder, encode_late, encode_naive, long_late_token_embeddings  # noqa: E402
+from latechunk.encoding import (  # noqa: E402
+    Encoder,
+    encode_late,
+    encode_naive,
+    encode_naive_prefix,
+    long_late_token_embeddings,
+)
 from latechunk.retrieval import evaluate, search_docs  # noqa: E402
 
 # Reference values (nDCG@10 x100) for jina-embeddings-v2-small-en, fixed 256-token chunks,
@@ -82,11 +88,12 @@ def main():
     p.add_argument("--chunk-size", type=int, default=256)
     p.add_argument("--max-length", type=int, default=8192)
     p.add_argument("--methods", nargs="+", default=["naive", "late", "long_late"],
-                   choices=["naive", "late", "long_late"])
+                   choices=["naive", "naive_prefix", "late", "long_late"])
     p.add_argument("--long-window", type=int, default=256, help="Algorithm 2 macro-window size (tokens)")
     p.add_argument("--long-overlap", type=int, default=64, help="Algorithm 2 overlap (tokens)")
     p.add_argument("--long-special-tokens", choices=["raw", "wrap"], default="raw")
-    p.add_argument("--no-title", action="store_true", help="Do not prepend the BEIR title to the document text")
+    p.add_argument("--no-title", action="store_true",
+                   help="Split body text only. naive_prefix still uses the BEIR title as its prefix.")
     p.add_argument("--batch-size", type=int, default=16)
     p.add_argument("--limit-docs", type=int, default=None, help="Debug: only use the first N documents")
     p.add_argument("--device", default=None)
@@ -122,6 +129,9 @@ def main():
         t0 = time.time()
         if method == "naive":
             c_emb = encode_naive(enc, docs, batch_size=64)
+        elif method == "naive_prefix":
+            prefixes = {doc_id: corpus[doc_id]["title"] for doc_id in doc_ids}
+            c_emb = encode_naive_prefix(enc, docs, prefixes, batch_size=64)
         elif method == "late":
             c_emb = encode_late(enc, docs, batch_size=args.batch_size)
         else:
@@ -134,7 +144,7 @@ def main():
         run = {q: [doc_ids[j] for j in row.tolist()] for q, row in zip(qids, top)}
         m = evaluate(run, qrels, k=10)
         m["encode_seconds"] = enc_time
-        ref = REFERENCE.get(args.dataset, {}).get(method)
+        ref = None if args.no_title else REFERENCE.get(args.dataset, {}).get(method)
         results[method] = m
         print(f"[{method:9s}] nDCG@10={100 * m['ndcg@10']:.2f}  Recall@10={100 * m['recall@10']:.2f}"
               + (f"  (reference nDCG@10={ref:.2f})" if ref is not None else "")

@@ -1,8 +1,8 @@
-"""Independent (naive) chunk encoding, Late Chunking, and Long Late Chunking (Algorithm 2)."""
+"""Independent chunk encoding with optional prefixes, Late Chunking, and Long Late Chunking."""
 
 from __future__ import annotations
 
-from typing import Callable, Sequence
+from typing import Callable, Mapping, Sequence
 
 import torch
 import torch.nn.functional as F
@@ -12,6 +12,7 @@ from .chunking import ChunkedDoc
 # Pinned revision of jinaai/jina-bert-implementation (the remote modeling code that
 # jina-embeddings-v2-*-en loads), so every run executes the same model code.
 JINA_BERT_CODE_REVISION = "f3ec4cf7de7e561007f27c9efc7148b0bd713f81"
+MAX_PREFIX_TOKENS = 64
 
 # embed_fn: list of token-id lists -> list of (len_i, d) token-embedding tensors
 EmbedFn = Callable[[Sequence[Sequence[int]]], list[torch.Tensor]]
@@ -75,7 +76,10 @@ class Encoder:
         """Standard independent encoding: tokenize with special tokens, mean-pool over
         the attention mask (incl. [CLS]/[SEP], as jina-embeddings-v2 `encode` does), L2-normalize."""
         enc = self.tokenizer(list(texts), add_special_tokens=True, truncation=True, max_length=self.max_length)
-        ids = enc["input_ids"]
+        return self.encode_token_ids(enc["input_ids"], batch_size=batch_size)
+
+    def encode_token_ids(self, ids: Sequence[Sequence[int]], batch_size: int = 64) -> torch.Tensor:
+        """Mean-pool and L2-normalize inputs that already include any special tokens."""
         order = sorted(range(len(ids)), key=lambda i: len(ids[i]))  # length bucketing
         out = torch.empty(len(ids), self.model.config.hidden_size)
         for b in range(0, len(order), batch_size):
@@ -163,6 +167,31 @@ def pool_spans(token_emb: torch.Tensor, spans: Sequence[tuple[int, int]]) -> tor
 def encode_naive(encoder: Encoder, docs: Sequence[ChunkedDoc], batch_size: int = 64) -> torch.Tensor:
     texts = [t for d in docs for t in d.texts]
     return encoder.encode_texts(texts, batch_size=batch_size)
+
+
+def encode_naive_prefix(
+    encoder: Encoder,
+    docs: Sequence[ChunkedDoc],
+    prefixes: Mapping[str, str],
+    batch_size: int = 64,
+) -> torch.Tensor:
+    """Independently encode each chunk with up to 64 tokens of document metadata."""
+    tokenizer = encoder.tokenizer
+    special_count = tokenizer.num_special_tokens_to_add(pair=False)
+    inputs = []
+    for doc in docs:
+        if not doc.texts:
+            continue
+        prefix = prefixes.get(doc.doc_id, "")
+        prefix_ids = tokenizer(prefix, add_special_tokens=False, truncation=False, verbose=False)["input_ids"]
+        prefix_ids = prefix_ids[:MAX_PREFIX_TOKENS]
+        chunks = tokenizer(doc.texts, add_special_tokens=False, truncation=False, verbose=False)["input_ids"]
+        for chunk_ids in chunks:
+            available = encoder.max_length - len(chunk_ids) - special_count
+            if available < 0:
+                raise ValueError(f"Chunk in document {doc.doc_id} exceeds max_length={encoder.max_length} before prefixing")
+            inputs.append(tokenizer.build_inputs_with_special_tokens(prefix_ids[:available] + chunk_ids))
+    return encoder.encode_token_ids(inputs, batch_size=batch_size)
 
 
 def encode_late(

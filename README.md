@@ -33,3 +33,34 @@ Reference nDCG@10 (jina-ai/late-chunking README; check against Table 2 of the pa
 - **Sanity checks** (run before the evaluation): span contiguity, coverage, and special-token exclusion; the rate at
   which naive re-tokenization differs from the span tokens; Long LC with window ≥ length equals single-pass late
   chunking; padding invariance; vector norms.
+
+## Independent + prefix
+
+The four-method SciFact comparison uses the original title-plus-body tokenization and 256-token retrieval
+chunks. `naive_prefix` prepends up to 64 title tokens to each existing chunk at encoding time. This
+intentionally repeats the title in the first chunk: the prefix and the title already in that chunk are both
+included in its input. `naive_prefix` uses the same mean pooling and L2 normalization as `naive`.
+
+```bash
+python scripts/reproduce_late_chunking.py --methods naive late long_late naive_prefix --device cpu --out-dir results/scifact-four-methods
+```
+
+### SciFact test results
+
+All four methods used the same 5,183 documents, 9,356 retrieval chunks, and 300 queries.
+Encoding time is for one full-corpus CPU run. See the [recorded configuration and metrics](benchmarks/scifact-four-methods.json).
+
+| Method | nDCG@10 (×100) | Recall@10 | Encoding time (s) |
+|---|---:|---:|---:|
+| `naive` | 64.18 | 76.59% | 421.4 |
+| `late` | 65.78 | 76.76% | 578.6 |
+| `long_late` | 65.04 | 76.59% | 798.6 |
+| `naive_prefix` | 64.53 | 76.51% | 522.4 |
+
+| `naive_prefix` relative to | Δ nDCG@10 points (×100) | Δ Recall@10 percentage points | Δ encoding time (s) |
+|---|---:|---:|---:|
+| `naive` | +0.35 | −0.08 | +101.0 |
+| `late` | −1.25 | −0.25 | −56.1 |
+
+The separate `--no-title --methods naive naive_prefix --out-dir results/prefix` comparison uses body-only
+retrieval chunks and adds the title from metadata only in `naive_prefix`.
