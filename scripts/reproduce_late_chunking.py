@@ -24,6 +24,7 @@ from latechunk.data import doc_text, download_beir, load_beir  # noqa: E402
 from latechunk.encoding import (  # noqa: E402
     Encoder,
     encode_late,
+    encode_local_contextual,
     encode_naive,
     encode_naive_prefix,
     long_late_token_embeddings,
@@ -88,10 +89,12 @@ def main():
     p.add_argument("--chunk-size", type=int, default=256)
     p.add_argument("--max-length", type=int, default=8192)
     p.add_argument("--methods", nargs="+", default=["naive", "late", "long_late"],
-                   choices=["naive", "naive_prefix", "late", "long_late"])
+                   choices=["naive", "naive_prefix", "late", "long_late", "local_contextual"])
     p.add_argument("--long-window", type=int, default=256, help="Algorithm 2 macro-window size (tokens)")
     p.add_argument("--long-overlap", type=int, default=64, help="Algorithm 2 overlap (tokens)")
     p.add_argument("--long-special-tokens", choices=["raw", "wrap"], default="raw")
+    p.add_argument("--local-radius", type=int, default=1, help="Maximum neighbour chunks on each side")
+    p.add_argument("--local-context-cap", type=int, default=1024, help="Local window token budget, including special tokens")
     p.add_argument("--no-title", action="store_true",
                    help="Split body text only. naive_prefix still uses the BEIR title as its prefix.")
     p.add_argument("--batch-size", type=int, default=16)
@@ -134,6 +137,9 @@ def main():
             c_emb = encode_naive_prefix(enc, docs, prefixes, batch_size=64)
         elif method == "late":
             c_emb = encode_late(enc, docs, batch_size=args.batch_size)
+        elif method == "local_contextual":
+            c_emb = encode_local_contextual(enc, docs, batch_size=args.batch_size,
+                                            radius=args.local_radius, context_cap=args.local_context_cap)
         else:
             c_emb = encode_late(enc, docs, batch_size=args.batch_size, long_window=args.long_window,
                                 long_overlap=args.long_overlap, special_tokens=args.long_special_tokens)

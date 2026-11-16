@@ -1,0 +1,146 @@
+{
+  "dataset": "scifact",
+  "documents": 5183,
+  "test_queries": 300,
+  "local_radius": 1,
+  "local_context_cap": 1024,
+  "coverage_definition": "One logical window per target chunk, whether or not identical inputs share an encoder pass.",
+  "sizes": {
+    "256": {
+      "source_results": [
+        "../scifact-four-methods.json",
+        "cs256-local-contextual.json"
+      ],
+      "chunks": 9356,
+      "full_document_target_windows": 8333,
+      "full_document_target_window_pct": 89.06584010260795,
+      "distinct_local_encoder_windows": 6155,
+      "distinct_full_document_encoder_windows": 5132,
+      "distinct_full_document_encoder_window_pct": 83.37936636880585,
+      "max_local_window_tokens_including_specials": 770,
+      "local_contextual_minus_late_ndcg10_points": -0.14324431933606663,
+      "methods": {
+        "naive": {
+          "ndcg@10": 0.6418124977208295,
+          "recall@10": 0.7658888888888888,
+          "n_queries": 300,
+          "encode_seconds": 421.42543172836304
+        },
+        "naive_prefix": {
+          "ndcg@10": 0.6453387301322848,
+          "recall@10": 0.7650555555555555,
+          "n_queries": 300,
+          "encode_seconds": 522.4357101917267
+        },
+        "late": {
+          "ndcg@10": 0.6578370981352855,
+          "recall@10": 0.7675555555555555,
+          "n_queries": 300,
+          "encode_seconds": 578.5563960075378
+        },
+        "long_late": {
+          "ndcg@10": 0.6504414080356534,
+          "recall@10": 0.7658888888888888,
+          "n_queries": 300,
+          "encode_seconds": 798.563973903656
+        },
+        "local_contextual": {
+          "ndcg@10": 0.6564046549419248,
+          "recall@10": 0.7725555555555556,
+          "n_queries": 300,
+          "encode_seconds": 686.2260394096375
+        }
+      }
+    },
+    "128": {
+      "source_results": [
+        "cs128.json"
+      ],
+      "chunks": 16193,
+      "full_document_target_windows": 5007,
+      "full_document_target_window_pct": 30.92076823318718,
+      "distinct_local_encoder_windows": 14776,
+      "distinct_full_document_encoder_windows": 3590,
+      "distinct_full_document_encoder_window_pct": 24.296155928532755,
+      "max_local_window_tokens_including_specials": 386,
+      "local_contextual_minus_late_ndcg10_points": -0.5032740158214533,
+      "methods": {
+        "naive": {
+          "ndcg@10": 0.6520637315029202,
+          "recall@10": 0.7881111111111111,
+          "n_queries": 300,
+          "encode_seconds": 388.63868045806885
+        },
+        "naive_prefix": {
+          "ndcg@10": 0.6554986418936235,
+          "recall@10": 0.7803333333333333,
+          "n_queries": 300,
+          "encode_seconds": 494.24400663375854
+        },
+        "late": {
+          "ndcg@10": 0.661228063809834,
+          "recall@10": 0.7853333333333333,
+          "n_queries": 300,
+          "encode_seconds": 578.6526622772217
+        },
+        "long_late": {
+          "ndcg@10": 0.6524052831510885,
+          "recall@10": 0.7586666666666666,
+          "n_queries": 300,
+          "encode_seconds": 798.5186972618103
+        },
+        "local_contextual": {
+          "ndcg@10": 0.6561953236516195,
+          "recall@10": 0.7786666666666666,
+          "n_queries": 300,
+          "encode_seconds": 1174.179405927658
+        }
+      }
+    },
+    "64": {
+      "source_results": [
+        "cs64.json"
+      ],
+      "chunks": 29726,
+      "full_document_target_windows": 697,
+      "full_document_target_window_pct": 2.344748704837516,
+      "distinct_local_encoder_windows": 29611,
+      "distinct_full_document_encoder_windows": 582,
+      "distinct_full_document_encoder_window_pct": 1.9654857991962447,
+      "max_local_window_tokens_including_specials": 194,
+      "local_contextual_minus_late_ndcg10_points": 1.818069138077616,
+      "methods": {
+        "naive": {
+          "ndcg@10": 0.6649421585969321,
+          "recall@10": 0.7789444444444443,
+          "n_queries": 300,
+          "encode_seconds": 425.04406666755676
+        },
+        "naive_prefix": {
+          "ndcg@10": 0.6701604774934926,
+          "recall@10": 0.800611111111111,
+          "n_queries": 300,
+          "encode_seconds": 591.1793179512024
+        },
+        "late": {
+          "ndcg@10": 0.6605236056843359,
+          "recall@10": 0.7858888888888889,
+          "n_queries": 300,
+          "encode_seconds": 588.7406008243561
+        },
+        "long_late": {
+          "ndcg@10": 0.6590884826734781,
+          "recall@10": 0.767,
+          "n_queries": 300,
+          "encode_seconds": 801.4868683815002
+        },
+        "local_contextual": {
+          "ndcg@10": 0.678704297065112,
+          "recall@10": 0.8025555555555555,
+          "n_queries": 300,
+          "encode_seconds": 1212.7504527568817
+        }
+      }
+    }
+  }
+}

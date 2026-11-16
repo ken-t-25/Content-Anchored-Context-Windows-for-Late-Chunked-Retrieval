@@ -1,4 +1,4 @@
-"""Independent chunk encoding with optional prefixes, Late Chunking, and Long Late Chunking."""
+"""Independent and contextual chunk encoders."""
 
 from __future__ import annotations
 
@@ -192,6 +192,73 @@ def encode_naive_prefix(
                 raise ValueError(f"Chunk in document {doc.doc_id} exceeds max_length={encoder.max_length} before prefixing")
             inputs.append(tokenizer.build_inputs_with_special_tokens(prefix_ids[:available] + chunk_ids))
     return encoder.encode_token_ids(inputs, batch_size=batch_size)
+
+
+def _local_window_bounds(
+    spans: Sequence[tuple[int, int]], target: int, radius: int, content_budget: int
+) -> tuple[int, int]:
+    left = right = target
+    start, end = spans[target]
+    # Prefer closer neighbours, breaking ties to the left. Keep the window contiguous.
+    for distance in range(1, min(radius, len(spans) - 1) + 1):
+        previous, following = target - distance, target + distance
+        expanded = False
+        if previous >= 0 and previous == left - 1 and end - spans[previous][0] <= content_budget:
+            left, start = previous, spans[previous][0]
+            expanded = True
+        if following < len(spans) and following == right + 1 and spans[following][1] - start <= content_budget:
+            right, end = following, spans[following][1]
+            expanded = True
+        if not expanded:
+            break
+    return start, end
+
+
+def encode_local_contextual(
+    encoder: Encoder,
+    docs: Sequence[ChunkedDoc],
+    batch_size: int = 16,
+    *,
+    radius: int = 1,
+    context_cap: int = 1024,
+) -> torch.Tensor:
+    """Use whole adjacent chunks as context and pool only each target span."""
+    if radius < 0 or context_cap <= 0 or batch_size <= 0:
+        raise ValueError("Local contextual encoding requires radius >= 0, context_cap > 0 and batch_size > 0")
+
+    tokenizer = encoder.tokenizer
+    special_count = tokenizer.num_special_tokens_to_add(pair=False)
+    content_budget = min(context_cap, encoder.max_length) - special_count
+    windows: list[list[int]] = []
+    targets: list[list[tuple[int, tuple[int, int]]]] = []
+    next_chunk = 0
+    for doc in docs:
+        if not doc.spans:
+            continue
+        leading_specials = doc.spans[0][0]
+        window_indices: dict[tuple[int, int], int] = {}
+        for target, (start, end) in enumerate(doc.spans):
+            if end - start + special_count > encoder.max_length:
+                raise ValueError(f"Chunk in document {doc.doc_id} exceeds max_length={encoder.max_length}")
+            # The target remains whole even when it alone exceeds the context budget.
+            window_start, window_end = _local_window_bounds(doc.spans, target, radius, content_budget)
+            bounds = (window_start, window_end)
+            if bounds not in window_indices:
+                window_indices[bounds] = len(windows)
+                windows.append(tokenizer.build_inputs_with_special_tokens(doc.input_ids[window_start:window_end]))
+                targets.append([])
+            offset = leading_specials - window_start
+            targets[window_indices[bounds]].append((next_chunk, (start + offset, end + offset)))
+            next_chunk += 1
+
+    order = sorted(range(len(windows)), key=lambda index: len(windows[index]))
+    out = torch.empty(next_chunk, encoder.model.config.hidden_size)
+    for start in range(0, len(order), batch_size):
+        batch = order[start : start + batch_size]
+        for index, token_emb in zip(batch, encoder.token_embeddings([windows[i] for i in batch])):
+            chunk_indices, spans = zip(*targets[index])
+            out[list(chunk_indices)] = pool_spans(token_emb, spans)
+    return F.normalize(out, dim=-1)
 
 
 def encode_late(

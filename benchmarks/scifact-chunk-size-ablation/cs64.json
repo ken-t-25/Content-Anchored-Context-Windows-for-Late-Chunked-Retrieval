@@ -1,0 +1,61 @@
+{
+  "config": {
+    "dataset": "scifact",
+    "data_dir": "data",
+    "out_dir": "results\\scifact-ablation-cs64",
+    "model": "jinaai/jina-embeddings-v2-small-en",
+    "chunk_size": "64",
+    "max_length": "8192",
+    "methods": "['naive', 'late', 'long_late', 'naive_prefix', 'local_contextual']",
+    "long_window": "256",
+    "long_overlap": "64",
+    "long_special_tokens": "raw",
+    "local_radius": "1",
+    "local_context_cap": "1024",
+    "no_title": "False",
+    "batch_size": "16",
+    "limit_docs": "None",
+    "device": "cpu",
+    "skip_sanity": "False"
+  },
+  "sanity": {
+    "spans_ok": true,
+    "naive_retokenization_mismatch_rate": 0.1649122807017544,
+    "llc_equals_late_when_fits_maxabs": 0.0,
+    "padding_invariance_maxabs": 1.4901161193847656e-06,
+    "late_norms_range": [
+      0.9999999403953552,
+      1.0
+    ]
+  },
+  "naive": {
+    "ndcg@10": 0.6649421585969321,
+    "recall@10": 0.7789444444444443,
+    "n_queries": 300,
+    "encode_seconds": 425.04406666755676
+  },
+  "late": {
+    "ndcg@10": 0.6605236056843359,
+    "recall@10": 0.7858888888888889,
+    "n_queries": 300,
+    "encode_seconds": 588.7406008243561
+  },
+  "long_late": {
+    "ndcg@10": 0.6590884826734781,
+    "recall@10": 0.767,
+    "n_queries": 300,
+    "encode_seconds": 801.4868683815002
+  },
+  "naive_prefix": {
+    "ndcg@10": 0.6701604774934926,
+    "recall@10": 0.800611111111111,
+    "n_queries": 300,
+    "encode_seconds": 591.1793179512024
+  },
+  "local_contextual": {
+    "ndcg@10": 0.678704297065112,
+    "recall@10": 0.8025555555555555,
+    "n_queries": 300,
+    "encode_seconds": 1212.7504527568817
+  }
+}

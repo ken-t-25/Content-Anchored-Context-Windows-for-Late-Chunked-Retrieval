@@ -1,0 +1,37 @@
+{
+  "config": {
+    "dataset": "scifact",
+    "data_dir": "data",
+    "out_dir": "results\\scifact-local-contextual",
+    "model": "jinaai/jina-embeddings-v2-small-en",
+    "chunk_size": "256",
+    "max_length": "8192",
+    "methods": "['local_contextual']",
+    "long_window": "256",
+    "long_overlap": "64",
+    "long_special_tokens": "raw",
+    "local_radius": "1",
+    "local_context_cap": "1024",
+    "no_title": "False",
+    "batch_size": "16",
+    "limit_docs": "None",
+    "device": "cpu",
+    "skip_sanity": "False"
+  },
+  "sanity": {
+    "spans_ok": true,
+    "naive_retokenization_mismatch_rate": 0.1,
+    "llc_equals_late_when_fits_maxabs": 0.0,
+    "padding_invariance_maxabs": 1.4901161193847656e-06,
+    "late_norms_range": [
+      0.9999998807907104,
+      1.0
+    ]
+  },
+  "local_contextual": {
+    "ndcg@10": 0.6564046549419248,
+    "recall@10": 0.7725555555555556,
+    "n_queries": 300,
+    "encode_seconds": 686.2260394096375
+  }
+}
