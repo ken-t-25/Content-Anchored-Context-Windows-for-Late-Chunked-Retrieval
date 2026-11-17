@@ -117,3 +117,60 @@ for size in 128 64; do
     --out-dir "results/scifact-ablation-cs$size"
 done
 ```
+
+## Sticky ID Groups
+
+Sticky groups maintain an ordered map of stable chunk IDs. The initial build packs whole chunks in
+document order, counting special tokens against the group cap. Each group is encoded jointly and
+mean-pooled back to its original chunks. A chunk above the group cap runs alone if it fits the model.
+
+An insertion joins its predecessor's group, or the first group for an insertion at the start. Replacements
+and insertions split only the affected group if it exceeds the cap. After a deletion, a surviving group
+below half of its content-token budget can merge with one adjacent group that fits, trying the left first.
+An empty group is removed. Vectors are reused when the group's ordered IDs and token inputs match.
+Restoring the saved group map preserves the partition reached through edits.
+
+### Full SciFact retrieval
+
+These runs use the initial grouping at a 1,024-token cap and reuse the original title-plus-body pipeline,
+5,183 documents, and 300 queries. Scores are compared with `late` at the same chunk size. Encoding times
+come from individual full-corpus CPU runs.
+
+| Chunk size | Sticky nDCG@10 (×100) | Recall@10 | Δ nDCG@10 vs. `late` (points) | Encoding time (s) | Chunks with full-document input |
+|---:|---:|---:|---:|---:|---:|
+| 256 | 65.7761 | 76.76% | −0.0076 | 953.4 | 99.31% (9,291 / 9,356) |
+| 128 | 65.9687 | 78.20% | −0.1541 | 917.5 | 99.23% (16,068 / 16,193) |
+| 64 | 66.0524 | 78.59% | 0.0000 | 810.8 | 99.18% (29,481 / 29,726) |
+
+The cap splits the same 11 documents at each size. More than 99% of chunks receive the full-document
+input used by `late`. Raw results are available for [256 tokens](benchmarks/scifact-sticky/cs256.json),
+[128 tokens](benchmarks/scifact-sticky/cs128.json), and [64 tokens](benchmarks/scifact-sticky/cs64.json).
+
+```bash
+for size in 256 128 64; do
+  python scripts/reproduce_late_chunking.py --methods sticky --chunk-size "$size" \
+    --sticky-token-cap 1024 --device cpu --out-dir "results/scifact-sticky-cs$size"
+done
+```
+
+### Edit pilot
+
+The pilot uses 256-token chunking and selects the first 20 SciFact documents with at least four chunks.
+It applies a replacement, an insertion, and deletion of the inserted chunk. Each refresh matched a full re-encode using the saved
+group map, with a maximum absolute vector difference of `6.9e-8`. Every insertion split its group, and all
+20 documents kept different group boundaries after deleting the inserted chunk. No-op refreshes made zero
+encoder calls.
+
+| Edit | Refreshed tokens, Sticky / rebuild | Rewritten vectors, Sticky / rebuild | Median CPU refresh per document (s) |
+|---|---:|---:|---:|
+| Replace one token | 17,034 / 18,551 | 77 / 84 | 1.43 |
+| Insert one chunk | 22,194 / 23,711 | 97 / 104 | 1.34 |
+| Delete the inserted chunk | 10,280 / 18,591 | 40 / 84 | 0.70 |
+
+The [pilot record](benchmarks/scifact-sticky/edit-pilot.json) includes per-document group maps, encoder call
+counts, and regrouping, encoding, and vector write times.
+
+```bash
+python scripts/pilot_sticky.py --limit-docs 20 --min-chunks 4 --token-cap 1024 --device cpu \
+  --out results/sticky-pilot/cs256-cap1024-min4.json
+```

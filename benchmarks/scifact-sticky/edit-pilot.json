@@ -1,0 +1,2760 @@
+{
+  "config": {
+    "data_dir": "data",
+    "out": "results\\sticky-pilot\\cs256-cap1024-min4.json",
+    "limit_docs": 20,
+    "min_chunks": 4,
+    "chunk_size": 256,
+    "token_cap": 1024,
+    "model": "jinaai/jina-embeddings-v2-small-en",
+    "max_length": 8192,
+    "batch_size": 16,
+    "device": "cpu"
+  },
+  "selection": "First documents with at least 4 title-plus-body chunks, in SciFact corpus order",
+  "totals": {
+    "noop_before": {
+      "refreshed_groups": 0,
+      "refreshed_input_tokens": 0,
+      "encoder_calls": 0,
+      "rewritten_vectors": 0,
+      "removed_vectors": 0,
+      "regroup_seconds": 0.0,
+      "encode_seconds": 0.0,
+      "write_seconds": 0.0,
+      "total_seconds": 0.0,
+      "max_rebuild_error": 0.0
+    },
+    "replace": {
+      "refreshed_groups": 20,
+      "refreshed_input_tokens": 17034,
+      "encoder_calls": 20,
+      "rewritten_vectors": 77,
+      "removed_vectors": 0,
+      "regroup_seconds": 0.0007372000836767256,
+      "encode_seconds": 29.89962189993821,
+      "write_seconds": 0.0009027000633068383,
+      "total_seconds": 29.901261800085194,
+      "max_rebuild_error": 3.3527612686157227e-08
+    },
+    "insert": {
+      "refreshed_groups": 40,
+      "refreshed_input_tokens": 22194,
+      "encoder_calls": 20,
+      "rewritten_vectors": 97,
+      "removed_vectors": 0,
+      "regroup_seconds": 0.0006870999932289124,
+      "encode_seconds": 27.343833799939603,
+      "write_seconds": 0.001136499980930239,
+      "total_seconds": 27.34565739991376,
+      "max_rebuild_error": 3.725290298461914e-08
+    },
+    "delete": {
+      "refreshed_groups": 20,
+      "refreshed_input_tokens": 10280,
+      "encoder_calls": 20,
+      "rewritten_vectors": 40,
+      "removed_vectors": 20,
+      "regroup_seconds": 0.0007555001066066325,
+      "encode_seconds": 14.2146483999677,
+      "write_seconds": 0.0008794000023044646,
+      "total_seconds": 14.216283300076611,
+      "max_rebuild_error": 6.891787052154541e-08
+    },
+    "noop_after": {
+      "refreshed_groups": 0,
+      "refreshed_input_tokens": 0,
+      "encoder_calls": 0,
+      "rewritten_vectors": 0,
+      "removed_vectors": 0,
+      "regroup_seconds": 0.0,
+      "encode_seconds": 0.0,
+      "write_seconds": 0.0,
+      "total_seconds": 0.0,
+      "max_rebuild_error": 6.891787052154541e-08
+    }
+  },
+  "documents_with_partition_drift": 20,
+  "documents": {
+    "581832": {
+      "initial_build": {
+        "refreshed_groups": 1,
+        "refreshed_input_tokens": 861,
+        "encoder_calls": 1,
+        "rewritten_vectors": 4,
+        "removed_vectors": 0,
+        "regroup_seconds": 4.4300046283751726e-05,
+        "encode_seconds": 1.1107287999475375,
+        "write_seconds": 0.0013013000134378672,
+        "total_seconds": 1.112074400007259
+      },
+      "initial_group_map": [
+        [
+          "581832:0",
+          "581832:1",
+          "581832:2",
+          "581832:3"
+        ]
+      ],
+      "events": {
+        "noop_before": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0,
+          "encode_seconds": 0.0,
+          "write_seconds": 0.0,
+          "total_seconds": 0.0,
+          "group_map": [
+            [
+              "581832:0",
+              "581832:1",
+              "581832:2",
+              "581832:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "replace": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 861,
+          "encoder_calls": 1,
+          "rewritten_vectors": 4,
+          "removed_vectors": 0,
+          "regroup_seconds": 3.7299992982298136e-05,
+          "encode_seconds": 1.3455955000245012,
+          "write_seconds": 3.920000744983554e-05,
+          "total_seconds": 1.3456720000249334,
+          "group_map": [
+            [
+              "581832:0",
+              "581832:1",
+              "581832:2",
+              "581832:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "insert": {
+          "refreshed_groups": 2,
+          "refreshed_input_tokens": 1119,
+          "encoder_calls": 1,
+          "rewritten_vectors": 5,
+          "removed_vectors": 0,
+          "regroup_seconds": 2.9999995604157448e-05,
+          "encode_seconds": 1.2283823000034317,
+          "write_seconds": 4.469999112188816e-05,
+          "total_seconds": 1.2284569999901578,
+          "group_map": [
+            [
+              "581832:0",
+              "581832:0:pilot-insert-1",
+              "581832:1"
+            ],
+            [
+              "581832:2",
+              "581832:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "delete": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 514,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 1,
+          "regroup_seconds": 3.070000093430281e-05,
+          "encode_seconds": 0.7573486000183038,
+          "write_seconds": 3.23000131174922e-05,
+          "total_seconds": 0.7574116000323556,
+          "group_map": [
+            [
+              "581832:0",
+              "581832:1"
+            ],
+            [
+              "581832:2",
+              "581832:3"
+            ]
+          ],
+          "max_rebuild_error": 4.470348358154297e-08
+        },
+        "noop_after": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0,
+          "encode_seconds": 0.0,
+          "write_seconds": 0.0,
+          "total_seconds": 0.0,
+          "group_map": [
+            [
+              "581832:0",
+              "581832:1"
+            ],
+            [
+              "581832:2",
+              "581832:3"
+            ]
+          ],
+          "max_rebuild_error": 4.470348358154297e-08
+        }
+      },
+      "partition_drifted": true
+    },
+    "1044552": {
+      "initial_build": {
+        "refreshed_groups": 1,
+        "refreshed_input_tokens": 846,
+        "encoder_calls": 1,
+        "rewritten_vectors": 4,
+        "removed_vectors": 0,
+        "regroup_seconds": 5.289999535307288e-05,
+        "encode_seconds": 1.194246800034307,
+        "write_seconds": 2.8399983420968056e-05,
+        "total_seconds": 1.194328100013081
+      },
+      "initial_group_map": [
+        [
+          "1044552:0",
+          "1044552:1",
+          "1044552:2",
+          "1044552:3"
+        ]
+      ],
+      "events": {
+        "noop_before": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0,
+          "encode_seconds": 0.0,
+          "write_seconds": 0.0,
+          "total_seconds": 0.0,
+          "group_map": [
+            [
+              "1044552:0",
+              "1044552:1",
+              "1044552:2",
+              "1044552:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "replace": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 846,
+          "encoder_calls": 1,
+          "rewritten_vectors": 4,
+          "removed_vectors": 0,
+          "regroup_seconds": 3.200001083314419e-05,
+          "encode_seconds": 1.4694626000127755,
+          "write_seconds": 3.5999983083456755e-05,
+          "total_seconds": 1.4695306000066921,
+          "group_map": [
+            [
+              "1044552:0",
+              "1044552:1",
+              "1044552:2",
+              "1044552:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "insert": {
+          "refreshed_groups": 2,
+          "refreshed_input_tokens": 1104,
+          "encoder_calls": 1,
+          "rewritten_vectors": 5,
+          "removed_vectors": 0,
+          "regroup_seconds": 2.829998265951872e-05,
+          "encode_seconds": 1.289924799988512,
+          "write_seconds": 6.450002547353506e-05,
+          "total_seconds": 1.290017599996645,
+          "group_map": [
+            [
+              "1044552:0",
+              "1044552:0:pilot-insert-1",
+              "1044552:1"
+            ],
+            [
+              "1044552:2",
+              "1044552:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "delete": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 514,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 1,
+          "regroup_seconds": 4.4599990360438824e-05,
+          "encode_seconds": 0.9425676999962889,
+          "write_seconds": 6.250001024454832e-05,
+          "total_seconds": 0.9426747999968939,
+          "group_map": [
+            [
+              "1044552:0",
+              "1044552:1"
+            ],
+            [
+              "1044552:2",
+              "1044552:3"
+            ]
+          ],
+          "max_rebuild_error": 2.9802322387695312e-08
+        },
+        "noop_after": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0,
+          "encode_seconds": 0.0,
+          "write_seconds": 0.0,
+          "total_seconds": 0.0,
+          "group_map": [
+            [
+              "1044552:0",
+              "1044552:1"
+            ],
+            [
+              "1044552:2",
+              "1044552:3"
+            ]
+          ],
+          "max_rebuild_error": 2.9802322387695312e-08
+        }
+      },
+      "partition_drifted": true
+    },
+    "1428840": {
+      "initial_build": {
+        "refreshed_groups": 1,
+        "refreshed_input_tokens": 826,
+        "encoder_calls": 1,
+        "rewritten_vectors": 4,
+        "removed_vectors": 0,
+        "regroup_seconds": 6.779999239370227e-05,
+        "encode_seconds": 2.302528499974869,
+        "write_seconds": 5.670002428814769e-05,
+        "total_seconds": 2.302652999991551
+      },
+      "initial_group_map": [
+        [
+          "1428840:0",
+          "1428840:1",
+          "1428840:2",
+          "1428840:3"
+        ]
+      ],
+      "events": {
+        "noop_before": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0,
+          "encode_seconds": 0.0,
+          "write_seconds": 0.0,
+          "total_seconds": 0.0,
+          "group_map": [
+            [
+              "1428840:0",
+              "1428840:1",
+              "1428840:2",
+              "1428840:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "replace": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 826,
+          "encoder_calls": 1,
+          "rewritten_vectors": 4,
+          "removed_vectors": 0,
+          "regroup_seconds": 6.290001329034567e-05,
+          "encode_seconds": 2.2086022999719717,
+          "write_seconds": 0.00011870003072544932,
+          "total_seconds": 2.2087839000159875,
+          "group_map": [
+            [
+              "1428840:0",
+              "1428840:1",
+              "1428840:2",
+              "1428840:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "insert": {
+          "refreshed_groups": 2,
+          "refreshed_input_tokens": 1084,
+          "encoder_calls": 1,
+          "rewritten_vectors": 5,
+          "removed_vectors": 0,
+          "regroup_seconds": 5.5800017435103655e-05,
+          "encode_seconds": 1.6873168000020087,
+          "write_seconds": 7.239996921271086e-05,
+          "total_seconds": 1.6874449999886565,
+          "group_map": [
+            [
+              "1428840:0",
+              "1428840:0:pilot-insert-1",
+              "1428840:1"
+            ],
+            [
+              "1428840:2",
+              "1428840:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "delete": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 514,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 1,
+          "regroup_seconds": 4.0000013541430235e-05,
+          "encode_seconds": 0.6289827000000514,
+          "write_seconds": 4.740001168102026e-05,
+          "total_seconds": 0.6290701000252739,
+          "group_map": [
+            [
+              "1428840:0",
+              "1428840:1"
+            ],
+            [
+              "1428840:2",
+              "1428840:3"
+            ]
+          ],
+          "max_rebuild_error": 2.9802322387695312e-08
+        },
+        "noop_after": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0,
+          "encode_seconds": 0.0,
+          "write_seconds": 0.0,
+          "total_seconds": 0.0,
+          "group_map": [
+            [
+              "1428840:0",
+              "1428840:1"
+            ],
+            [
+              "1428840:2",
+              "1428840:3"
+            ]
+          ],
+          "max_rebuild_error": 2.9802322387695312e-08
+        }
+      },
+      "partition_drifted": true
+    },
+    "2475059": {
+      "initial_build": {
+        "refreshed_groups": 1,
+        "refreshed_input_tokens": 973,
+        "encoder_calls": 1,
+        "rewritten_vectors": 4,
+        "removed_vectors": 0,
+        "regroup_seconds": 2.5200017262250185e-05,
+        "encode_seconds": 2.07025980000617,
+        "write_seconds": 4.2599975131452084e-05,
+        "total_seconds": 2.0703275999985635
+      },
+      "initial_group_map": [
+        [
+          "2475059:0",
+          "2475059:1",
+          "2475059:2",
+          "2475059:3"
+        ]
+      ],
+      "events": {
+        "noop_before": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0,
+          "encode_seconds": 0.0,
+          "write_seconds": 0.0,
+          "total_seconds": 0.0,
+          "group_map": [
+            [
+              "2475059:0",
+              "2475059:1",
+              "2475059:2",
+              "2475059:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "replace": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 973,
+          "encoder_calls": 1,
+          "rewritten_vectors": 4,
+          "removed_vectors": 0,
+          "regroup_seconds": 3.4100026823580265e-05,
+          "encode_seconds": 2.6013114999514073,
+          "write_seconds": 4.5000051613897085e-05,
+          "total_seconds": 2.601390600029845,
+          "group_map": [
+            [
+              "2475059:0",
+              "2475059:1",
+              "2475059:2",
+              "2475059:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "insert": {
+          "refreshed_groups": 2,
+          "refreshed_input_tokens": 1231,
+          "encoder_calls": 1,
+          "rewritten_vectors": 5,
+          "removed_vectors": 0,
+          "regroup_seconds": 3.320001997053623e-05,
+          "encode_seconds": 1.5537910999846645,
+          "write_seconds": 7.020001066848636e-05,
+          "total_seconds": 1.5538945000153035,
+          "group_map": [
+            [
+              "2475059:0",
+              "2475059:0:pilot-insert-1",
+              "2475059:1"
+            ],
+            [
+              "2475059:2",
+              "2475059:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "delete": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 514,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 1,
+          "regroup_seconds": 4.880002234131098e-05,
+          "encode_seconds": 0.8180527000222355,
+          "write_seconds": 4.499999340623617e-05,
+          "total_seconds": 0.8181465000379831,
+          "group_map": [
+            [
+              "2475059:0",
+              "2475059:1"
+            ],
+            [
+              "2475059:2",
+              "2475059:3"
+            ]
+          ],
+          "max_rebuild_error": 2.9802322387695312e-08
+        },
+        "noop_after": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0,
+          "encode_seconds": 0.0,
+          "write_seconds": 0.0,
+          "total_seconds": 0.0,
+          "group_map": [
+            [
+              "2475059:0",
+              "2475059:1"
+            ],
+            [
+              "2475059:2",
+              "2475059:3"
+            ]
+          ],
+          "max_rebuild_error": 2.9802322387695312e-08
+        }
+      },
+      "partition_drifted": true
+    },
+    "3471191": {
+      "initial_build": {
+        "refreshed_groups": 1,
+        "refreshed_input_tokens": 829,
+        "encoder_calls": 1,
+        "rewritten_vectors": 4,
+        "removed_vectors": 0,
+        "regroup_seconds": 3.5100034438073635e-05,
+        "encode_seconds": 1.600173199956771,
+        "write_seconds": 3.50000336766243e-05,
+        "total_seconds": 1.6002433000248857
+      },
+      "initial_group_map": [
+        [
+          "3471191:0",
+          "3471191:1",
+          "3471191:2",
+          "3471191:3"
+        ]
+      ],
+      "events": {
+        "noop_before": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0,
+          "encode_seconds": 0.0,
+          "write_seconds": 0.0,
+          "total_seconds": 0.0,
+          "group_map": [
+            [
+              "3471191:0",
+              "3471191:1",
+              "3471191:2",
+              "3471191:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "replace": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 829,
+          "encoder_calls": 1,
+          "rewritten_vectors": 4,
+          "removed_vectors": 0,
+          "regroup_seconds": 3.1100003980100155e-05,
+          "encode_seconds": 1.4205515999929048,
+          "write_seconds": 4.339998122304678e-05,
+          "total_seconds": 1.420626099978108,
+          "group_map": [
+            [
+              "3471191:0",
+              "3471191:1",
+              "3471191:2",
+              "3471191:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "insert": {
+          "refreshed_groups": 2,
+          "refreshed_input_tokens": 1087,
+          "encoder_calls": 1,
+          "rewritten_vectors": 5,
+          "removed_vectors": 0,
+          "regroup_seconds": 3.430002834647894e-05,
+          "encode_seconds": 1.5634480000007898,
+          "write_seconds": 4.2499974370002747e-05,
+          "total_seconds": 1.5635248000035062,
+          "group_map": [
+            [
+              "3471191:0",
+              "3471191:0:pilot-insert-1",
+              "3471191:1"
+            ],
+            [
+              "3471191:2",
+              "3471191:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "delete": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 514,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 1,
+          "regroup_seconds": 2.4800014216452837e-05,
+          "encode_seconds": 0.6805261999834329,
+          "write_seconds": 3.980001201853156e-05,
+          "total_seconds": 0.6805908000096679,
+          "group_map": [
+            [
+              "3471191:0",
+              "3471191:1"
+            ],
+            [
+              "3471191:2",
+              "3471191:3"
+            ]
+          ],
+          "max_rebuild_error": 3.725290298461914e-08
+        },
+        "noop_after": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0,
+          "encode_seconds": 0.0,
+          "write_seconds": 0.0,
+          "total_seconds": 0.0,
+          "group_map": [
+            [
+              "3471191:0",
+              "3471191:1"
+            ],
+            [
+              "3471191:2",
+              "3471191:3"
+            ]
+          ],
+          "max_rebuild_error": 3.725290298461914e-08
+        }
+      },
+      "partition_drifted": true
+    },
+    "3654468": {
+      "initial_build": {
+        "refreshed_groups": 1,
+        "refreshed_input_tokens": 902,
+        "encoder_calls": 1,
+        "rewritten_vectors": 4,
+        "removed_vectors": 0,
+        "regroup_seconds": 2.1099986042827368e-05,
+        "encode_seconds": 1.4160050000064075,
+        "write_seconds": 3.349996404722333e-05,
+        "total_seconds": 1.4160595999564976
+      },
+      "initial_group_map": [
+        [
+          "3654468:0",
+          "3654468:1",
+          "3654468:2",
+          "3654468:3"
+        ]
+      ],
+      "events": {
+        "noop_before": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0,
+          "encode_seconds": 0.0,
+          "write_seconds": 0.0,
+          "total_seconds": 0.0,
+          "group_map": [
+            [
+              "3654468:0",
+              "3654468:1",
+              "3654468:2",
+              "3654468:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "replace": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 902,
+          "encoder_calls": 1,
+          "rewritten_vectors": 4,
+          "removed_vectors": 0,
+          "regroup_seconds": 8.920003892853856e-05,
+          "encode_seconds": 1.6393925999873318,
+          "write_seconds": 2.239999594166875e-05,
+          "total_seconds": 1.639504200022202,
+          "group_map": [
+            [
+              "3654468:0",
+              "3654468:1",
+              "3654468:2",
+              "3654468:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "insert": {
+          "refreshed_groups": 2,
+          "refreshed_input_tokens": 1160,
+          "encoder_calls": 1,
+          "rewritten_vectors": 5,
+          "removed_vectors": 0,
+          "regroup_seconds": 2.8399983420968056e-05,
+          "encode_seconds": 1.3045912000234239,
+          "write_seconds": 4.5599997974932194e-05,
+          "total_seconds": 1.3046652000048198,
+          "group_map": [
+            [
+              "3654468:0",
+              "3654468:0:pilot-insert-1",
+              "3654468:1"
+            ],
+            [
+              "3654468:2",
+              "3654468:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "delete": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 514,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 1,
+          "regroup_seconds": 4.090002039447427e-05,
+          "encode_seconds": 0.9143632999621332,
+          "write_seconds": 3.789999755099416e-05,
+          "total_seconds": 0.9144420999800786,
+          "group_map": [
+            [
+              "3654468:0",
+              "3654468:1"
+            ],
+            [
+              "3654468:2",
+              "3654468:3"
+            ]
+          ],
+          "max_rebuild_error": 3.725290298461914e-08
+        },
+        "noop_after": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0,
+          "encode_seconds": 0.0,
+          "write_seconds": 0.0,
+          "total_seconds": 0.0,
+          "group_map": [
+            [
+              "3654468:0",
+              "3654468:1"
+            ],
+            [
+              "3654468:2",
+              "3654468:3"
+            ]
+          ],
+          "max_rebuild_error": 3.725290298461914e-08
+        }
+      },
+      "partition_drifted": true
+    },
+    "3898784": {
+      "initial_build": {
+        "refreshed_groups": 1,
+        "refreshed_input_tokens": 904,
+        "encoder_calls": 1,
+        "rewritten_vectors": 4,
+        "removed_vectors": 0,
+        "regroup_seconds": 2.9099988751113415e-05,
+        "encode_seconds": 1.5239758000243455,
+        "write_seconds": 2.5900022592395544e-05,
+        "total_seconds": 1.524030800035689
+      },
+      "initial_group_map": [
+        [
+          "3898784:0",
+          "3898784:1",
+          "3898784:2",
+          "3898784:3"
+        ]
+      ],
+      "events": {
+        "noop_before": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0,
+          "encode_seconds": 0.0,
+          "write_seconds": 0.0,
+          "total_seconds": 0.0,
+          "group_map": [
+            [
+              "3898784:0",
+              "3898784:1",
+              "3898784:2",
+              "3898784:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "replace": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 904,
+          "encoder_calls": 1,
+          "rewritten_vectors": 4,
+          "removed_vectors": 0,
+          "regroup_seconds": 5.1499984692782164e-05,
+          "encode_seconds": 1.4956221000174992,
+          "write_seconds": 5.370000144466758e-05,
+          "total_seconds": 1.4957273000036366,
+          "group_map": [
+            [
+              "3898784:0",
+              "3898784:1",
+              "3898784:2",
+              "3898784:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "insert": {
+          "refreshed_groups": 2,
+          "refreshed_input_tokens": 1162,
+          "encoder_calls": 1,
+          "rewritten_vectors": 5,
+          "removed_vectors": 0,
+          "regroup_seconds": 3.1800009310245514e-05,
+          "encode_seconds": 1.3103915000101551,
+          "write_seconds": 7.92999635450542e-05,
+          "total_seconds": 1.3105025999830104,
+          "group_map": [
+            [
+              "3898784:0",
+              "3898784:0:pilot-insert-1",
+              "3898784:1"
+            ],
+            [
+              "3898784:2",
+              "3898784:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "delete": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 514,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 1,
+          "regroup_seconds": 4.600000102072954e-05,
+          "encode_seconds": 0.621322599996347,
+          "write_seconds": 3.390002530068159e-05,
+          "total_seconds": 0.6214025000226684,
+          "group_map": [
+            [
+              "3898784:0",
+              "3898784:1"
+            ],
+            [
+              "3898784:2",
+              "3898784:3"
+            ]
+          ],
+          "max_rebuild_error": 3.725290298461914e-08
+        },
+        "noop_after": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0,
+          "encode_seconds": 0.0,
+          "write_seconds": 0.0,
+          "total_seconds": 0.0,
+          "group_map": [
+            [
+              "3898784:0",
+              "3898784:1"
+            ],
+            [
+              "3898784:2",
+              "3898784:3"
+            ]
+          ],
+          "max_rebuild_error": 3.725290298461914e-08
+        }
+      },
+      "partition_drifted": true
+    },
+    "4506414": {
+      "initial_build": {
+        "refreshed_groups": 1,
+        "refreshed_input_tokens": 825,
+        "encoder_calls": 1,
+        "rewritten_vectors": 4,
+        "removed_vectors": 0,
+        "regroup_seconds": 3.23000131174922e-05,
+        "encode_seconds": 1.0886481999768876,
+        "write_seconds": 3.950000973418355e-05,
+        "total_seconds": 1.0887199999997392
+      },
+      "initial_group_map": [
+        [
+          "4506414:0",
+          "4506414:1",
+          "4506414:2",
+          "4506414:3"
+        ]
+      ],
+      "events": {
+        "noop_before": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0,
+          "encode_seconds": 0.0,
+          "write_seconds": 0.0,
+          "total_seconds": 0.0,
+          "group_map": [
+            [
+              "4506414:0",
+              "4506414:1",
+              "4506414:2",
+              "4506414:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "replace": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 825,
+          "encoder_calls": 1,
+          "rewritten_vectors": 4,
+          "removed_vectors": 0,
+          "regroup_seconds": 4.309997893869877e-05,
+          "encode_seconds": 1.6900335000245832,
+          "write_seconds": 6.97999494150281e-05,
+          "total_seconds": 1.690146399952937,
+          "group_map": [
+            [
+              "4506414:0",
+              "4506414:1",
+              "4506414:2",
+              "4506414:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "insert": {
+          "refreshed_groups": 2,
+          "refreshed_input_tokens": 1083,
+          "encoder_calls": 1,
+          "rewritten_vectors": 5,
+          "removed_vectors": 0,
+          "regroup_seconds": 3.319996176287532e-05,
+          "encode_seconds": 1.244760400033556,
+          "write_seconds": 4.579999949783087e-05,
+          "total_seconds": 1.2448393999948166,
+          "group_map": [
+            [
+              "4506414:0",
+              "4506414:0:pilot-insert-1",
+              "4506414:1"
+            ],
+            [
+              "4506414:2",
+              "4506414:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "delete": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 514,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 1,
+          "regroup_seconds": 3.3800024539232254e-05,
+          "encode_seconds": 0.6908708999981172,
+          "write_seconds": 4.349998198449612e-05,
+          "total_seconds": 0.690948200004641,
+          "group_map": [
+            [
+              "4506414:0",
+              "4506414:1"
+            ],
+            [
+              "4506414:2",
+              "4506414:3"
+            ]
+          ],
+          "max_rebuild_error": 2.9802322387695312e-08
+        },
+        "noop_after": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0,
+          "encode_seconds": 0.0,
+          "write_seconds": 0.0,
+          "total_seconds": 0.0,
+          "group_map": [
+            [
+              "4506414:0",
+              "4506414:1"
+            ],
+            [
+              "4506414:2",
+              "4506414:3"
+            ]
+          ],
+          "max_rebuild_error": 2.9802322387695312e-08
+        }
+      },
+      "partition_drifted": true
+    },
+    "4824840": {
+      "initial_build": {
+        "refreshed_groups": 1,
+        "refreshed_input_tokens": 771,
+        "encoder_calls": 1,
+        "rewritten_vectors": 4,
+        "removed_vectors": 0,
+        "regroup_seconds": 3.1400006264448166e-05,
+        "encode_seconds": 1.3470953000360169,
+        "write_seconds": 2.5799963623285294e-05,
+        "total_seconds": 1.3471525000059046
+      },
+      "initial_group_map": [
+        [
+          "4824840:0",
+          "4824840:1",
+          "4824840:2",
+          "4824840:3"
+        ]
+      ],
+      "events": {
+        "noop_before": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0,
+          "encode_seconds": 0.0,
+          "write_seconds": 0.0,
+          "total_seconds": 0.0,
+          "group_map": [
+            [
+              "4824840:0",
+              "4824840:1",
+              "4824840:2",
+              "4824840:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "replace": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 771,
+          "encoder_calls": 1,
+          "rewritten_vectors": 4,
+          "removed_vectors": 0,
+          "regroup_seconds": 3.160000778734684e-05,
+          "encode_seconds": 1.2301324000000022,
+          "write_seconds": 3.170000854879618e-05,
+          "total_seconds": 1.2301957000163384,
+          "group_map": [
+            [
+              "4824840:0",
+              "4824840:1",
+              "4824840:2",
+              "4824840:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "insert": {
+          "refreshed_groups": 2,
+          "refreshed_input_tokens": 1029,
+          "encoder_calls": 1,
+          "rewritten_vectors": 5,
+          "removed_vectors": 0,
+          "regroup_seconds": 3.409996861591935e-05,
+          "encode_seconds": 1.3605822999961674,
+          "write_seconds": 4.460004856809974e-05,
+          "total_seconds": 1.3606610000133514,
+          "group_map": [
+            [
+              "4824840:0",
+              "4824840:0:pilot-insert-1",
+              "4824840:1"
+            ],
+            [
+              "4824840:2",
+              "4824840:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "delete": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 514,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 1,
+          "regroup_seconds": 3.2100011594593525e-05,
+          "encode_seconds": 0.7443274999968708,
+          "write_seconds": 4.090002039447427e-05,
+          "total_seconds": 0.7444005000288598,
+          "group_map": [
+            [
+              "4824840:0",
+              "4824840:1"
+            ],
+            [
+              "4824840:2",
+              "4824840:3"
+            ]
+          ],
+          "max_rebuild_error": 6.891787052154541e-08
+        },
+        "noop_after": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0,
+          "encode_seconds": 0.0,
+          "write_seconds": 0.0,
+          "total_seconds": 0.0,
+          "group_map": [
+            [
+              "4824840:0",
+              "4824840:1"
+            ],
+            [
+              "4824840:2",
+              "4824840:3"
+            ]
+          ],
+          "max_rebuild_error": 6.891787052154541e-08
+        }
+      },
+      "partition_drifted": true
+    },
+    "4828631": {
+      "initial_build": {
+        "refreshed_groups": 1,
+        "refreshed_input_tokens": 780,
+        "encoder_calls": 1,
+        "rewritten_vectors": 4,
+        "removed_vectors": 0,
+        "regroup_seconds": 3.860000288113952e-05,
+        "encode_seconds": 1.5576833999948576,
+        "write_seconds": 2.4500011932104826e-05,
+        "total_seconds": 1.5577465000096709
+      },
+      "initial_group_map": [
+        [
+          "4828631:0",
+          "4828631:1",
+          "4828631:2",
+          "4828631:3"
+        ]
+      ],
+      "events": {
+        "noop_before": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0,
+          "encode_seconds": 0.0,
+          "write_seconds": 0.0,
+          "total_seconds": 0.0,
+          "group_map": [
+            [
+              "4828631:0",
+              "4828631:1",
+              "4828631:2",
+              "4828631:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "replace": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 780,
+          "encoder_calls": 1,
+          "rewritten_vectors": 4,
+          "removed_vectors": 0,
+          "regroup_seconds": 2.670002868399024e-05,
+          "encode_seconds": 1.1230258999858052,
+          "write_seconds": 3.980001201853156e-05,
+          "total_seconds": 1.1230924000265077,
+          "group_map": [
+            [
+              "4828631:0",
+              "4828631:1",
+              "4828631:2",
+              "4828631:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "insert": {
+          "refreshed_groups": 2,
+          "refreshed_input_tokens": 1038,
+          "encoder_calls": 1,
+          "rewritten_vectors": 5,
+          "removed_vectors": 0,
+          "regroup_seconds": 3.220001235604286e-05,
+          "encode_seconds": 1.3833760999841616,
+          "write_seconds": 6.65000407025218e-05,
+          "total_seconds": 1.3834748000372201,
+          "group_map": [
+            [
+              "4828631:0",
+              "4828631:0:pilot-insert-1",
+              "4828631:1"
+            ],
+            [
+              "4828631:2",
+              "4828631:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "delete": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 514,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 1,
+          "regroup_seconds": 6.19000056758523e-05,
+          "encode_seconds": 0.7527306000120007,
+          "write_seconds": 3.880000440403819e-05,
+          "total_seconds": 0.7528313000220805,
+          "group_map": [
+            [
+              "4828631:0",
+              "4828631:1"
+            ],
+            [
+              "4828631:2",
+              "4828631:3"
+            ]
+          ],
+          "max_rebuild_error": 4.842877388000488e-08
+        },
+        "noop_after": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0,
+          "encode_seconds": 0.0,
+          "write_seconds": 0.0,
+          "total_seconds": 0.0,
+          "group_map": [
+            [
+              "4828631:0",
+              "4828631:1"
+            ],
+            [
+              "4828631:2",
+              "4828631:3"
+            ]
+          ],
+          "max_rebuild_error": 4.842877388000488e-08
+        }
+      },
+      "partition_drifted": true
+    },
+    "5114940": {
+      "initial_build": {
+        "refreshed_groups": 2,
+        "refreshed_input_tokens": 1476,
+        "encoder_calls": 1,
+        "rewritten_vectors": 6,
+        "removed_vectors": 0,
+        "regroup_seconds": 3.300001844763756e-05,
+        "encode_seconds": 1.6448598999995738,
+        "write_seconds": 5.0799979362636805e-05,
+        "total_seconds": 1.644943699997384
+      },
+      "initial_group_map": [
+        [
+          "5114940:0",
+          "5114940:1",
+          "5114940:2"
+        ],
+        [
+          "5114940:3",
+          "5114940:4",
+          "5114940:5"
+        ]
+      ],
+      "events": {
+        "noop_before": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0,
+          "encode_seconds": 0.0,
+          "write_seconds": 0.0,
+          "total_seconds": 0.0,
+          "group_map": [
+            [
+              "5114940:0",
+              "5114940:1",
+              "5114940:2"
+            ],
+            [
+              "5114940:3",
+              "5114940:4",
+              "5114940:5"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "replace": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 770,
+          "encoder_calls": 1,
+          "rewritten_vectors": 3,
+          "removed_vectors": 0,
+          "regroup_seconds": 4.6200002543628216e-05,
+          "encode_seconds": 1.2987738000229,
+          "write_seconds": 3.300001844763756e-05,
+          "total_seconds": 1.2988530000438914,
+          "group_map": [
+            [
+              "5114940:0",
+              "5114940:1",
+              "5114940:2"
+            ],
+            [
+              "5114940:3",
+              "5114940:4",
+              "5114940:5"
+            ]
+          ],
+          "max_rebuild_error": 3.3527612686157227e-08
+        },
+        "insert": {
+          "refreshed_groups": 2,
+          "refreshed_input_tokens": 1028,
+          "encoder_calls": 1,
+          "rewritten_vectors": 4,
+          "removed_vectors": 0,
+          "regroup_seconds": 3.809999907389283e-05,
+          "encode_seconds": 1.467526699998416,
+          "write_seconds": 6.339995888993144e-05,
+          "total_seconds": 1.4676281999563798,
+          "group_map": [
+            [
+              "5114940:0",
+              "5114940:0:pilot-insert-1",
+              "5114940:1"
+            ],
+            [
+              "5114940:2"
+            ],
+            [
+              "5114940:3",
+              "5114940:4",
+              "5114940:5"
+            ]
+          ],
+          "max_rebuild_error": 3.725290298461914e-08
+        },
+        "delete": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 514,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 1,
+          "regroup_seconds": 4.650000482797623e-05,
+          "encode_seconds": 0.6205607000156306,
+          "write_seconds": 4.1499966755509377e-05,
+          "total_seconds": 0.6206486999872141,
+          "group_map": [
+            [
+              "5114940:0",
+              "5114940:1"
+            ],
+            [
+              "5114940:2"
+            ],
+            [
+              "5114940:3",
+              "5114940:4",
+              "5114940:5"
+            ]
+          ],
+          "max_rebuild_error": 4.470348358154297e-08
+        },
+        "noop_after": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0,
+          "encode_seconds": 0.0,
+          "write_seconds": 0.0,
+          "total_seconds": 0.0,
+          "group_map": [
+            [
+              "5114940:0",
+              "5114940:1"
+            ],
+            [
+              "5114940:2"
+            ],
+            [
+              "5114940:3",
+              "5114940:4",
+              "5114940:5"
+            ]
+          ],
+          "max_rebuild_error": 4.470348358154297e-08
+        }
+      },
+      "partition_drifted": true
+    },
+    "5145974": {
+      "initial_build": {
+        "refreshed_groups": 1,
+        "refreshed_input_tokens": 912,
+        "encoder_calls": 1,
+        "rewritten_vectors": 4,
+        "removed_vectors": 0,
+        "regroup_seconds": 3.190001007169485e-05,
+        "encode_seconds": 1.440141599974595,
+        "write_seconds": 2.2099993657320738e-05,
+        "total_seconds": 1.440195599978324
+      },
+      "initial_group_map": [
+        [
+          "5145974:0",
+          "5145974:1",
+          "5145974:2",
+          "5145974:3"
+        ]
+      ],
+      "events": {
+        "noop_before": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0,
+          "encode_seconds": 0.0,
+          "write_seconds": 0.0,
+          "total_seconds": 0.0,
+          "group_map": [
+            [
+              "5145974:0",
+              "5145974:1",
+              "5145974:2",
+              "5145974:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "replace": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 912,
+          "encoder_calls": 1,
+          "rewritten_vectors": 4,
+          "removed_vectors": 0,
+          "regroup_seconds": 3.190001007169485e-05,
+          "encode_seconds": 1.4369686999707483,
+          "write_seconds": 7.250002818182111e-05,
+          "total_seconds": 1.4370731000090018,
+          "group_map": [
+            [
+              "5145974:0",
+              "5145974:1",
+              "5145974:2",
+              "5145974:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "insert": {
+          "refreshed_groups": 2,
+          "refreshed_input_tokens": 1170,
+          "encoder_calls": 1,
+          "rewritten_vectors": 5,
+          "removed_vectors": 0,
+          "regroup_seconds": 3.5299977753311396e-05,
+          "encode_seconds": 1.3891968000098132,
+          "write_seconds": 5.6200020480901e-05,
+          "total_seconds": 1.3892883000080474,
+          "group_map": [
+            [
+              "5145974:0",
+              "5145974:0:pilot-insert-1",
+              "5145974:1"
+            ],
+            [
+              "5145974:2",
+              "5145974:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "delete": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 514,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 1,
+          "regroup_seconds": 7.230002665892243e-05,
+          "encode_seconds": 0.8565603999886662,
+          "write_seconds": 4.199997056275606e-05,
+          "total_seconds": 0.8566746999858879,
+          "group_map": [
+            [
+              "5145974:0",
+              "5145974:1"
+            ],
+            [
+              "5145974:2",
+              "5145974:3"
+            ]
+          ],
+          "max_rebuild_error": 4.470348358154297e-08
+        },
+        "noop_after": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0,
+          "encode_seconds": 0.0,
+          "write_seconds": 0.0,
+          "total_seconds": 0.0,
+          "group_map": [
+            [
+              "5145974:0",
+              "5145974:1"
+            ],
+            [
+              "5145974:2",
+              "5145974:3"
+            ]
+          ],
+          "max_rebuild_error": 4.470348358154297e-08
+        }
+      },
+      "partition_drifted": true
+    },
+    "5185871": {
+      "initial_build": {
+        "refreshed_groups": 1,
+        "refreshed_input_tokens": 808,
+        "encoder_calls": 1,
+        "rewritten_vectors": 4,
+        "removed_vectors": 0,
+        "regroup_seconds": 3.600004129111767e-05,
+        "encode_seconds": 1.4708073999499902,
+        "write_seconds": 2.9300048481673002e-05,
+        "total_seconds": 1.470872700039763
+      },
+      "initial_group_map": [
+        [
+          "5185871:0",
+          "5185871:1",
+          "5185871:2",
+          "5185871:3"
+        ]
+      ],
+      "events": {
+        "noop_before": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0,
+          "encode_seconds": 0.0,
+          "write_seconds": 0.0,
+          "total_seconds": 0.0,
+          "group_map": [
+            [
+              "5185871:0",
+              "5185871:1",
+              "5185871:2",
+              "5185871:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "replace": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 808,
+          "encoder_calls": 1,
+          "rewritten_vectors": 4,
+          "removed_vectors": 0,
+          "regroup_seconds": 2.1899992134422064e-05,
+          "encode_seconds": 1.2695019000093453,
+          "write_seconds": 3.3400021493434906e-05,
+          "total_seconds": 1.2695572000229731,
+          "group_map": [
+            [
+              "5185871:0",
+              "5185871:1",
+              "5185871:2",
+              "5185871:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "insert": {
+          "refreshed_groups": 2,
+          "refreshed_input_tokens": 1066,
+          "encoder_calls": 1,
+          "rewritten_vectors": 5,
+          "removed_vectors": 0,
+          "regroup_seconds": 3.950000973418355e-05,
+          "encode_seconds": 1.4679685999872163,
+          "write_seconds": 8.269998943433166e-05,
+          "total_seconds": 1.4680907999863848,
+          "group_map": [
+            [
+              "5185871:0",
+              "5185871:0:pilot-insert-1",
+              "5185871:1"
+            ],
+            [
+              "5185871:2",
+              "5185871:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "delete": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 514,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 1,
+          "regroup_seconds": 2.6500027161091566e-05,
+          "encode_seconds": 0.7691698999842629,
+          "write_seconds": 9.510002564638853e-05,
+          "total_seconds": 0.7692915000370704,
+          "group_map": [
+            [
+              "5185871:0",
+              "5185871:1"
+            ],
+            [
+              "5185871:2",
+              "5185871:3"
+            ]
+          ],
+          "max_rebuild_error": 2.9802322387695312e-08
+        },
+        "noop_after": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0,
+          "encode_seconds": 0.0,
+          "write_seconds": 0.0,
+          "total_seconds": 0.0,
+          "group_map": [
+            [
+              "5185871:0",
+              "5185871:1"
+            ],
+            [
+              "5185871:2",
+              "5185871:3"
+            ]
+          ],
+          "max_rebuild_error": 2.9802322387695312e-08
+        }
+      },
+      "partition_drifted": true
+    },
+    "5691302": {
+      "initial_build": {
+        "refreshed_groups": 1,
+        "refreshed_input_tokens": 918,
+        "encoder_calls": 1,
+        "rewritten_vectors": 4,
+        "removed_vectors": 0,
+        "regroup_seconds": 5.5999960750341415e-05,
+        "encode_seconds": 1.654740900034085,
+        "write_seconds": 5.689996760338545e-05,
+        "total_seconds": 1.6548537999624386
+      },
+      "initial_group_map": [
+        [
+          "5691302:0",
+          "5691302:1",
+          "5691302:2",
+          "5691302:3"
+        ]
+      ],
+      "events": {
+        "noop_before": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0,
+          "encode_seconds": 0.0,
+          "write_seconds": 0.0,
+          "total_seconds": 0.0,
+          "group_map": [
+            [
+              "5691302:0",
+              "5691302:1",
+              "5691302:2",
+              "5691302:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "replace": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 918,
+          "encoder_calls": 1,
+          "rewritten_vectors": 4,
+          "removed_vectors": 0,
+          "regroup_seconds": 3.130000550299883e-05,
+          "encode_seconds": 1.5844247000059113,
+          "write_seconds": 3.4599972423166037e-05,
+          "total_seconds": 1.5844905999838375,
+          "group_map": [
+            [
+              "5691302:0",
+              "5691302:1",
+              "5691302:2",
+              "5691302:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "insert": {
+          "refreshed_groups": 2,
+          "refreshed_input_tokens": 1176,
+          "encoder_calls": 1,
+          "rewritten_vectors": 5,
+          "removed_vectors": 0,
+          "regroup_seconds": 3.860000288113952e-05,
+          "encode_seconds": 1.5050903999945149,
+          "write_seconds": 4.789995728060603e-05,
+          "total_seconds": 1.5051768999546766,
+          "group_map": [
+            [
+              "5691302:0",
+              "5691302:0:pilot-insert-1",
+              "5691302:1"
+            ],
+            [
+              "5691302:2",
+              "5691302:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "delete": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 514,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 1,
+          "regroup_seconds": 3.9300008211284876e-05,
+          "encode_seconds": 0.5918108000187203,
+          "write_seconds": 5.509995389729738e-05,
+          "total_seconds": 0.5919051999808289,
+          "group_map": [
+            [
+              "5691302:0",
+              "5691302:1"
+            ],
+            [
+              "5691302:2",
+              "5691302:3"
+            ]
+          ],
+          "max_rebuild_error": 5.21540641784668e-08
+        },
+        "noop_after": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0,
+          "encode_seconds": 0.0,
+          "write_seconds": 0.0,
+          "total_seconds": 0.0,
+          "group_map": [
+            [
+              "5691302:0",
+              "5691302:1"
+            ],
+            [
+              "5691302:2",
+              "5691302:3"
+            ]
+          ],
+          "max_rebuild_error": 5.21540641784668e-08
+        }
+      },
+      "partition_drifted": true
+    },
+    "5850219": {
+      "initial_build": {
+        "refreshed_groups": 1,
+        "refreshed_input_tokens": 900,
+        "encoder_calls": 1,
+        "rewritten_vectors": 4,
+        "removed_vectors": 0,
+        "regroup_seconds": 2.5900022592395544e-05,
+        "encode_seconds": 1.2443370999535546,
+        "write_seconds": 2.7300033252686262e-05,
+        "total_seconds": 1.2443903000093997
+      },
+      "initial_group_map": [
+        [
+          "5850219:0",
+          "5850219:1",
+          "5850219:2",
+          "5850219:3"
+        ]
+      ],
+      "events": {
+        "noop_before": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0,
+          "encode_seconds": 0.0,
+          "write_seconds": 0.0,
+          "total_seconds": 0.0,
+          "group_map": [
+            [
+              "5850219:0",
+              "5850219:1",
+              "5850219:2",
+              "5850219:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "replace": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 900,
+          "encoder_calls": 1,
+          "rewritten_vectors": 4,
+          "removed_vectors": 0,
+          "regroup_seconds": 2.239999594166875e-05,
+          "encode_seconds": 1.5001137999934144,
+          "write_seconds": 4.309997893869877e-05,
+          "total_seconds": 1.5001792999682948,
+          "group_map": [
+            [
+              "5850219:0",
+              "5850219:1",
+              "5850219:2",
+              "5850219:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "insert": {
+          "refreshed_groups": 2,
+          "refreshed_input_tokens": 1158,
+          "encoder_calls": 1,
+          "rewritten_vectors": 5,
+          "removed_vectors": 0,
+          "regroup_seconds": 3.8300000596791506e-05,
+          "encode_seconds": 1.2516184000414796,
+          "write_seconds": 4.179996903985739e-05,
+          "total_seconds": 1.2516985000111163,
+          "group_map": [
+            [
+              "5850219:0",
+              "5850219:0:pilot-insert-1",
+              "5850219:1"
+            ],
+            [
+              "5850219:2",
+              "5850219:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "delete": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 514,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 1,
+          "regroup_seconds": 2.4100008886307478e-05,
+          "encode_seconds": 0.6104184999712743,
+          "write_seconds": 3.120000474154949e-05,
+          "total_seconds": 0.6104737999849021,
+          "group_map": [
+            [
+              "5850219:0",
+              "5850219:1"
+            ],
+            [
+              "5850219:2",
+              "5850219:3"
+            ]
+          ],
+          "max_rebuild_error": 2.9802322387695312e-08
+        },
+        "noop_after": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0,
+          "encode_seconds": 0.0,
+          "write_seconds": 0.0,
+          "total_seconds": 0.0,
+          "group_map": [
+            [
+              "5850219:0",
+              "5850219:1"
+            ],
+            [
+              "5850219:2",
+              "5850219:3"
+            ]
+          ],
+          "max_rebuild_error": 2.9802322387695312e-08
+        }
+      },
+      "partition_drifted": true
+    },
+    "6158879": {
+      "initial_build": {
+        "refreshed_groups": 1,
+        "refreshed_input_tokens": 807,
+        "encoder_calls": 1,
+        "rewritten_vectors": 4,
+        "removed_vectors": 0,
+        "regroup_seconds": 3.509997623041272e-05,
+        "encode_seconds": 1.2005577000090852,
+        "write_seconds": 3.1100003980100155e-05,
+        "total_seconds": 1.2006238999892958
+      },
+      "initial_group_map": [
+        [
+          "6158879:0",
+          "6158879:1",
+          "6158879:2",
+          "6158879:3"
+        ]
+      ],
+      "events": {
+        "noop_before": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0,
+          "encode_seconds": 0.0,
+          "write_seconds": 0.0,
+          "total_seconds": 0.0,
+          "group_map": [
+            [
+              "6158879:0",
+              "6158879:1",
+              "6158879:2",
+              "6158879:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "replace": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 807,
+          "encoder_calls": 1,
+          "rewritten_vectors": 4,
+          "removed_vectors": 0,
+          "regroup_seconds": 2.2499996703118086e-05,
+          "encode_seconds": 1.3340941999922507,
+          "write_seconds": 4.039995837956667e-05,
+          "total_seconds": 1.3341570999473333,
+          "group_map": [
+            [
+              "6158879:0",
+              "6158879:1",
+              "6158879:2",
+              "6158879:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "insert": {
+          "refreshed_groups": 2,
+          "refreshed_input_tokens": 1065,
+          "encoder_calls": 1,
+          "rewritten_vectors": 5,
+          "removed_vectors": 0,
+          "regroup_seconds": 2.9499991796910763e-05,
+          "encode_seconds": 1.1686300999717787,
+          "write_seconds": 5.050003528594971e-05,
+          "total_seconds": 1.1687100999988616,
+          "group_map": [
+            [
+              "6158879:0",
+              "6158879:0:pilot-insert-1",
+              "6158879:1"
+            ],
+            [
+              "6158879:2",
+              "6158879:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "delete": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 514,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 1,
+          "regroup_seconds": 1.9700033590197563e-05,
+          "encode_seconds": 0.5666401999769732,
+          "write_seconds": 3.7999998312443495e-05,
+          "total_seconds": 0.5666979000088759,
+          "group_map": [
+            [
+              "6158879:0",
+              "6158879:1"
+            ],
+            [
+              "6158879:2",
+              "6158879:3"
+            ]
+          ],
+          "max_rebuild_error": 3.725290298461914e-08
+        },
+        "noop_after": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0,
+          "encode_seconds": 0.0,
+          "write_seconds": 0.0,
+          "total_seconds": 0.0,
+          "group_map": [
+            [
+              "6158879:0",
+              "6158879:1"
+            ],
+            [
+              "6158879:2",
+              "6158879:3"
+            ]
+          ],
+          "max_rebuild_error": 3.725290298461914e-08
+        }
+      },
+      "partition_drifted": true
+    },
+    "6670101": {
+      "initial_build": {
+        "refreshed_groups": 2,
+        "refreshed_input_tokens": 1200,
+        "encoder_calls": 1,
+        "rewritten_vectors": 5,
+        "removed_vectors": 0,
+        "regroup_seconds": 4.4599990360438824e-05,
+        "encode_seconds": 1.3643684000126086,
+        "write_seconds": 5.989999044686556e-05,
+        "total_seconds": 1.364472899993416
+      },
+      "initial_group_map": [
+        [
+          "6670101:0",
+          "6670101:1",
+          "6670101:2"
+        ],
+        [
+          "6670101:3",
+          "6670101:4"
+        ]
+      ],
+      "events": {
+        "noop_before": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0,
+          "encode_seconds": 0.0,
+          "write_seconds": 0.0,
+          "total_seconds": 0.0,
+          "group_map": [
+            [
+              "6670101:0",
+              "6670101:1",
+              "6670101:2"
+            ],
+            [
+              "6670101:3",
+              "6670101:4"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "replace": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 770,
+          "encoder_calls": 1,
+          "rewritten_vectors": 3,
+          "removed_vectors": 0,
+          "regroup_seconds": 3.350002225488424e-05,
+          "encode_seconds": 1.0520081999711692,
+          "write_seconds": 3.860000288113952e-05,
+          "total_seconds": 1.0520802999963053,
+          "group_map": [
+            [
+              "6670101:0",
+              "6670101:1",
+              "6670101:2"
+            ],
+            [
+              "6670101:3",
+              "6670101:4"
+            ]
+          ],
+          "max_rebuild_error": 2.9802322387695312e-08
+        },
+        "insert": {
+          "refreshed_groups": 2,
+          "refreshed_input_tokens": 1028,
+          "encoder_calls": 1,
+          "rewritten_vectors": 4,
+          "removed_vectors": 0,
+          "regroup_seconds": 3.890000516548753e-05,
+          "encode_seconds": 1.1931916999747045,
+          "write_seconds": 6.450002547353506e-05,
+          "total_seconds": 1.1932951000053436,
+          "group_map": [
+            [
+              "6670101:0",
+              "6670101:0:pilot-insert-1",
+              "6670101:1"
+            ],
+            [
+              "6670101:2"
+            ],
+            [
+              "6670101:3",
+              "6670101:4"
+            ]
+          ],
+          "max_rebuild_error": 2.9802322387695312e-08
+        },
+        "delete": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 514,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 1,
+          "regroup_seconds": 3.5299977753311396e-05,
+          "encode_seconds": 0.7080278000212274,
+          "write_seconds": 2.989999484270811e-05,
+          "total_seconds": 0.7080929999938235,
+          "group_map": [
+            [
+              "6670101:0",
+              "6670101:1"
+            ],
+            [
+              "6670101:2"
+            ],
+            [
+              "6670101:3",
+              "6670101:4"
+            ]
+          ],
+          "max_rebuild_error": 2.60770320892334e-08
+        },
+        "noop_after": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0,
+          "encode_seconds": 0.0,
+          "write_seconds": 0.0,
+          "total_seconds": 0.0,
+          "group_map": [
+            [
+              "6670101:0",
+              "6670101:1"
+            ],
+            [
+              "6670101:2"
+            ],
+            [
+              "6670101:3",
+              "6670101:4"
+            ]
+          ],
+          "max_rebuild_error": 2.60770320892334e-08
+        }
+      },
+      "partition_drifted": true
+    },
+    "9394119": {
+      "initial_build": {
+        "refreshed_groups": 1,
+        "refreshed_input_tokens": 910,
+        "encoder_calls": 1,
+        "rewritten_vectors": 4,
+        "removed_vectors": 0,
+        "regroup_seconds": 2.4500011932104826e-05,
+        "encode_seconds": 1.6464514000108466,
+        "write_seconds": 2.9099988751113415e-05,
+        "total_seconds": 1.6465050000115298
+      },
+      "initial_group_map": [
+        [
+          "9394119:0",
+          "9394119:1",
+          "9394119:2",
+          "9394119:3"
+        ]
+      ],
+      "events": {
+        "noop_before": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0,
+          "encode_seconds": 0.0,
+          "write_seconds": 0.0,
+          "total_seconds": 0.0,
+          "group_map": [
+            [
+              "9394119:0",
+              "9394119:1",
+              "9394119:2",
+              "9394119:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "replace": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 910,
+          "encoder_calls": 1,
+          "rewritten_vectors": 4,
+          "removed_vectors": 0,
+          "regroup_seconds": 3.379996633157134e-05,
+          "encode_seconds": 1.3903583000064828,
+          "write_seconds": 4.290003562346101e-05,
+          "total_seconds": 1.3904350000084378,
+          "group_map": [
+            [
+              "9394119:0",
+              "9394119:1",
+              "9394119:2",
+              "9394119:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "insert": {
+          "refreshed_groups": 2,
+          "refreshed_input_tokens": 1168,
+          "encoder_calls": 1,
+          "rewritten_vectors": 5,
+          "removed_vectors": 0,
+          "regroup_seconds": 2.800003858283162e-05,
+          "encode_seconds": 1.4235264000017196,
+          "write_seconds": 4.680000711232424e-05,
+          "total_seconds": 1.4236012000474147,
+          "group_map": [
+            [
+              "9394119:0",
+              "9394119:0:pilot-insert-1",
+              "9394119:1"
+            ],
+            [
+              "9394119:2",
+              "9394119:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "delete": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 514,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 1,
+          "regroup_seconds": 3.559998003765941e-05,
+          "encode_seconds": 0.7601286999997683,
+          "write_seconds": 4.680000711232424e-05,
+          "total_seconds": 0.7602110999869183,
+          "group_map": [
+            [
+              "9394119:0",
+              "9394119:1"
+            ],
+            [
+              "9394119:2",
+              "9394119:3"
+            ]
+          ],
+          "max_rebuild_error": 4.470348358154297e-08
+        },
+        "noop_after": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0,
+          "encode_seconds": 0.0,
+          "write_seconds": 0.0,
+          "total_seconds": 0.0,
+          "group_map": [
+            [
+              "9394119:0",
+              "9394119:1"
+            ],
+            [
+              "9394119:2",
+              "9394119:3"
+            ]
+          ],
+          "max_rebuild_error": 4.470348358154297e-08
+        }
+      },
+      "partition_drifted": true
+    },
+    "9764256": {
+      "initial_build": {
+        "refreshed_groups": 2,
+        "refreshed_input_tokens": 1151,
+        "encoder_calls": 1,
+        "rewritten_vectors": 5,
+        "removed_vectors": 0,
+        "regroup_seconds": 3.539997851476073e-05,
+        "encode_seconds": 1.2349707999965176,
+        "write_seconds": 3.980001201853156e-05,
+        "total_seconds": 1.235045999987051
+      },
+      "initial_group_map": [
+        [
+          "9764256:0",
+          "9764256:1",
+          "9764256:2"
+        ],
+        [
+          "9764256:3",
+          "9764256:4"
+        ]
+      ],
+      "events": {
+        "noop_before": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0,
+          "encode_seconds": 0.0,
+          "write_seconds": 0.0,
+          "total_seconds": 0.0,
+          "group_map": [
+            [
+              "9764256:0",
+              "9764256:1",
+              "9764256:2"
+            ],
+            [
+              "9764256:3",
+              "9764256:4"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "replace": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 770,
+          "encoder_calls": 1,
+          "rewritten_vectors": 3,
+          "removed_vectors": 0,
+          "regroup_seconds": 2.529995981603861e-05,
+          "encode_seconds": 1.2381866000359878,
+          "write_seconds": 3.659998765215278e-05,
+          "total_seconds": 1.238248499983456,
+          "group_map": [
+            [
+              "9764256:0",
+              "9764256:1",
+              "9764256:2"
+            ],
+            [
+              "9764256:3",
+              "9764256:4"
+            ]
+          ],
+          "max_rebuild_error": 2.60770320892334e-08
+        },
+        "insert": {
+          "refreshed_groups": 2,
+          "refreshed_input_tokens": 1028,
+          "encoder_calls": 1,
+          "rewritten_vectors": 4,
+          "removed_vectors": 0,
+          "regroup_seconds": 2.929999027401209e-05,
+          "encode_seconds": 1.2780656999675557,
+          "write_seconds": 4.640000406652689e-05,
+          "total_seconds": 1.2781413999618962,
+          "group_map": [
+            [
+              "9764256:0",
+              "9764256:0:pilot-insert-1",
+              "9764256:1"
+            ],
+            [
+              "9764256:2"
+            ],
+            [
+              "9764256:3",
+              "9764256:4"
+            ]
+          ],
+          "max_rebuild_error": 2.9802322387695312e-08
+        },
+        "delete": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 514,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 1,
+          "regroup_seconds": 2.7999980375170708e-05,
+          "encode_seconds": 0.5359774999669753,
+          "write_seconds": 3.220001235604286e-05,
+          "total_seconds": 0.5360376999597065,
+          "group_map": [
+            [
+              "9764256:0",
+              "9764256:1"
+            ],
+            [
+              "9764256:2"
+            ],
+            [
+              "9764256:3",
+              "9764256:4"
+            ]
+          ],
+          "max_rebuild_error": 2.9802322387695312e-08
+        },
+        "noop_after": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0,
+          "encode_seconds": 0.0,
+          "write_seconds": 0.0,
+          "total_seconds": 0.0,
+          "group_map": [
+            [
+              "9764256:0",
+              "9764256:1"
+            ],
+            [
+              "9764256:2"
+            ],
+            [
+              "9764256:3",
+              "9764256:4"
+            ]
+          ],
+          "max_rebuild_error": 2.9802322387695312e-08
+        }
+      },
+      "partition_drifted": true
+    },
+    "9967265": {
+      "initial_build": {
+        "refreshed_groups": 1,
+        "refreshed_input_tokens": 952,
+        "encoder_calls": 1,
+        "rewritten_vectors": 4,
+        "removed_vectors": 0,
+        "regroup_seconds": 4.569999873638153e-05,
+        "encode_seconds": 1.4298355000209995,
+        "write_seconds": 3.130000550299883e-05,
+        "total_seconds": 1.4299125000252388
+      },
+      "initial_group_map": [
+        [
+          "9967265:0",
+          "9967265:1",
+          "9967265:2",
+          "9967265:3"
+        ]
+      ],
+      "events": {
+        "noop_before": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0,
+          "encode_seconds": 0.0,
+          "write_seconds": 0.0,
+          "total_seconds": 0.0,
+          "group_map": [
+            [
+              "9967265:0",
+              "9967265:1",
+              "9967265:2",
+              "9967265:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "replace": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 952,
+          "encoder_calls": 1,
+          "rewritten_vectors": 4,
+          "removed_vectors": 0,
+          "regroup_seconds": 2.8900045435875654e-05,
+          "encode_seconds": 1.571461699961219,
+          "write_seconds": 2.7900037821382284e-05,
+          "total_seconds": 1.5715185000444762,
+          "group_map": [
+            [
+              "9967265:0",
+              "9967265:1",
+              "9967265:2",
+              "9967265:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "insert": {
+          "refreshed_groups": 2,
+          "refreshed_input_tokens": 1210,
+          "encoder_calls": 1,
+          "rewritten_vectors": 5,
+          "removed_vectors": 0,
+          "regroup_seconds": 3.029999788850546e-05,
+          "encode_seconds": 1.2724544999655336,
+          "write_seconds": 6.019999273121357e-05,
+          "total_seconds": 1.2725449999561533,
+          "group_map": [
+            [
+              "9967265:0",
+              "9967265:0:pilot-insert-1",
+              "9967265:1"
+            ],
+            [
+              "9967265:2",
+              "9967265:3"
+            ]
+          ],
+          "max_rebuild_error": 0.0
+        },
+        "delete": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 514,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 1,
+          "regroup_seconds": 2.459995448589325e-05,
+          "encode_seconds": 0.6442611000384204,
+          "write_seconds": 4.5599997974932194e-05,
+          "total_seconds": 0.6443312999908812,
+          "group_map": [
+            [
+              "9967265:0",
+              "9967265:1"
+            ],
+            [
+              "9967265:2",
+              "9967265:3"
+            ]
+          ],
+          "max_rebuild_error": 4.470348358154297e-08
+        },
+        "noop_after": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0,
+          "encode_seconds": 0.0,
+          "write_seconds": 0.0,
+          "total_seconds": 0.0,
+          "group_map": [
+            [
+              "9967265:0",
+              "9967265:1"
+            ],
+            [
+              "9967265:2",
+              "9967265:3"
+            ]
+          ],
+          "max_rebuild_error": 4.470348358154297e-08
+        }
+      },
+      "partition_drifted": true
+    }
+  }
+}

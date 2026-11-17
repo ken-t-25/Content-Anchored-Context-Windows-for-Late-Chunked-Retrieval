@@ -30,6 +30,7 @@ from latechunk.encoding import (  # noqa: E402
     long_late_token_embeddings,
 )
 from latechunk.retrieval import evaluate, search_docs  # noqa: E402
+from latechunk.sticky import encode_sticky  # noqa: E402
 
 # Reference values (nDCG@10 x100) for jina-embeddings-v2-small-en, fixed 256-token chunks,
 # as reported in the jina-ai/late-chunking README. Check them against Table 2 of the paper.
@@ -89,12 +90,13 @@ def main():
     p.add_argument("--chunk-size", type=int, default=256)
     p.add_argument("--max-length", type=int, default=8192)
     p.add_argument("--methods", nargs="+", default=["naive", "late", "long_late"],
-                   choices=["naive", "naive_prefix", "late", "long_late", "local_contextual"])
+                   choices=["naive", "naive_prefix", "late", "long_late", "local_contextual", "sticky"])
     p.add_argument("--long-window", type=int, default=256, help="Algorithm 2 macro-window size (tokens)")
     p.add_argument("--long-overlap", type=int, default=64, help="Algorithm 2 overlap (tokens)")
     p.add_argument("--long-special-tokens", choices=["raw", "wrap"], default="raw")
     p.add_argument("--local-radius", type=int, default=1, help="Maximum neighbour chunks on each side")
     p.add_argument("--local-context-cap", type=int, default=1024, help="Local window token budget, including special tokens")
+    p.add_argument("--sticky-token-cap", type=int, default=1024, help="Sticky group token budget, including special tokens")
     p.add_argument("--no-title", action="store_true",
                    help="Split body text only. naive_prefix still uses the BEIR title as its prefix.")
     p.add_argument("--batch-size", type=int, default=16)
@@ -140,6 +142,8 @@ def main():
         elif method == "local_contextual":
             c_emb = encode_local_contextual(enc, docs, batch_size=args.batch_size,
                                             radius=args.local_radius, context_cap=args.local_context_cap)
+        elif method == "sticky":
+            c_emb = encode_sticky(enc, docs, batch_size=args.batch_size, token_cap=args.sticky_token_cap)
         else:
             c_emb = encode_late(enc, docs, batch_size=args.batch_size, long_window=args.long_window,
                                 long_overlap=args.long_overlap, special_tokens=args.long_special_tokens)
