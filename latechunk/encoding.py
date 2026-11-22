@@ -267,6 +267,13 @@ def _template_special_counts(tokenizer) -> tuple[int, int]:
     return leading, len(wrapped) - leading - len(probe)
 
 
+def _wrap_content(tokenizer, content: list[int], leading: int, trailing: int) -> list[int]:
+    wrapped = tokenizer.build_inputs_with_special_tokens(content)
+    if len(wrapped) != leading + len(content) + trailing or wrapped[leading:leading + len(content)] != content:
+        raise ValueError("Expected contiguous content in the tokenizer single-sequence template")
+    return wrapped
+
+
 def _validate_doc_spans(doc: ChunkedDoc, leading: int, trailing: int) -> None:
     previous_end = leading
     content_end = len(doc.input_ids) - trailing
@@ -303,7 +310,7 @@ def encode_naive_prefix(
     """Independently encode each chunk with up to 64 tokens of document metadata."""
     _validate_batch_size(batch_size)
     tokenizer = encoder.tokenizer
-    special_count = tokenizer.num_special_tokens_to_add(pair=False)
+    leading, trailing = _template_special_counts(tokenizer)
     inputs = []
     for doc in docs:
         if not doc.texts:
@@ -313,10 +320,10 @@ def encode_naive_prefix(
         prefix_ids = prefix_ids[:MAX_PREFIX_TOKENS]
         chunks = tokenizer(doc.texts, add_special_tokens=False, truncation=False, verbose=False)["input_ids"]
         for chunk_ids in chunks:
-            available = encoder.max_length - len(chunk_ids) - special_count
+            available = encoder.max_length - leading - len(chunk_ids) - trailing
             if available < 0:
                 raise ValueError(f"Chunk in document {doc.doc_id} exceeds max_length={encoder.max_length} before prefixing")
-            inputs.append(tokenizer.build_inputs_with_special_tokens(prefix_ids[:available] + chunk_ids))
+            inputs.append(_wrap_content(tokenizer, prefix_ids[:available] + chunk_ids, leading, trailing))
     return encoder.encode_token_ids(inputs, batch_size=batch_size)
 
 
@@ -373,12 +380,7 @@ def encode_local_contextual(
             bounds = (window_start, window_end)
             if bounds not in window_indices:
                 content = doc.input_ids[window_start:window_end]
-                wrapped = tokenizer.build_inputs_with_special_tokens(content)
-                if (
-                    len(wrapped) != len(content) + special_count
-                    or wrapped[leading_specials:leading_specials + len(content)] != content
-                ):
-                    raise ValueError("Expected contiguous content in the tokenizer single-sequence template")
+                wrapped = _wrap_content(tokenizer, content, leading_specials, trailing_specials)
                 window_indices[bounds] = len(windows)
                 windows.append(wrapped)
                 targets.append([])

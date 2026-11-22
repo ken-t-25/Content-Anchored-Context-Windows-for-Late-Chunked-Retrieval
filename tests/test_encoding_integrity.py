@@ -30,11 +30,16 @@ class SyntheticTokenizer:
 
     def __call__(self, texts, *, add_special_tokens, truncation, verbose):
         assert truncation is False
-        inputs = [list(map(int, text.split())) for text in texts]
-        return {
-            "input_ids": [self.build_inputs_with_special_tokens(ids) for ids in inputs]
-            if add_special_tokens else inputs
-        }
+        is_single = isinstance(texts, str)
+        inputs = [list(map(int, text.split())) for text in ([texts] if is_single else texts)]
+        if add_special_tokens:
+            inputs = [self.build_inputs_with_special_tokens(ids) for ids in inputs]
+        return {"input_ids": inputs[0] if is_single else inputs}
+
+
+class TwoLeadingSpecials(SyntheticTokenizer):
+    def build_inputs_with_special_tokens(self, ids):
+        return [self.cls_token_id, 103, *ids, self.sep_token_id]
 
 
 def document(doc_id, chunks):
@@ -167,15 +172,19 @@ def test_pooling_rejects_empty_or_out_of_bounds_spans(span):
 def test_local_uses_special_template_offset_with_partial_target_spans(encoder_and_inputs):
     encoder, inputs = encoder_and_inputs
 
-    class TwoLeadingSpecials(SyntheticTokenizer):
-        def build_inputs_with_special_tokens(self, ids):
-            return [self.cls_token_id, 103, *ids, self.sep_token_id]
-
     encoder.tokenizer = TwoLeadingSpecials()
     doc = ChunkedDoc("partial", [101, 103, 40, 41, 5, 6, 7, 102], [(4, 6), (6, 7)], ["5 6", "7"])
     vectors = encode_local_contextual(encoder, [doc])
     assert inputs == [[101, 103, 5, 6, 7, 102]]
     torch.testing.assert_close(vectors, F.normalize(torch.tensor([[5.5, 2.5], [7.0, 4.0]]), dim=-1))
+
+
+def test_prefix_budget_counts_actual_specials(encoder_and_inputs):
+    encoder, inputs = encoder_and_inputs
+    encoder.tokenizer = TwoLeadingSpecials()
+    doc = ChunkedDoc("a", [101, 103, 4, 5, 6, 7, 102], [(2, 6)], ["4 5 6 7"])
+    encode_naive_prefix(encoder, [doc], {"a": "8 9 10"})
+    assert inputs == [[101, 103, 8, 4, 5, 6, 7, 102]]
 
 
 def test_long_window_plans_have_exact_document_ownership():
