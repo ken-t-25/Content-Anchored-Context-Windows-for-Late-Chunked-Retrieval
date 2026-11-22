@@ -40,6 +40,17 @@ def _verify(operation, stats, ids, current, rebuilt):
     return asdict(stats) | {"max_rebuild_error": (actual - expected).abs().max().item()}
 
 
+def _rebuild_stateless(encoder, method, snapshot, edited, ids, prefix, args):
+    if method == "late":
+        vectors = encode_late(encoder, [edited], batch_size=args.batch_size)
+        return dict(zip(ids, vectors, strict=True))
+    units = build_stateless_units(encoder, snapshot, method=method, token_cap=args.context_cap,
+                                   local_radius=args.local_radius, prefix=prefix)
+    inputs = list(dict.fromkeys(unit for unit, _ in units.values()))
+    vectors = dict(zip(inputs, encode_group_inputs(encoder, inputs, args.batch_size), strict=True))
+    return {key: vectors[unit][index] for key, (unit, index) in units.items()}
+
+
 def run_sequence(encoder, doc, sequence, args):
     replacement, inserted, snapshots = sequence
     settings = {"token_cap": args.context_cap, "batch_size": args.batch_size}
@@ -64,7 +75,7 @@ def run_sequence(encoder, doc, sequence, args):
         "delete": lambda: sticky.delete(inserted.chunk_id),
     }
 
-    events = {}
+    events, fresh_references = {}, {}
     for operation, snapshot in (*snapshots.items(), ("title_prefix", snapshots["delete"]),
                                 ("noop_title", snapshots["delete"])):
         ids = tuple(chunk.chunk_id for chunk in snapshot)
@@ -75,31 +86,34 @@ def run_sequence(encoder, doc, sequence, args):
         row = {}
         for method, state in stateless.items():
             stats = state.refresh(snapshot, prefix=prefix)
-            if method == "late":
-                vectors = encode_late(encoder, [edited], batch_size=args.batch_size)
-                rebuilt = dict(zip(ids, vectors, strict=True))
-            else:
-                units = build_stateless_units(encoder, snapshot, method=method, token_cap=args.context_cap,
-                                               local_radius=args.local_radius, prefix=prefix)
-                inputs = list(dict.fromkeys(unit for unit, _ in units.values()))
-                vectors = dict(zip(inputs, encode_group_inputs(encoder, inputs, args.batch_size), strict=True))
-                rebuilt = {key: vectors[unit][index] for key, (unit, index) in units.items()}
-            row[method] = _verify(operation, stats, ids, state.vectors, rebuilt)
+            reference = (method, snapshot, prefix if method == "naive_prefix" else "")
+            if reference not in fresh_references:
+                fresh_references[reference] = _rebuild_stateless(encoder, method, snapshot, edited, ids, prefix, args)
+            row[method] = _verify(operation, stats, ids, state.vectors, fresh_references[reference])
 
         stats = positional.refresh(edited, ids)
-        fresh = encode_study_long_late(encoder, [replace(doc, chunks=snapshot, chunked=edited)],
-                                       token_cap=args.context_cap, overlap=args.overlap, batch_size=args.batch_size)
-        row["long_late"] = _verify(operation, stats, ids, positional.vectors, dict(zip(ids, fresh, strict=True)))
+        reference = ("long_late", snapshot)
+        if reference not in fresh_references:
+            fresh = encode_study_long_late(encoder, [replace(doc, chunks=snapshot, chunked=edited)],
+                                           token_cap=args.context_cap, overlap=args.overlap, batch_size=args.batch_size)
+            fresh_references[reference] = dict(zip(ids, fresh, strict=True))
+        row["long_late"] = _verify(operation, stats, ids, positional.vectors, fresh_references[reference])
 
         stats = sticky_edits.get(operation, sticky.refresh)()
         if sticky.chunks != _as_sticky(snapshot):
             raise AssertionError(f"{operation} changed Sticky content or order")
-        sticky_rebuild = StickyGroups(encoder, sticky.chunks, group_map=sticky.group_map, **settings)
+        reference = ("sticky", snapshot, sticky.group_map)
+        if reference not in fresh_references:
+            fresh_references[reference] = StickyGroups(encoder, sticky.chunks, group_map=sticky.group_map, **settings)
+        sticky_rebuild = fresh_references[reference]
         row["sticky"] = _verify(operation, stats, ids, sticky.vectors, sticky_rebuild.vectors) | {
             "group_map": sticky.group_map,
         }
         stats = anchored.refresh(snapshot)
-        anchored_rebuild = AnchoredGroups(encoder, snapshot, anchor_k=args.anchor_k, **settings)
+        reference = ("content_anchored", snapshot)
+        if reference not in fresh_references:
+            fresh_references[reference] = AnchoredGroups(encoder, snapshot, anchor_k=args.anchor_k, **settings)
+        anchored_rebuild = fresh_references[reference]
         if anchored.group_map != anchored_rebuild.group_map:
             raise AssertionError(f"{operation} changed the deterministic anchor partition")
         row["content_anchored"] = _verify(operation, stats, ids, anchored.vectors, anchored_rebuild.vectors) | {
@@ -199,7 +213,10 @@ def main():
                for _, _, snapshots in sequences.values() for snapshot in snapshots.values()):
             excluded[doc.doc_id] = "edited document exceeds the Full Late model limit"
             continue
-        documents[doc.doc_id] = {key: run_sequence(encoder, doc, value, args) for key, value in sequences.items()}
+        documents[doc.doc_id] = {}
+        for position, sequence in sequences.items():
+            documents[doc.doc_id][position] = run_sequence(encoder, doc, sequence, args)
+            print(f"Verified {doc.doc_id} at position {position}", flush=True)
         print(f"Verified {len(documents)} / {args.limit_docs} documents", flush=True)
         if len(documents) == args.limit_docs:
             break
