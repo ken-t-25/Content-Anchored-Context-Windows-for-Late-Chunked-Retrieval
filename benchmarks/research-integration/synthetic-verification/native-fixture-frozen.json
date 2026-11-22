@@ -1,0 +1,41 @@
+{
+  "schema": "latechunk.study.config.v1",
+  "dataset": "conteb-fixture",
+  "development_split": "train",
+  "development_fingerprints": {
+    "source": "2d9b78c6d7ee3fe701d0581409d890dca8ed131478d4f217e28c365f814507b3",
+    "corpus": "3094530672928419480e512753ea7601f7713877ecc4a5ec1a3a63f99c7e4e5d",
+    "chunks": "6a11f301f378551e58c8400464161f04a17aae6cb51e939c4fd6fc9a55a7457d",
+    "queries": "5cab750aa6e577a7f72051ffc7448020fb7bc806afd07905835b40faa252e8f2",
+    "qrels": "237cbc69fed5e4f91e18694d1a07122ae19cc08896b5b462e9602d168638d4e7"
+  },
+  "development_query_text_hashes": [
+    "3613da2cb36b470682419e4114ee7a206edf5ccf503222185e563418c0831c80",
+    "7635d4542be2fead7021517f199b18a2dc5e72e0f45473847b2c56af94824a1b"
+  ],
+  "study_config": {
+    "context_cap": 1024,
+    "overlap": 64,
+    "anchor_k": 4,
+    "local_radius": 1,
+    "batch_size": 16,
+    "query_batch_size": 64,
+    "k": 10
+  },
+  "encoder_settings": {
+    "model": "jinaai/jina-embeddings-v2-small-en",
+    "model_revision": "44e7d1d6caec8c883c2d4b207588504d519788d0",
+    "tokenizer_revision": "44e7d1d6caec8c883c2d4b207588504d519788d0",
+    "max_length": 8192
+  },
+  "encoder_provenance": {
+    "model": "jinaai/jina-embeddings-v2-small-en",
+    "model_revision": "44e7d1d6caec8c883c2d4b207588504d519788d0",
+    "code_revision": "f3ec4cf7de7e561007f27c9efc7148b0bd713f81",
+    "tokenizer": "jinaai/jina-embeddings-v2-small-en",
+    "tokenizer_revision": "44e7d1d6caec8c883c2d4b207588504d519788d0",
+    "tokenizer_class": "BertTokenizerFast",
+    "tokenizer_sha256": "ee0b14dbe12a2d982076140491b1015609cd7a8730483583218651a84f0a0f49",
+    "max_length": 8192
+  }
+}

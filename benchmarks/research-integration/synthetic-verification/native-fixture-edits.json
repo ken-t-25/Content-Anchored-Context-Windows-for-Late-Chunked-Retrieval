@@ -1,0 +1,4390 @@
+{
+  "config": {
+    "native": "results\\research-integration\\native-fixture-test.json",
+    "scifact": null,
+    "out": "results\\research-integration\\native-fixture-edits.json",
+    "frozen_config": "results\\research-integration\\native-fixture-frozen.json",
+    "context_cap": 1024,
+    "overlap": 64,
+    "anchor_k": 4,
+    "local_radius": 1,
+    "batch_size": 16,
+    "chunk_size": 256,
+    "limit_docs": 1,
+    "min_chunks": 2,
+    "edit_position": "all",
+    "model": "jinaai/jina-embeddings-v2-small-en",
+    "model_revision": "44e7d1d6caec8c883c2d4b207588504d519788d0",
+    "tokenizer_revision": "44e7d1d6caec8c883c2d4b207588504d519788d0",
+    "max_length": 8192,
+    "device": "cpu",
+    "long_special_tokens": "wrap",
+    "effective_device": "cpu"
+  },
+  "encoder_provenance": {
+    "model": "jinaai/jina-embeddings-v2-small-en",
+    "model_revision": "44e7d1d6caec8c883c2d4b207588504d519788d0",
+    "code_revision": "f3ec4cf7de7e561007f27c9efc7148b0bd713f81",
+    "tokenizer": "jinaai/jina-embeddings-v2-small-en",
+    "tokenizer_revision": "44e7d1d6caec8c883c2d4b207588504d519788d0",
+    "tokenizer_class": "BertTokenizerFast",
+    "tokenizer_sha256": "ee0b14dbe12a2d982076140491b1015609cd7a8730483583218651a84f0a0f49",
+    "max_length": 8192
+  },
+  "dataset": "conteb-fixture",
+  "split": "test",
+  "baseline_coverage": {
+    "document_limit": null,
+    "source_documents": 2,
+    "candidate_documents": 2,
+    "eligible_documents": 2,
+    "candidate_chunks": 4,
+    "eligible_chunks": 4,
+    "excluded_documents": {},
+    "source_queries": 2,
+    "eligible_queries": 2,
+    "eligible_query_source_documents": 2,
+    "excluded_queries": {},
+    "eligible_positive_qrels": 2,
+    "source_positive_qrels": 2
+  },
+  "dataset_fingerprints": {
+    "source": "5fc879df625dfb0dbaa9275b400c5cc473606c7461a473018ef3ff30f632b05c",
+    "corpus": "9f41f4ffa90e19f33dd60acc4c479d31bb4d13c34cd8a9309e5bf7b63dbd575d",
+    "chunks": "af1acae8b0c0cc1af4db2aae2d9116983b8bab2e882c3daa3d6284449be3f2c5",
+    "queries": "f33f93bc22cc60dddb901e3e9398b11840028938718168fd5a164b8994a1c124",
+    "qrels": "90149b655765cea89626a9c54b9b98d2899a0c1bdb6b0d727c77c5cf319146b8"
+  },
+  "selection": "First eligible documents with all requested edit positions",
+  "edit_exclusions": {},
+  "timing": "Per-update wall time includes regroup, model inference, pooling and in-memory writes; fresh checks excluded",
+  "totals": {
+    "early": {
+      "noop_before": {
+        "naive": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.00039379997178912163,
+          "encode_seconds": 4.529999569058418e-05,
+          "write_seconds": 7.100054062902927e-06,
+          "total_seconds": 0.00044620002154260874,
+          "median_refresh_seconds": 0.00044620002154260874,
+          "max_rebuild_error": 0.0
+        },
+        "naive_prefix": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.000784900039434433,
+          "encode_seconds": 3.85999446734786e-05,
+          "write_seconds": 7.800059393048286e-06,
+          "total_seconds": 0.0008313000435009599,
+          "median_refresh_seconds": 0.0008313000435009599,
+          "max_rebuild_error": 0.0
+        },
+        "late": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.00030259997583925724,
+          "encode_seconds": 2.9099988751113415e-05,
+          "write_seconds": 6.600050255656242e-06,
+          "total_seconds": 0.0003383000148460269,
+          "median_refresh_seconds": 0.0003383000148460269,
+          "max_rebuild_error": 0.0
+        },
+        "local_contextual": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0003704000264406204,
+          "encode_seconds": 3.630004357546568e-05,
+          "write_seconds": 7.5999414548277855e-06,
+          "total_seconds": 0.0004143000114709139,
+          "median_refresh_seconds": 0.0004143000114709139,
+          "max_rebuild_error": 0.0
+        },
+        "long_late": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0003090999089181423,
+          "encode_seconds": 2.6000081561505795e-05,
+          "write_seconds": 4.699919372797012e-06,
+          "total_seconds": 0.0003397999098524451,
+          "median_refresh_seconds": 0.0003397999098524451,
+          "max_rebuild_error": 0.0
+        },
+        "sticky": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0002671999391168356,
+          "encode_seconds": 2.8499984182417393e-05,
+          "write_seconds": 6.00004568696022e-06,
+          "total_seconds": 0.0003016999689862132,
+          "median_refresh_seconds": 0.0003016999689862132,
+          "max_rebuild_error": 0.0
+        },
+        "content_anchored": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0003291000612080097,
+          "encode_seconds": 3.339990507811308e-05,
+          "write_seconds": 6.300047971308231e-06,
+          "total_seconds": 0.00036880001425743103,
+          "median_refresh_seconds": 0.00036880001425743103,
+          "max_rebuild_error": 0.0
+        }
+      },
+      "replace": {
+        "naive": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 9,
+          "encoder_calls": 1,
+          "rewritten_vectors": 1,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.00029090000316500664,
+          "encode_seconds": 0.02834780002012849,
+          "write_seconds": 0.0006366000743582845,
+          "total_seconds": 0.02927530009765178,
+          "median_refresh_seconds": 0.02927530009765178,
+          "max_rebuild_error": 4.842877388000488e-08
+        },
+        "naive_prefix": {
+          "refreshed_groups": 2,
+          "refreshed_input_tokens": 31,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0012091000098735094,
+          "encode_seconds": 0.046958599938079715,
+          "write_seconds": 0.0004425999941304326,
+          "total_seconds": 0.04861029994208366,
+          "median_refresh_seconds": 0.04861029994208366,
+          "max_rebuild_error": 0.0
+        },
+        "late": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 15,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.001053999993018806,
+          "encode_seconds": 0.036264399997889996,
+          "write_seconds": 0.0003538000164553523,
+          "total_seconds": 0.037672200007364154,
+          "median_refresh_seconds": 0.037672200007364154,
+          "max_rebuild_error": 0.0
+        },
+        "local_contextual": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 15,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.00034339993726462126,
+          "encode_seconds": 0.03970670001581311,
+          "write_seconds": 0.0005450999597087502,
+          "total_seconds": 0.040595199912786484,
+          "median_refresh_seconds": 0.040595199912786484,
+          "max_rebuild_error": 0.0
+        },
+        "long_late": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 15,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0003703999100252986,
+          "encode_seconds": 0.033157900092191994,
+          "write_seconds": 0.0005098999245092273,
+          "total_seconds": 0.03403819992672652,
+          "median_refresh_seconds": 0.03403819992672652,
+          "max_rebuild_error": 0.0
+        },
+        "sticky": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 15,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0003253000322729349,
+          "encode_seconds": 0.031159200007095933,
+          "write_seconds": 0.0003755999496206641,
+          "total_seconds": 0.03186009998898953,
+          "median_refresh_seconds": 0.03186009998898953,
+          "max_rebuild_error": 0.0
+        },
+        "content_anchored": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 15,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0003016999689862132,
+          "encode_seconds": 0.03352269995957613,
+          "write_seconds": 0.0003489000955596566,
+          "total_seconds": 0.034173300024122,
+          "median_refresh_seconds": 0.034173300024122,
+          "max_rebuild_error": 0.0
+        }
+      },
+      "insert": {
+        "naive": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 9,
+          "encoder_calls": 1,
+          "rewritten_vectors": 1,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0003370000049471855,
+          "encode_seconds": 0.022409200086258352,
+          "write_seconds": 0.0002896999940276146,
+          "total_seconds": 0.023035900085233152,
+          "median_refresh_seconds": 0.023035900085233152,
+          "max_rebuild_error": 4.842877388000488e-08
+        },
+        "naive_prefix": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 16,
+          "encoder_calls": 1,
+          "rewritten_vectors": 1,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0008390999864786863,
+          "encode_seconds": 0.03291079995688051,
+          "write_seconds": 0.0003179000923410058,
+          "total_seconds": 0.0340678000357002,
+          "median_refresh_seconds": 0.0340678000357002,
+          "max_rebuild_error": 3.725290298461914e-08
+        },
+        "late": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 22,
+          "encoder_calls": 1,
+          "rewritten_vectors": 3,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0001362999901175499,
+          "encode_seconds": 0.016566700069233775,
+          "write_seconds": 0.0002848999574780464,
+          "total_seconds": 0.01698790001682937,
+          "median_refresh_seconds": 0.01698790001682937,
+          "max_rebuild_error": 0.0
+        },
+        "local_contextual": {
+          "refreshed_groups": 3,
+          "refreshed_input_tokens": 53,
+          "encoder_calls": 1,
+          "rewritten_vectors": 3,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.00035719992592930794,
+          "encode_seconds": 0.0821856000693515,
+          "write_seconds": 0.0005599999567493796,
+          "total_seconds": 0.08310279995203018,
+          "median_refresh_seconds": 0.08310279995203018,
+          "max_rebuild_error": 0.0
+        },
+        "long_late": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 22,
+          "encoder_calls": 1,
+          "rewritten_vectors": 3,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.00017149990890175104,
+          "encode_seconds": 0.019033199991099536,
+          "write_seconds": 0.00041960005182772875,
+          "total_seconds": 0.019624299951829016,
+          "median_refresh_seconds": 0.019624299951829016,
+          "max_rebuild_error": 0.0
+        },
+        "sticky": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 22,
+          "encoder_calls": 1,
+          "rewritten_vectors": 3,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0003203999949619174,
+          "encode_seconds": 0.034882099949754775,
+          "write_seconds": 0.0004000000189989805,
+          "total_seconds": 0.03560249996371567,
+          "median_refresh_seconds": 0.03560249996371567,
+          "max_rebuild_error": 0.0
+        },
+        "content_anchored": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 22,
+          "encoder_calls": 1,
+          "rewritten_vectors": 3,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0001572000328451395,
+          "encode_seconds": 0.019751599989831448,
+          "write_seconds": 0.0005620999727398157,
+          "total_seconds": 0.020470899995416403,
+          "median_refresh_seconds": 0.020470899995416403,
+          "max_rebuild_error": 0.0
+        }
+      },
+      "delete": {
+        "naive": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 1,
+          "regroup_seconds": 0.00016950001008808613,
+          "encode_seconds": 2.7399975806474686e-05,
+          "write_seconds": 1.0600080713629723e-05,
+          "total_seconds": 0.00020750006660819054,
+          "median_refresh_seconds": 0.00020750006660819054,
+          "max_rebuild_error": 4.842877388000488e-08
+        },
+        "naive_prefix": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 1,
+          "regroup_seconds": 0.00043519993778318167,
+          "encode_seconds": 1.910002902150154e-05,
+          "write_seconds": 1.1199968867003918e-05,
+          "total_seconds": 0.0004654999356716871,
+          "median_refresh_seconds": 0.0004654999356716871,
+          "max_rebuild_error": 0.0
+        },
+        "late": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 15,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 1,
+          "regroup_seconds": 0.00012250000145286322,
+          "encode_seconds": 0.02095300005748868,
+          "write_seconds": 0.00020349991973489523,
+          "total_seconds": 0.02127899997867644,
+          "median_refresh_seconds": 0.02127899997867644,
+          "max_rebuild_error": 0.0
+        },
+        "local_contextual": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 15,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 1,
+          "regroup_seconds": 0.00018679990898817778,
+          "encode_seconds": 0.02530910004861653,
+          "write_seconds": 0.00029939995147287846,
+          "total_seconds": 0.025795299909077585,
+          "median_refresh_seconds": 0.025795299909077585,
+          "max_rebuild_error": 0.0
+        },
+        "long_late": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 15,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 1,
+          "regroup_seconds": 0.0001824999926611781,
+          "encode_seconds": 0.014035800006240606,
+          "write_seconds": 0.00019890000112354755,
+          "total_seconds": 0.014417200000025332,
+          "median_refresh_seconds": 0.014417200000025332,
+          "max_rebuild_error": 0.0
+        },
+        "sticky": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 15,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 1,
+          "regroup_seconds": 0.0001287000486627221,
+          "encode_seconds": 0.012647700030356646,
+          "write_seconds": 0.00021510000806301832,
+          "total_seconds": 0.012991500087082386,
+          "median_refresh_seconds": 0.012991500087082386,
+          "max_rebuild_error": 0.0
+        },
+        "content_anchored": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 15,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 1,
+          "regroup_seconds": 0.000313800061121583,
+          "encode_seconds": 0.016610599937848747,
+          "write_seconds": 0.0003307999577373266,
+          "total_seconds": 0.017255199956707656,
+          "median_refresh_seconds": 0.017255199956707656,
+          "max_rebuild_error": 0.0
+        }
+      },
+      "noop_after": {
+        "naive": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0002033999189734459,
+          "encode_seconds": 2.9199989512562752e-05,
+          "write_seconds": 6.200047209858894e-06,
+          "total_seconds": 0.00023879995569586754,
+          "median_refresh_seconds": 0.00023879995569586754,
+          "max_rebuild_error": 4.842877388000488e-08
+        },
+        "naive_prefix": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0005184999899938703,
+          "encode_seconds": 2.0000035874545574e-05,
+          "write_seconds": 5.300040356814861e-06,
+          "total_seconds": 0.0005438000662252307,
+          "median_refresh_seconds": 0.0005438000662252307,
+          "max_rebuild_error": 0.0
+        },
+        "late": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.00016850000247359276,
+          "encode_seconds": 1.8900027498602867e-05,
+          "write_seconds": 7.100054062902927e-06,
+          "total_seconds": 0.00019450008403509855,
+          "median_refresh_seconds": 0.00019450008403509855,
+          "max_rebuild_error": 0.0
+        },
+        "local_contextual": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.00018480001017451286,
+          "encode_seconds": 1.619989052414894e-05,
+          "write_seconds": 4.900037311017513e-06,
+          "total_seconds": 0.00020589993800967932,
+          "median_refresh_seconds": 0.00020589993800967932,
+          "max_rebuild_error": 0.0
+        },
+        "long_late": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0001631999621167779,
+          "encode_seconds": 1.750001683831215e-05,
+          "write_seconds": 3.500026650726795e-06,
+          "total_seconds": 0.00018420000560581684,
+          "median_refresh_seconds": 0.00018420000560581684,
+          "max_rebuild_error": 0.0
+        },
+        "sticky": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.00010559998918324709,
+          "encode_seconds": 1.4399993233382702e-05,
+          "write_seconds": 4.00003045797348e-06,
+          "total_seconds": 0.00012400001287460327,
+          "median_refresh_seconds": 0.00012400001287460327,
+          "max_rebuild_error": 0.0
+        },
+        "content_anchored": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0002166999038308859,
+          "encode_seconds": 2.2700056433677673e-05,
+          "write_seconds": 5.800044164061546e-06,
+          "total_seconds": 0.0002452000044286251,
+          "median_refresh_seconds": 0.0002452000044286251,
+          "max_rebuild_error": 0.0
+        }
+      },
+      "title_prefix": {
+        "naive": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.00022380007430911064,
+          "encode_seconds": 1.580000389367342e-05,
+          "write_seconds": 5.09992241859436e-06,
+          "total_seconds": 0.0002447000006213784,
+          "median_refresh_seconds": 0.0002447000006213784,
+          "max_rebuild_error": 4.842877388000488e-08
+        },
+        "naive_prefix": {
+          "refreshed_groups": 2,
+          "refreshed_input_tokens": 39,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0006662000669166446,
+          "encode_seconds": 0.05340919992886484,
+          "write_seconds": 0.0005064000142738223,
+          "total_seconds": 0.054581800010055304,
+          "median_refresh_seconds": 0.054581800010055304,
+          "max_rebuild_error": 0.0
+        },
+        "late": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0002429999876767397,
+          "encode_seconds": 2.7300091460347176e-05,
+          "write_seconds": 6.6999346017837524e-06,
+          "total_seconds": 0.0002770000137388706,
+          "median_refresh_seconds": 0.0002770000137388706,
+          "max_rebuild_error": 0.0
+        },
+        "local_contextual": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.00034330005291849375,
+          "encode_seconds": 6.500002928078175e-05,
+          "write_seconds": 9.899958968162537e-06,
+          "total_seconds": 0.00041820004116743803,
+          "median_refresh_seconds": 0.00041820004116743803,
+          "max_rebuild_error": 0.0
+        },
+        "long_late": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0004533999599516392,
+          "encode_seconds": 2.6600086130201817e-05,
+          "write_seconds": 5.699926987290382e-06,
+          "total_seconds": 0.0004856999730691314,
+          "median_refresh_seconds": 0.0004856999730691314,
+          "max_rebuild_error": 0.0
+        },
+        "sticky": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.00017220003064721823,
+          "encode_seconds": 2.619996666908264e-05,
+          "write_seconds": 5.500041879713535e-06,
+          "total_seconds": 0.0002039000391960144,
+          "median_refresh_seconds": 0.0002039000391960144,
+          "max_rebuild_error": 0.0
+        },
+        "content_anchored": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.00019869999960064888,
+          "encode_seconds": 1.880002673715353e-05,
+          "write_seconds": 5.800044164061546e-06,
+          "total_seconds": 0.00022330007050186396,
+          "median_refresh_seconds": 0.00022330007050186396,
+          "max_rebuild_error": 0.0
+        }
+      },
+      "noop_title": {
+        "naive": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.00021550001110881567,
+          "encode_seconds": 2.129992935806513e-05,
+          "write_seconds": 6.900052540004253e-06,
+          "total_seconds": 0.00024369999300688505,
+          "median_refresh_seconds": 0.00024369999300688505,
+          "max_rebuild_error": 4.842877388000488e-08
+        },
+        "naive_prefix": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0005975000094622374,
+          "encode_seconds": 2.0200037397444248e-05,
+          "write_seconds": 6.400048732757568e-06,
+          "total_seconds": 0.0006241000955924392,
+          "median_refresh_seconds": 0.0006241000955924392,
+          "max_rebuild_error": 0.0
+        },
+        "late": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.00017419992946088314,
+          "encode_seconds": 1.9200029782950878e-05,
+          "write_seconds": 5.400041118264198e-06,
+          "total_seconds": 0.00019880000036209822,
+          "median_refresh_seconds": 0.00019880000036209822,
+          "max_rebuild_error": 0.0
+        },
+        "local_contextual": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0001732999226078391,
+          "encode_seconds": 1.3899989426136017e-05,
+          "write_seconds": 4.900037311017513e-06,
+          "total_seconds": 0.00019209994934499264,
+          "median_refresh_seconds": 0.00019209994934499264,
+          "max_rebuild_error": 0.0
+        },
+        "long_late": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.000174800050444901,
+          "encode_seconds": 1.4199991710484028e-05,
+          "write_seconds": 3.4999102354049683e-06,
+          "total_seconds": 0.00019249995239078999,
+          "median_refresh_seconds": 0.00019249995239078999,
+          "max_rebuild_error": 0.0
+        },
+        "sticky": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.00010689999908208847,
+          "encode_seconds": 1.4899997040629387e-05,
+          "write_seconds": 3.999914042651653e-06,
+          "total_seconds": 0.0001257999101653695,
+          "median_refresh_seconds": 0.0001257999101653695,
+          "max_rebuild_error": 0.0
+        },
+        "content_anchored": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.00017040001694113016,
+          "encode_seconds": 1.7200014553964138e-05,
+          "write_seconds": 4.600035026669502e-06,
+          "total_seconds": 0.0001922000665217638,
+          "median_refresh_seconds": 0.0001922000665217638,
+          "max_rebuild_error": 0.0
+        }
+      }
+    },
+    "middle": {
+      "noop_before": {
+        "naive": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.00014749995898455381,
+          "encode_seconds": 1.9000028260052204e-05,
+          "write_seconds": 3.900029696524143e-06,
+          "total_seconds": 0.00017040001694113016,
+          "median_refresh_seconds": 0.00017040001694113016,
+          "max_rebuild_error": 0.0
+        },
+        "naive_prefix": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0006365999579429626,
+          "encode_seconds": 3.1800009310245514e-05,
+          "write_seconds": 1.0199961252510548e-05,
+          "total_seconds": 0.0006785999285057187,
+          "median_refresh_seconds": 0.0006785999285057187,
+          "max_rebuild_error": 0.0
+        },
+        "late": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.00035889993887394667,
+          "encode_seconds": 2.8499984182417393e-05,
+          "write_seconds": 6.700051017105579e-06,
+          "total_seconds": 0.00039409997407346964,
+          "median_refresh_seconds": 0.00039409997407346964,
+          "max_rebuild_error": 0.0
+        },
+        "local_contextual": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.00031260005198419094,
+          "encode_seconds": 2.9399991035461426e-05,
+          "write_seconds": 7.4999406933784485e-06,
+          "total_seconds": 0.0003494999837130308,
+          "median_refresh_seconds": 0.0003494999837130308,
+          "max_rebuild_error": 0.0
+        },
+        "long_late": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.00019079993944615126,
+          "encode_seconds": 1.7700018361210823e-05,
+          "write_seconds": 3.700028173625469e-06,
+          "total_seconds": 0.00021219998598098755,
+          "median_refresh_seconds": 0.00021219998598098755,
+          "max_rebuild_error": 0.0
+        },
+        "sticky": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 8.140003774315119e-05,
+          "encode_seconds": 9.399955160915852e-06,
+          "write_seconds": 1.700012944638729e-06,
+          "total_seconds": 9.250000584870577e-05,
+          "median_refresh_seconds": 9.250000584870577e-05,
+          "max_rebuild_error": 0.0
+        },
+        "content_anchored": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.00016259995754808187,
+          "encode_seconds": 1.9400031305849552e-05,
+          "write_seconds": 3.00002284348011e-06,
+          "total_seconds": 0.00018500001169741154,
+          "median_refresh_seconds": 0.00018500001169741154,
+          "max_rebuild_error": 0.0
+        }
+      },
+      "replace": {
+        "naive": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 8,
+          "encoder_calls": 1,
+          "rewritten_vectors": 1,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.00034440006129443645,
+          "encode_seconds": 0.024577699950896204,
+          "write_seconds": 0.00028769997879862785,
+          "total_seconds": 0.025209799990989268,
+          "median_refresh_seconds": 0.025209799990989268,
+          "max_rebuild_error": 4.0978193283081055e-08
+        },
+        "naive_prefix": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 15,
+          "encoder_calls": 1,
+          "rewritten_vectors": 1,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0006837000837549567,
+          "encode_seconds": 0.02852239995263517,
+          "write_seconds": 0.00028360006399452686,
+          "total_seconds": 0.029489700100384653,
+          "median_refresh_seconds": 0.029489700100384653,
+          "max_rebuild_error": 5.21540641784668e-08
+        },
+        "late": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 15,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.00011289992835372686,
+          "encode_seconds": 0.010881500085815787,
+          "write_seconds": 0.00019779999274760485,
+          "total_seconds": 0.011192200006917119,
+          "median_refresh_seconds": 0.011192200006917119,
+          "max_rebuild_error": 0.0
+        },
+        "local_contextual": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 15,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.00016649998724460602,
+          "encode_seconds": 0.01767979993019253,
+          "write_seconds": 0.00016850000247359276,
+          "total_seconds": 0.01801479991991073,
+          "median_refresh_seconds": 0.01801479991991073,
+          "max_rebuild_error": 0.0
+        },
+        "long_late": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 15,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.00012890005018562078,
+          "encode_seconds": 0.016966299968771636,
+          "write_seconds": 0.0003429999342188239,
+          "total_seconds": 0.01743819995317608,
+          "median_refresh_seconds": 0.01743819995317608,
+          "max_rebuild_error": 0.0
+        },
+        "sticky": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 15,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.00022219994571059942,
+          "encode_seconds": 0.02538740006275475,
+          "write_seconds": 0.00029250001534819603,
+          "total_seconds": 0.025902100023813546,
+          "median_refresh_seconds": 0.025902100023813546,
+          "max_rebuild_error": 0.0
+        },
+        "content_anchored": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 15,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0001743000466376543,
+          "encode_seconds": 0.023574399994686246,
+          "write_seconds": 0.0002272999845445156,
+          "total_seconds": 0.023976000025868416,
+          "median_refresh_seconds": 0.023976000025868416,
+          "max_rebuild_error": 0.0
+        }
+      },
+      "insert": {
+        "naive": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 8,
+          "encoder_calls": 1,
+          "rewritten_vectors": 1,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.00024339999072253704,
+          "encode_seconds": 0.032724699936807156,
+          "write_seconds": 0.0007343000033870339,
+          "total_seconds": 0.03370239993091673,
+          "median_refresh_seconds": 0.03370239993091673,
+          "max_rebuild_error": 4.842877388000488e-08
+        },
+        "naive_prefix": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 15,
+          "encoder_calls": 1,
+          "rewritten_vectors": 1,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0005571000510826707,
+          "encode_seconds": 0.03003319993149489,
+          "write_seconds": 0.00027489999774843454,
+          "total_seconds": 0.030865199980325997,
+          "median_refresh_seconds": 0.030865199980325997,
+          "max_rebuild_error": 5.21540641784668e-08
+        },
+        "late": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 21,
+          "encoder_calls": 1,
+          "rewritten_vectors": 3,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.000835500075481832,
+          "encode_seconds": 0.05679999990388751,
+          "write_seconds": 0.0006608000257983804,
+          "total_seconds": 0.05829630000516772,
+          "median_refresh_seconds": 0.05829630000516772,
+          "max_rebuild_error": 0.0
+        },
+        "local_contextual": {
+          "refreshed_groups": 2,
+          "refreshed_input_tokens": 35,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0005333999870344996,
+          "encode_seconds": 0.07815620000474155,
+          "write_seconds": 0.0004941000370308757,
+          "total_seconds": 0.07918370002880692,
+          "median_refresh_seconds": 0.07918370002880692,
+          "max_rebuild_error": 5.960464477539063e-08
+        },
+        "long_late": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 21,
+          "encoder_calls": 1,
+          "rewritten_vectors": 3,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.00030990003142505884,
+          "encode_seconds": 0.03636769996955991,
+          "write_seconds": 0.001020899973809719,
+          "total_seconds": 0.037698499974794686,
+          "median_refresh_seconds": 0.037698499974794686,
+          "max_rebuild_error": 0.0
+        },
+        "sticky": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 21,
+          "encoder_calls": 1,
+          "rewritten_vectors": 3,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.00033459998667240143,
+          "encode_seconds": 0.04168680007569492,
+          "write_seconds": 0.0005898999515920877,
+          "total_seconds": 0.04261130001395941,
+          "median_refresh_seconds": 0.04261130001395941,
+          "max_rebuild_error": 0.0
+        },
+        "content_anchored": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 21,
+          "encoder_calls": 1,
+          "rewritten_vectors": 3,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.00031349994242191315,
+          "encode_seconds": 0.041782099986448884,
+          "write_seconds": 0.0010181000689044595,
+          "total_seconds": 0.04311369999777526,
+          "median_refresh_seconds": 0.04311369999777526,
+          "max_rebuild_error": 0.0
+        }
+      },
+      "delete": {
+        "naive": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 1,
+          "regroup_seconds": 0.0002482999116182327,
+          "encode_seconds": 2.9999995604157448e-05,
+          "write_seconds": 1.3499986380338669e-05,
+          "total_seconds": 0.00029179989360272884,
+          "median_refresh_seconds": 0.00029179989360272884,
+          "max_rebuild_error": 4.0978193283081055e-08
+        },
+        "naive_prefix": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 1,
+          "regroup_seconds": 0.0006388999754562974,
+          "encode_seconds": 7.870001718401909e-05,
+          "write_seconds": 2.150004729628563e-05,
+          "total_seconds": 0.0007391000399366021,
+          "median_refresh_seconds": 0.0007391000399366021,
+          "max_rebuild_error": 5.21540641784668e-08
+        },
+        "late": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 15,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 1,
+          "regroup_seconds": 0.0002691000699996948,
+          "encode_seconds": 0.03644149994943291,
+          "write_seconds": 0.000541800050996244,
+          "total_seconds": 0.03725240007042885,
+          "median_refresh_seconds": 0.03725240007042885,
+          "max_rebuild_error": 0.0
+        },
+        "local_contextual": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 1,
+          "removed_vectors": 1,
+          "regroup_seconds": 0.0003469999646767974,
+          "encode_seconds": 3.9499951526522636e-05,
+          "write_seconds": 0.00033279997296631336,
+          "total_seconds": 0.0007192998891696334,
+          "median_refresh_seconds": 0.0007192998891696334,
+          "max_rebuild_error": 0.0
+        },
+        "long_late": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 15,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 1,
+          "regroup_seconds": 0.0002535999519750476,
+          "encode_seconds": 0.0513436000328511,
+          "write_seconds": 0.0006092999828979373,
+          "total_seconds": 0.052206499967724085,
+          "median_refresh_seconds": 0.052206499967724085,
+          "max_rebuild_error": 0.0
+        },
+        "sticky": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 15,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 1,
+          "regroup_seconds": 0.00039270007982850075,
+          "encode_seconds": 0.04353719996288419,
+          "write_seconds": 0.0011206000344827771,
+          "total_seconds": 0.045050500077195466,
+          "median_refresh_seconds": 0.045050500077195466,
+          "max_rebuild_error": 0.0
+        },
+        "content_anchored": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 15,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 1,
+          "regroup_seconds": 0.0006417999975383282,
+          "encode_seconds": 0.04551069997251034,
+          "write_seconds": 0.0005734000587835908,
+          "total_seconds": 0.04672590002883226,
+          "median_refresh_seconds": 0.04672590002883226,
+          "max_rebuild_error": 0.0
+        }
+      },
+      "noop_after": {
+        "naive": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0003397000255063176,
+          "encode_seconds": 4.279997665435076e-05,
+          "write_seconds": 8.399947546422482e-06,
+          "total_seconds": 0.00039089994970709085,
+          "median_refresh_seconds": 0.00039089994970709085,
+          "max_rebuild_error": 4.0978193283081055e-08
+        },
+        "naive_prefix": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0007944999961182475,
+          "encode_seconds": 3.250001464039087e-05,
+          "write_seconds": 1.109996810555458e-05,
+          "total_seconds": 0.000838099978864193,
+          "median_refresh_seconds": 0.000838099978864193,
+          "max_rebuild_error": 5.21540641784668e-08
+        },
+        "late": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0002666999353095889,
+          "encode_seconds": 2.9699993319809437e-05,
+          "write_seconds": 7.100054062902927e-06,
+          "total_seconds": 0.0003034999826923013,
+          "median_refresh_seconds": 0.0003034999826923013,
+          "max_rebuild_error": 0.0
+        },
+        "local_contextual": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0002609000075608492,
+          "encode_seconds": 2.1400046534836292e-05,
+          "write_seconds": 6.400048732757568e-06,
+          "total_seconds": 0.00028870010282844305,
+          "median_refresh_seconds": 0.00028870010282844305,
+          "max_rebuild_error": 0.0
+        },
+        "long_late": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0002253999700769782,
+          "encode_seconds": 1.8600025214254856e-05,
+          "write_seconds": 5.199923180043697e-06,
+          "total_seconds": 0.00024919991847127676,
+          "median_refresh_seconds": 0.00024919991847127676,
+          "max_rebuild_error": 0.0
+        },
+        "sticky": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.00014220003504306078,
+          "encode_seconds": 2.3099943064153194e-05,
+          "write_seconds": 5.00003807246685e-06,
+          "total_seconds": 0.00017030001617968082,
+          "median_refresh_seconds": 0.00017030001617968082,
+          "max_rebuild_error": 0.0
+        },
+        "content_anchored": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.00031859998125582933,
+          "encode_seconds": 2.359994687139988e-05,
+          "write_seconds": 6.400048732757568e-06,
+          "total_seconds": 0.0003485999768599868,
+          "median_refresh_seconds": 0.0003485999768599868,
+          "max_rebuild_error": 0.0
+        }
+      },
+      "title_prefix": {
+        "naive": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.00031409994699060917,
+          "encode_seconds": 2.9799994081258774e-05,
+          "write_seconds": 1.0899966582655907e-05,
+          "total_seconds": 0.00035479990765452385,
+          "median_refresh_seconds": 0.00035479990765452385,
+          "max_rebuild_error": 4.0978193283081055e-08
+        },
+        "naive_prefix": {
+          "refreshed_groups": 2,
+          "refreshed_input_tokens": 39,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0007287999615073204,
+          "encode_seconds": 0.11243620002642274,
+          "write_seconds": 0.0005339999916031957,
+          "total_seconds": 0.11369899997953326,
+          "median_refresh_seconds": 0.11369899997953326,
+          "max_rebuild_error": 0.0
+        },
+        "late": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0004053999437019229,
+          "encode_seconds": 4.199997056275606e-05,
+          "write_seconds": 9.900075383484364e-06,
+          "total_seconds": 0.0004572999896481633,
+          "median_refresh_seconds": 0.0004572999896481633,
+          "max_rebuild_error": 0.0
+        },
+        "local_contextual": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.00031849998049438,
+          "encode_seconds": 2.929999027401209e-05,
+          "write_seconds": 8.500064723193645e-06,
+          "total_seconds": 0.00035630003549158573,
+          "median_refresh_seconds": 0.00035630003549158573,
+          "max_rebuild_error": 0.0
+        },
+        "long_late": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0002932000206783414,
+          "encode_seconds": 2.1700048819184303e-05,
+          "write_seconds": 7.1999384090304375e-06,
+          "total_seconds": 0.00032210000790655613,
+          "median_refresh_seconds": 0.00032210000790655613,
+          "max_rebuild_error": 0.0
+        },
+        "sticky": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.00020150002092123032,
+          "encode_seconds": 2.329994458705187e-05,
+          "write_seconds": 6.200047209858894e-06,
+          "total_seconds": 0.00023100001271814108,
+          "median_refresh_seconds": 0.00023100001271814108,
+          "max_rebuild_error": 0.0
+        },
+        "content_anchored": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0004059999482706189,
+          "encode_seconds": 3.120000474154949e-05,
+          "write_seconds": 8.800067007541656e-06,
+          "total_seconds": 0.00044600002001971006,
+          "median_refresh_seconds": 0.00044600002001971006,
+          "max_rebuild_error": 0.0
+        }
+      },
+      "noop_title": {
+        "naive": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.000219699926674366,
+          "encode_seconds": 2.0600040443241596e-05,
+          "write_seconds": 6.9999368861317635e-06,
+          "total_seconds": 0.00024729990400373936,
+          "median_refresh_seconds": 0.00024729990400373936,
+          "max_rebuild_error": 4.0978193283081055e-08
+        },
+        "naive_prefix": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0006923000328242779,
+          "encode_seconds": 2.319994382560253e-05,
+          "write_seconds": 6.700051017105579e-06,
+          "total_seconds": 0.000722200027666986,
+          "median_refresh_seconds": 0.000722200027666986,
+          "max_rebuild_error": 0.0
+        },
+        "late": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0003090000245720148,
+          "encode_seconds": 2.510007470846176e-05,
+          "write_seconds": 6.9999368861317635e-06,
+          "total_seconds": 0.00034110003616660833,
+          "median_refresh_seconds": 0.00034110003616660833,
+          "max_rebuild_error": 0.0
+        },
+        "local_contextual": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.000215600011870265,
+          "encode_seconds": 1.6300007700920105e-05,
+          "write_seconds": 5.599926225841045e-06,
+          "total_seconds": 0.00023749994579702616,
+          "median_refresh_seconds": 0.00023749994579702616,
+          "max_rebuild_error": 0.0
+        },
+        "long_late": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.00024089997168630362,
+          "encode_seconds": 2.0200037397444248e-05,
+          "write_seconds": 5.399924702942371e-06,
+          "total_seconds": 0.00026649993378669024,
+          "median_refresh_seconds": 0.00026649993378669024,
+          "max_rebuild_error": 0.0
+        },
+        "sticky": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.00013149995356798172,
+          "encode_seconds": 1.6900012269616127e-05,
+          "write_seconds": 4.900037311017513e-06,
+          "total_seconds": 0.00015330000314861536,
+          "median_refresh_seconds": 0.00015330000314861536,
+          "max_rebuild_error": 0.0
+        },
+        "content_anchored": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0002578999847173691,
+          "encode_seconds": 2.0400038920342922e-05,
+          "write_seconds": 7.00005330145359e-06,
+          "total_seconds": 0.0002853000769391656,
+          "median_refresh_seconds": 0.0002853000769391656,
+          "max_rebuild_error": 0.0
+        }
+      }
+    },
+    "late": {
+      "noop_before": {
+        "naive": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0004221999552100897,
+          "encode_seconds": 4.279997665435076e-05,
+          "write_seconds": 9.70007386058569e-06,
+          "total_seconds": 0.00047470000572502613,
+          "median_refresh_seconds": 0.00047470000572502613,
+          "max_rebuild_error": 0.0
+        },
+        "naive_prefix": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0014903999399393797,
+          "encode_seconds": 5.8699981309473515e-05,
+          "write_seconds": 1.5199999324977398e-05,
+          "total_seconds": 0.0015642999205738306,
+          "median_refresh_seconds": 0.0015642999205738306,
+          "max_rebuild_error": 0.0
+        },
+        "late": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0005431000608950853,
+          "encode_seconds": 5.1999930292367935e-05,
+          "write_seconds": 0.00012690003495663404,
+          "total_seconds": 0.0007220000261440873,
+          "median_refresh_seconds": 0.0007220000261440873,
+          "max_rebuild_error": 0.0
+        },
+        "local_contextual": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0004808000521734357,
+          "encode_seconds": 4.39999857917428e-05,
+          "write_seconds": 9.899958968162537e-06,
+          "total_seconds": 0.000534699996933341,
+          "median_refresh_seconds": 0.000534699996933341,
+          "max_rebuild_error": 0.0
+        },
+        "long_late": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.00042669998947530985,
+          "encode_seconds": 3.330002073198557e-05,
+          "write_seconds": 7.3999399319291115e-06,
+          "total_seconds": 0.00046739995013922453,
+          "median_refresh_seconds": 0.00046739995013922453,
+          "max_rebuild_error": 0.0
+        },
+        "sticky": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.00038759992457926273,
+          "encode_seconds": 4.0100072510540485e-05,
+          "write_seconds": 8.299946784973145e-06,
+          "total_seconds": 0.00043599994387477636,
+          "median_refresh_seconds": 0.00043599994387477636,
+          "max_rebuild_error": 0.0
+        },
+        "content_anchored": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0009107000660151243,
+          "encode_seconds": 7.319997530430555e-05,
+          "write_seconds": 4.950002767145634e-05,
+          "total_seconds": 0.0010334000689908862,
+          "median_refresh_seconds": 0.0010334000689908862,
+          "max_rebuild_error": 0.0
+        }
+      },
+      "replace": {
+        "naive": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 8,
+          "encoder_calls": 1,
+          "rewritten_vectors": 1,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0005682000191882253,
+          "encode_seconds": 0.04956279997713864,
+          "write_seconds": 0.0006871999939903617,
+          "total_seconds": 0.050818199990317225,
+          "median_refresh_seconds": 0.050818199990317225,
+          "max_rebuild_error": 4.0978193283081055e-08
+        },
+        "naive_prefix": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 15,
+          "encoder_calls": 1,
+          "rewritten_vectors": 1,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0018845000304281712,
+          "encode_seconds": 0.07659910002257675,
+          "write_seconds": 0.0006101999897509813,
+          "total_seconds": 0.0790938000427559,
+          "median_refresh_seconds": 0.0790938000427559,
+          "max_rebuild_error": 5.21540641784668e-08
+        },
+        "late": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 15,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0003437000559642911,
+          "encode_seconds": 0.0508886999450624,
+          "write_seconds": 0.0010357999708503485,
+          "total_seconds": 0.05226819997187704,
+          "median_refresh_seconds": 0.05226819997187704,
+          "max_rebuild_error": 0.0
+        },
+        "local_contextual": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 15,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0006649999413639307,
+          "encode_seconds": 0.05827120004687458,
+          "write_seconds": 0.001165500027127564,
+          "total_seconds": 0.06010170001536608,
+          "median_refresh_seconds": 0.06010170001536608,
+          "max_rebuild_error": 0.0
+        },
+        "long_late": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 15,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.00040419993456453085,
+          "encode_seconds": 0.055577400024048984,
+          "write_seconds": 0.0015666000545024872,
+          "total_seconds": 0.057548200013116,
+          "median_refresh_seconds": 0.057548200013116,
+          "max_rebuild_error": 0.0
+        },
+        "sticky": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 15,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0004285000031813979,
+          "encode_seconds": 0.05430359998717904,
+          "write_seconds": 0.0010766000486910343,
+          "total_seconds": 0.05580870003905147,
+          "median_refresh_seconds": 0.05580870003905147,
+          "max_rebuild_error": 0.0
+        },
+        "content_anchored": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 15,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0003657999914139509,
+          "encode_seconds": 0.04052319994661957,
+          "write_seconds": 0.0004317000275477767,
+          "total_seconds": 0.0413206999655813,
+          "median_refresh_seconds": 0.0413206999655813,
+          "max_rebuild_error": 0.0
+        }
+      },
+      "insert": {
+        "naive": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 8,
+          "encoder_calls": 1,
+          "rewritten_vectors": 1,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.00033219996839761734,
+          "encode_seconds": 0.029631100012920797,
+          "write_seconds": 0.000269099953584373,
+          "total_seconds": 0.030232399934902787,
+          "median_refresh_seconds": 0.030232399934902787,
+          "max_rebuild_error": 4.842877388000488e-08
+        },
+        "naive_prefix": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 15,
+          "encoder_calls": 1,
+          "rewritten_vectors": 1,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0009018999990075827,
+          "encode_seconds": 0.040932999923825264,
+          "write_seconds": 0.00034300005063414574,
+          "total_seconds": 0.04217789997346699,
+          "median_refresh_seconds": 0.04217789997346699,
+          "max_rebuild_error": 5.21540641784668e-08
+        },
+        "late": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 21,
+          "encoder_calls": 1,
+          "rewritten_vectors": 3,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.00038579991087317467,
+          "encode_seconds": 0.042789900093339384,
+          "write_seconds": 0.00028959999326616526,
+          "total_seconds": 0.043465299997478724,
+          "median_refresh_seconds": 0.043465299997478724,
+          "max_rebuild_error": 0.0
+        },
+        "local_contextual": {
+          "refreshed_groups": 2,
+          "refreshed_input_tokens": 35,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.000604800065048039,
+          "encode_seconds": 0.06747649994213134,
+          "write_seconds": 0.000278300023637712,
+          "total_seconds": 0.06835960003081709,
+          "median_refresh_seconds": 0.06835960003081709,
+          "max_rebuild_error": 5.960464477539063e-08
+        },
+        "long_late": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 21,
+          "encoder_calls": 1,
+          "rewritten_vectors": 3,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0006693999748677015,
+          "encode_seconds": 0.1827843999490142,
+          "write_seconds": 0.006245300057344139,
+          "total_seconds": 0.18969909998122603,
+          "median_refresh_seconds": 0.18969909998122603,
+          "max_rebuild_error": 0.0
+        },
+        "sticky": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 21,
+          "encoder_calls": 1,
+          "rewritten_vectors": 3,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.002951500006020069,
+          "encode_seconds": 0.13355349993798882,
+          "write_seconds": 0.0023034000769257545,
+          "total_seconds": 0.13880840002093464,
+          "median_refresh_seconds": 0.13880840002093464,
+          "max_rebuild_error": 0.0
+        },
+        "content_anchored": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 21,
+          "encoder_calls": 1,
+          "rewritten_vectors": 3,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0009071000386029482,
+          "encode_seconds": 0.18351650005206466,
+          "write_seconds": 0.0014464999549090862,
+          "total_seconds": 0.1858701000455767,
+          "median_refresh_seconds": 0.1858701000455767,
+          "max_rebuild_error": 0.0
+        }
+      },
+      "delete": {
+        "naive": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 1,
+          "regroup_seconds": 0.0006581000052392483,
+          "encode_seconds": 7.090007420629263e-05,
+          "write_seconds": 2.859998494386673e-05,
+          "total_seconds": 0.0007576000643894076,
+          "median_refresh_seconds": 0.0007576000643894076,
+          "max_rebuild_error": 4.0978193283081055e-08
+        },
+        "naive_prefix": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 1,
+          "regroup_seconds": 0.0012903999304398894,
+          "encode_seconds": 6.690004374831915e-05,
+          "write_seconds": 0.000685199978761375,
+          "total_seconds": 0.0020424999529495835,
+          "median_refresh_seconds": 0.0020424999529495835,
+          "max_rebuild_error": 5.21540641784668e-08
+        },
+        "late": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 15,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 1,
+          "regroup_seconds": 0.0006148999091237783,
+          "encode_seconds": 0.09460670000407845,
+          "write_seconds": 0.0013383000623434782,
+          "total_seconds": 0.0965598999755457,
+          "median_refresh_seconds": 0.0965598999755457,
+          "max_rebuild_error": 0.0
+        },
+        "local_contextual": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 1,
+          "removed_vectors": 1,
+          "regroup_seconds": 0.000771900056861341,
+          "encode_seconds": 5.819997750222683e-05,
+          "write_seconds": 0.0005777999758720398,
+          "total_seconds": 0.0014079000102356076,
+          "median_refresh_seconds": 0.0014079000102356076,
+          "max_rebuild_error": 0.0
+        },
+        "long_late": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 15,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 1,
+          "regroup_seconds": 0.0005821000086143613,
+          "encode_seconds": 0.09809290000703186,
+          "write_seconds": 0.0010972999734804034,
+          "total_seconds": 0.09977229998912662,
+          "median_refresh_seconds": 0.09977229998912662,
+          "max_rebuild_error": 0.0
+        },
+        "sticky": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 15,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 1,
+          "regroup_seconds": 0.0007547000423073769,
+          "encode_seconds": 0.09461309993639588,
+          "write_seconds": 0.0009762999834492803,
+          "total_seconds": 0.09634409996215254,
+          "median_refresh_seconds": 0.09634409996215254,
+          "max_rebuild_error": 0.0
+        },
+        "content_anchored": {
+          "refreshed_groups": 1,
+          "refreshed_input_tokens": 15,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 1,
+          "regroup_seconds": 0.0007592999609187245,
+          "encode_seconds": 0.0968286000424996,
+          "write_seconds": 0.0015490000369027257,
+          "total_seconds": 0.09913690004032105,
+          "median_refresh_seconds": 0.09913690004032105,
+          "max_rebuild_error": 0.0
+        }
+      },
+      "noop_after": {
+        "naive": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0006988999666646123,
+          "encode_seconds": 7.770000956952572e-05,
+          "write_seconds": 1.4699995517730713e-05,
+          "total_seconds": 0.0007912999717518687,
+          "median_refresh_seconds": 0.0007912999717518687,
+          "max_rebuild_error": 4.0978193283081055e-08
+        },
+        "naive_prefix": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0016528000123798847,
+          "encode_seconds": 7.239996921271086e-05,
+          "write_seconds": 2.189993392676115e-05,
+          "total_seconds": 0.0017470999155193567,
+          "median_refresh_seconds": 0.0017470999155193567,
+          "max_rebuild_error": 5.21540641784668e-08
+        },
+        "late": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0006055000703781843,
+          "encode_seconds": 4.6600005589425564e-05,
+          "write_seconds": 1.1599971912801266e-05,
+          "total_seconds": 0.0006637000478804111,
+          "median_refresh_seconds": 0.0006637000478804111,
+          "max_rebuild_error": 0.0
+        },
+        "local_contextual": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0007735000690445304,
+          "encode_seconds": 5.809997674077749e-05,
+          "write_seconds": 1.2899981811642647e-05,
+          "total_seconds": 0.0008445000275969505,
+          "median_refresh_seconds": 0.0008445000275969505,
+          "max_rebuild_error": 0.0
+        },
+        "long_late": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0008000999223440886,
+          "encode_seconds": 6.410002242773771e-05,
+          "write_seconds": 1.1899974197149277e-05,
+          "total_seconds": 0.0008760999189689755,
+          "median_refresh_seconds": 0.0008760999189689755,
+          "max_rebuild_error": 0.0
+        },
+        "sticky": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0005436999490484595,
+          "encode_seconds": 6.240000948309898e-05,
+          "write_seconds": 1.1299969628453255e-05,
+          "total_seconds": 0.0006173999281600118,
+          "median_refresh_seconds": 0.0006173999281600118,
+          "max_rebuild_error": 0.0
+        },
+        "content_anchored": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0007084000390022993,
+          "encode_seconds": 5.519995465874672e-05,
+          "write_seconds": 1.4399993233382702e-05,
+          "total_seconds": 0.0007779999868944287,
+          "median_refresh_seconds": 0.0007779999868944287,
+          "max_rebuild_error": 0.0
+        }
+      },
+      "title_prefix": {
+        "naive": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0007377000292763114,
+          "encode_seconds": 7.98000255599618e-05,
+          "write_seconds": 1.71000137925148e-05,
+          "total_seconds": 0.000834600068628788,
+          "median_refresh_seconds": 0.000834600068628788,
+          "max_rebuild_error": 4.0978193283081055e-08
+        },
+        "naive_prefix": {
+          "refreshed_groups": 2,
+          "refreshed_input_tokens": 39,
+          "encoder_calls": 1,
+          "rewritten_vectors": 2,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0015516000567004085,
+          "encode_seconds": 0.22566439991351217,
+          "write_seconds": 0.0011278000893071294,
+          "total_seconds": 0.2283438000595197,
+          "median_refresh_seconds": 0.2283438000595197,
+          "max_rebuild_error": 0.0
+        },
+        "late": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0006779999239370227,
+          "encode_seconds": 8.970010094344616e-05,
+          "write_seconds": 1.9799917936325073e-05,
+          "total_seconds": 0.0007874999428167939,
+          "median_refresh_seconds": 0.0007874999428167939,
+          "max_rebuild_error": 0.0
+        },
+        "local_contextual": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0006035000551491976,
+          "encode_seconds": 5.779997445642948e-05,
+          "write_seconds": 1.3199984095990658e-05,
+          "total_seconds": 0.0006745000137016177,
+          "median_refresh_seconds": 0.0006745000137016177,
+          "max_rebuild_error": 0.0
+        },
+        "long_late": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0005959999980404973,
+          "encode_seconds": 4.000007174909115e-05,
+          "write_seconds": 8.599949069321156e-06,
+          "total_seconds": 0.0006446000188589096,
+          "median_refresh_seconds": 0.0006446000188589096,
+          "max_rebuild_error": 0.0
+        },
+        "sticky": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0003282000543549657,
+          "encode_seconds": 4.5599997974932194e-05,
+          "write_seconds": 9.599956683814526e-06,
+          "total_seconds": 0.0003834000090137124,
+          "median_refresh_seconds": 0.0003834000090137124,
+          "max_rebuild_error": 0.0
+        },
+        "content_anchored": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0006541999755427241,
+          "encode_seconds": 6.980006583034992e-05,
+          "write_seconds": 7.059995550662279e-05,
+          "total_seconds": 0.0007945999968796968,
+          "median_refresh_seconds": 0.0007945999968796968,
+          "max_rebuild_error": 0.0
+        }
+      },
+      "noop_title": {
+        "naive": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0007478999905288219,
+          "encode_seconds": 7.020006887614727e-05,
+          "write_seconds": 1.95999164134264e-05,
+          "total_seconds": 0.0008376999758183956,
+          "median_refresh_seconds": 0.0008376999758183956,
+          "max_rebuild_error": 4.0978193283081055e-08
+        },
+        "naive_prefix": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.001537000061944127,
+          "encode_seconds": 7.309997454285622e-05,
+          "write_seconds": 1.9000028260052204e-05,
+          "total_seconds": 0.0016291000647470355,
+          "median_refresh_seconds": 0.0016291000647470355,
+          "max_rebuild_error": 0.0
+        },
+        "late": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0005049000028520823,
+          "encode_seconds": 6.120000034570694e-05,
+          "write_seconds": 1.3199984095990658e-05,
+          "total_seconds": 0.0005792999872937799,
+          "median_refresh_seconds": 0.0005792999872937799,
+          "max_rebuild_error": 0.0
+        },
+        "local_contextual": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0005429000593721867,
+          "encode_seconds": 4.2199972085654736e-05,
+          "write_seconds": 1.2399978004395962e-05,
+          "total_seconds": 0.0005975000094622374,
+          "median_refresh_seconds": 0.0005975000094622374,
+          "max_rebuild_error": 0.0
+        },
+        "long_late": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0004905000096186996,
+          "encode_seconds": 3.609992563724518e-05,
+          "write_seconds": 7.6000578701496124e-06,
+          "total_seconds": 0.0005341999931260943,
+          "median_refresh_seconds": 0.0005341999931260943,
+          "max_rebuild_error": 0.0
+        },
+        "sticky": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.00030800001695752144,
+          "encode_seconds": 5.159992724657059e-05,
+          "write_seconds": 8.400063961744308e-06,
+          "total_seconds": 0.00036800000816583633,
+          "median_refresh_seconds": 0.00036800000816583633,
+          "max_rebuild_error": 0.0
+        },
+        "content_anchored": {
+          "refreshed_groups": 0,
+          "refreshed_input_tokens": 0,
+          "encoder_calls": 0,
+          "rewritten_vectors": 0,
+          "removed_vectors": 0,
+          "regroup_seconds": 0.0005298000760376453,
+          "encode_seconds": 4.5599997974932194e-05,
+          "write_seconds": 1.279998105019331e-05,
+          "total_seconds": 0.0005882000550627708,
+          "median_refresh_seconds": 0.0005882000550627708,
+          "max_rebuild_error": 0.0
+        }
+      }
+    }
+  },
+  "documents": {
+    "test-0": {
+      "early": {
+        "edited_chunk_id": "test-0_2",
+        "inserted_chunk_id": "test-0_2:pilot-insert-1",
+        "original_target_tokens": 7,
+        "replacement_tokens": 7,
+        "insertion_tokens": 7,
+        "initial_build": {
+          "naive": {
+            "refreshed_groups": 2,
+            "refreshed_input_tokens": 17,
+            "encoder_calls": 1,
+            "rewritten_vectors": 2,
+            "removed_vectors": 0,
+            "regroup_seconds": 0.00021410000044852495,
+            "encode_seconds": 0.05018639995250851,
+            "write_seconds": 0.0006139000179246068,
+            "total_seconds": 0.05101439997088164
+          },
+          "naive_prefix": {
+            "refreshed_groups": 2,
+            "refreshed_input_tokens": 31,
+            "encoder_calls": 1,
+            "rewritten_vectors": 2,
+            "removed_vectors": 0,
+            "regroup_seconds": 0.0014880000380799174,
+            "encode_seconds": 0.052579900017008185,
+            "write_seconds": 0.000434999936260283,
+            "total_seconds": 0.054502899991348386
+          },
+          "late": {
+            "refreshed_groups": 1,
+            "refreshed_input_tokens": 15,
+            "encoder_calls": 1,
+            "rewritten_vectors": 2,
+            "removed_vectors": 0,
+            "regroup_seconds": 0.0002647999208420515,
+            "encode_seconds": 0.03762800002004951,
+            "write_seconds": 0.00044600002001971006,
+            "total_seconds": 0.038338799960911274
+          },
+          "local_contextual": {
+            "refreshed_groups": 1,
+            "refreshed_input_tokens": 15,
+            "encoder_calls": 1,
+            "rewritten_vectors": 2,
+            "removed_vectors": 0,
+            "regroup_seconds": 0.0002968000480905175,
+            "encode_seconds": 0.03194609994534403,
+            "write_seconds": 0.0003991000121459365,
+            "total_seconds": 0.032642000005580485
+          },
+          "long_late": {
+            "refreshed_groups": 1,
+            "refreshed_input_tokens": 15,
+            "encoder_calls": 1,
+            "rewritten_vectors": 2,
+            "removed_vectors": 0,
+            "regroup_seconds": 0.000268799951300025,
+            "encode_seconds": 0.03599600004963577,
+            "write_seconds": 0.0006226999685168266,
+            "total_seconds": 0.03688749996945262
+          },
+          "sticky": {
+            "refreshed_groups": 1,
+            "refreshed_input_tokens": 15,
+            "encoder_calls": 1,
+            "rewritten_vectors": 2,
+            "removed_vectors": 0,
+            "regroup_seconds": 0.0003733000485226512,
+            "encode_seconds": 0.03556500002741814,
+            "write_seconds": 0.0004539999645203352,
+            "total_seconds": 0.03639230004046112,
+            "group_map": [
+              [
+                "test-0_2",
+                "test-0_10"
+              ]
+            ]
+          },
+          "content_anchored": {
+            "refreshed_groups": 1,
+            "refreshed_input_tokens": 15,
+            "encoder_calls": 1,
+            "rewritten_vectors": 2,
+            "removed_vectors": 0,
+            "regroup_seconds": 0.00031539995688945055,
+            "encode_seconds": 0.03229739994276315,
+            "write_seconds": 0.00046980008482933044,
+            "total_seconds": 0.03308259998448193,
+            "group_map": [
+              [
+                "test-0_2",
+                "test-0_10"
+              ]
+            ]
+          }
+        },
+        "events": {
+          "noop_before": {
+            "naive": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.00039379997178912163,
+              "encode_seconds": 4.529999569058418e-05,
+              "write_seconds": 7.100054062902927e-06,
+              "total_seconds": 0.00044620002154260874,
+              "max_rebuild_error": 0.0
+            },
+            "naive_prefix": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.000784900039434433,
+              "encode_seconds": 3.85999446734786e-05,
+              "write_seconds": 7.800059393048286e-06,
+              "total_seconds": 0.0008313000435009599,
+              "max_rebuild_error": 0.0
+            },
+            "late": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.00030259997583925724,
+              "encode_seconds": 2.9099988751113415e-05,
+              "write_seconds": 6.600050255656242e-06,
+              "total_seconds": 0.0003383000148460269,
+              "max_rebuild_error": 0.0
+            },
+            "local_contextual": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0003704000264406204,
+              "encode_seconds": 3.630004357546568e-05,
+              "write_seconds": 7.5999414548277855e-06,
+              "total_seconds": 0.0004143000114709139,
+              "max_rebuild_error": 0.0
+            },
+            "long_late": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0003090999089181423,
+              "encode_seconds": 2.6000081561505795e-05,
+              "write_seconds": 4.699919372797012e-06,
+              "total_seconds": 0.0003397999098524451,
+              "max_rebuild_error": 0.0
+            },
+            "sticky": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0002671999391168356,
+              "encode_seconds": 2.8499984182417393e-05,
+              "write_seconds": 6.00004568696022e-06,
+              "total_seconds": 0.0003016999689862132,
+              "max_rebuild_error": 0.0,
+              "group_map": [
+                [
+                  "test-0_2",
+                  "test-0_10"
+                ]
+              ]
+            },
+            "content_anchored": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0003291000612080097,
+              "encode_seconds": 3.339990507811308e-05,
+              "write_seconds": 6.300047971308231e-06,
+              "total_seconds": 0.00036880001425743103,
+              "max_rebuild_error": 0.0,
+              "group_map": [
+                [
+                  "test-0_2",
+                  "test-0_10"
+                ]
+              ]
+            }
+          },
+          "replace": {
+            "naive": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 9,
+              "encoder_calls": 1,
+              "rewritten_vectors": 1,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.00029090000316500664,
+              "encode_seconds": 0.02834780002012849,
+              "write_seconds": 0.0006366000743582845,
+              "total_seconds": 0.02927530009765178,
+              "max_rebuild_error": 4.842877388000488e-08
+            },
+            "naive_prefix": {
+              "refreshed_groups": 2,
+              "refreshed_input_tokens": 31,
+              "encoder_calls": 1,
+              "rewritten_vectors": 2,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0012091000098735094,
+              "encode_seconds": 0.046958599938079715,
+              "write_seconds": 0.0004425999941304326,
+              "total_seconds": 0.04861029994208366,
+              "max_rebuild_error": 0.0
+            },
+            "late": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 15,
+              "encoder_calls": 1,
+              "rewritten_vectors": 2,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.001053999993018806,
+              "encode_seconds": 0.036264399997889996,
+              "write_seconds": 0.0003538000164553523,
+              "total_seconds": 0.037672200007364154,
+              "max_rebuild_error": 0.0
+            },
+            "local_contextual": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 15,
+              "encoder_calls": 1,
+              "rewritten_vectors": 2,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.00034339993726462126,
+              "encode_seconds": 0.03970670001581311,
+              "write_seconds": 0.0005450999597087502,
+              "total_seconds": 0.040595199912786484,
+              "max_rebuild_error": 0.0
+            },
+            "long_late": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 15,
+              "encoder_calls": 1,
+              "rewritten_vectors": 2,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0003703999100252986,
+              "encode_seconds": 0.033157900092191994,
+              "write_seconds": 0.0005098999245092273,
+              "total_seconds": 0.03403819992672652,
+              "max_rebuild_error": 0.0
+            },
+            "sticky": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 15,
+              "encoder_calls": 1,
+              "rewritten_vectors": 2,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0003253000322729349,
+              "encode_seconds": 0.031159200007095933,
+              "write_seconds": 0.0003755999496206641,
+              "total_seconds": 0.03186009998898953,
+              "max_rebuild_error": 0.0,
+              "group_map": [
+                [
+                  "test-0_2",
+                  "test-0_10"
+                ]
+              ]
+            },
+            "content_anchored": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 15,
+              "encoder_calls": 1,
+              "rewritten_vectors": 2,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0003016999689862132,
+              "encode_seconds": 0.03352269995957613,
+              "write_seconds": 0.0003489000955596566,
+              "total_seconds": 0.034173300024122,
+              "max_rebuild_error": 0.0,
+              "group_map": [
+                [
+                  "test-0_2",
+                  "test-0_10"
+                ]
+              ]
+            }
+          },
+          "insert": {
+            "naive": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 9,
+              "encoder_calls": 1,
+              "rewritten_vectors": 1,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0003370000049471855,
+              "encode_seconds": 0.022409200086258352,
+              "write_seconds": 0.0002896999940276146,
+              "total_seconds": 0.023035900085233152,
+              "max_rebuild_error": 4.842877388000488e-08
+            },
+            "naive_prefix": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 16,
+              "encoder_calls": 1,
+              "rewritten_vectors": 1,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0008390999864786863,
+              "encode_seconds": 0.03291079995688051,
+              "write_seconds": 0.0003179000923410058,
+              "total_seconds": 0.0340678000357002,
+              "max_rebuild_error": 3.725290298461914e-08
+            },
+            "late": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 22,
+              "encoder_calls": 1,
+              "rewritten_vectors": 3,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0001362999901175499,
+              "encode_seconds": 0.016566700069233775,
+              "write_seconds": 0.0002848999574780464,
+              "total_seconds": 0.01698790001682937,
+              "max_rebuild_error": 0.0
+            },
+            "local_contextual": {
+              "refreshed_groups": 3,
+              "refreshed_input_tokens": 53,
+              "encoder_calls": 1,
+              "rewritten_vectors": 3,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.00035719992592930794,
+              "encode_seconds": 0.0821856000693515,
+              "write_seconds": 0.0005599999567493796,
+              "total_seconds": 0.08310279995203018,
+              "max_rebuild_error": 0.0
+            },
+            "long_late": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 22,
+              "encoder_calls": 1,
+              "rewritten_vectors": 3,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.00017149990890175104,
+              "encode_seconds": 0.019033199991099536,
+              "write_seconds": 0.00041960005182772875,
+              "total_seconds": 0.019624299951829016,
+              "max_rebuild_error": 0.0
+            },
+            "sticky": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 22,
+              "encoder_calls": 1,
+              "rewritten_vectors": 3,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0003203999949619174,
+              "encode_seconds": 0.034882099949754775,
+              "write_seconds": 0.0004000000189989805,
+              "total_seconds": 0.03560249996371567,
+              "max_rebuild_error": 0.0,
+              "group_map": [
+                [
+                  "test-0_2",
+                  "test-0_2:pilot-insert-1",
+                  "test-0_10"
+                ]
+              ]
+            },
+            "content_anchored": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 22,
+              "encoder_calls": 1,
+              "rewritten_vectors": 3,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0001572000328451395,
+              "encode_seconds": 0.019751599989831448,
+              "write_seconds": 0.0005620999727398157,
+              "total_seconds": 0.020470899995416403,
+              "max_rebuild_error": 0.0,
+              "group_map": [
+                [
+                  "test-0_2",
+                  "test-0_2:pilot-insert-1",
+                  "test-0_10"
+                ]
+              ]
+            }
+          },
+          "delete": {
+            "naive": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 1,
+              "regroup_seconds": 0.00016950001008808613,
+              "encode_seconds": 2.7399975806474686e-05,
+              "write_seconds": 1.0600080713629723e-05,
+              "total_seconds": 0.00020750006660819054,
+              "max_rebuild_error": 4.842877388000488e-08
+            },
+            "naive_prefix": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 1,
+              "regroup_seconds": 0.00043519993778318167,
+              "encode_seconds": 1.910002902150154e-05,
+              "write_seconds": 1.1199968867003918e-05,
+              "total_seconds": 0.0004654999356716871,
+              "max_rebuild_error": 0.0
+            },
+            "late": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 15,
+              "encoder_calls": 1,
+              "rewritten_vectors": 2,
+              "removed_vectors": 1,
+              "regroup_seconds": 0.00012250000145286322,
+              "encode_seconds": 0.02095300005748868,
+              "write_seconds": 0.00020349991973489523,
+              "total_seconds": 0.02127899997867644,
+              "max_rebuild_error": 0.0
+            },
+            "local_contextual": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 15,
+              "encoder_calls": 1,
+              "rewritten_vectors": 2,
+              "removed_vectors": 1,
+              "regroup_seconds": 0.00018679990898817778,
+              "encode_seconds": 0.02530910004861653,
+              "write_seconds": 0.00029939995147287846,
+              "total_seconds": 0.025795299909077585,
+              "max_rebuild_error": 0.0
+            },
+            "long_late": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 15,
+              "encoder_calls": 1,
+              "rewritten_vectors": 2,
+              "removed_vectors": 1,
+              "regroup_seconds": 0.0001824999926611781,
+              "encode_seconds": 0.014035800006240606,
+              "write_seconds": 0.00019890000112354755,
+              "total_seconds": 0.014417200000025332,
+              "max_rebuild_error": 0.0
+            },
+            "sticky": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 15,
+              "encoder_calls": 1,
+              "rewritten_vectors": 2,
+              "removed_vectors": 1,
+              "regroup_seconds": 0.0001287000486627221,
+              "encode_seconds": 0.012647700030356646,
+              "write_seconds": 0.00021510000806301832,
+              "total_seconds": 0.012991500087082386,
+              "max_rebuild_error": 0.0,
+              "group_map": [
+                [
+                  "test-0_2",
+                  "test-0_10"
+                ]
+              ]
+            },
+            "content_anchored": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 15,
+              "encoder_calls": 1,
+              "rewritten_vectors": 2,
+              "removed_vectors": 1,
+              "regroup_seconds": 0.000313800061121583,
+              "encode_seconds": 0.016610599937848747,
+              "write_seconds": 0.0003307999577373266,
+              "total_seconds": 0.017255199956707656,
+              "max_rebuild_error": 0.0,
+              "group_map": [
+                [
+                  "test-0_2",
+                  "test-0_10"
+                ]
+              ]
+            }
+          },
+          "noop_after": {
+            "naive": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0002033999189734459,
+              "encode_seconds": 2.9199989512562752e-05,
+              "write_seconds": 6.200047209858894e-06,
+              "total_seconds": 0.00023879995569586754,
+              "max_rebuild_error": 4.842877388000488e-08
+            },
+            "naive_prefix": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0005184999899938703,
+              "encode_seconds": 2.0000035874545574e-05,
+              "write_seconds": 5.300040356814861e-06,
+              "total_seconds": 0.0005438000662252307,
+              "max_rebuild_error": 0.0
+            },
+            "late": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.00016850000247359276,
+              "encode_seconds": 1.8900027498602867e-05,
+              "write_seconds": 7.100054062902927e-06,
+              "total_seconds": 0.00019450008403509855,
+              "max_rebuild_error": 0.0
+            },
+            "local_contextual": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.00018480001017451286,
+              "encode_seconds": 1.619989052414894e-05,
+              "write_seconds": 4.900037311017513e-06,
+              "total_seconds": 0.00020589993800967932,
+              "max_rebuild_error": 0.0
+            },
+            "long_late": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0001631999621167779,
+              "encode_seconds": 1.750001683831215e-05,
+              "write_seconds": 3.500026650726795e-06,
+              "total_seconds": 0.00018420000560581684,
+              "max_rebuild_error": 0.0
+            },
+            "sticky": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.00010559998918324709,
+              "encode_seconds": 1.4399993233382702e-05,
+              "write_seconds": 4.00003045797348e-06,
+              "total_seconds": 0.00012400001287460327,
+              "max_rebuild_error": 0.0,
+              "group_map": [
+                [
+                  "test-0_2",
+                  "test-0_10"
+                ]
+              ]
+            },
+            "content_anchored": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0002166999038308859,
+              "encode_seconds": 2.2700056433677673e-05,
+              "write_seconds": 5.800044164061546e-06,
+              "total_seconds": 0.0002452000044286251,
+              "max_rebuild_error": 0.0,
+              "group_map": [
+                [
+                  "test-0_2",
+                  "test-0_10"
+                ]
+              ]
+            }
+          },
+          "title_prefix": {
+            "naive": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.00022380007430911064,
+              "encode_seconds": 1.580000389367342e-05,
+              "write_seconds": 5.09992241859436e-06,
+              "total_seconds": 0.0002447000006213784,
+              "max_rebuild_error": 4.842877388000488e-08
+            },
+            "naive_prefix": {
+              "refreshed_groups": 2,
+              "refreshed_input_tokens": 39,
+              "encoder_calls": 1,
+              "rewritten_vectors": 2,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0006662000669166446,
+              "encode_seconds": 0.05340919992886484,
+              "write_seconds": 0.0005064000142738223,
+              "total_seconds": 0.054581800010055304,
+              "max_rebuild_error": 0.0
+            },
+            "late": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0002429999876767397,
+              "encode_seconds": 2.7300091460347176e-05,
+              "write_seconds": 6.6999346017837524e-06,
+              "total_seconds": 0.0002770000137388706,
+              "max_rebuild_error": 0.0
+            },
+            "local_contextual": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.00034330005291849375,
+              "encode_seconds": 6.500002928078175e-05,
+              "write_seconds": 9.899958968162537e-06,
+              "total_seconds": 0.00041820004116743803,
+              "max_rebuild_error": 0.0
+            },
+            "long_late": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0004533999599516392,
+              "encode_seconds": 2.6600086130201817e-05,
+              "write_seconds": 5.699926987290382e-06,
+              "total_seconds": 0.0004856999730691314,
+              "max_rebuild_error": 0.0
+            },
+            "sticky": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.00017220003064721823,
+              "encode_seconds": 2.619996666908264e-05,
+              "write_seconds": 5.500041879713535e-06,
+              "total_seconds": 0.0002039000391960144,
+              "max_rebuild_error": 0.0,
+              "group_map": [
+                [
+                  "test-0_2",
+                  "test-0_10"
+                ]
+              ]
+            },
+            "content_anchored": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.00019869999960064888,
+              "encode_seconds": 1.880002673715353e-05,
+              "write_seconds": 5.800044164061546e-06,
+              "total_seconds": 0.00022330007050186396,
+              "max_rebuild_error": 0.0,
+              "group_map": [
+                [
+                  "test-0_2",
+                  "test-0_10"
+                ]
+              ]
+            }
+          },
+          "noop_title": {
+            "naive": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.00021550001110881567,
+              "encode_seconds": 2.129992935806513e-05,
+              "write_seconds": 6.900052540004253e-06,
+              "total_seconds": 0.00024369999300688505,
+              "max_rebuild_error": 4.842877388000488e-08
+            },
+            "naive_prefix": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0005975000094622374,
+              "encode_seconds": 2.0200037397444248e-05,
+              "write_seconds": 6.400048732757568e-06,
+              "total_seconds": 0.0006241000955924392,
+              "max_rebuild_error": 0.0
+            },
+            "late": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.00017419992946088314,
+              "encode_seconds": 1.9200029782950878e-05,
+              "write_seconds": 5.400041118264198e-06,
+              "total_seconds": 0.00019880000036209822,
+              "max_rebuild_error": 0.0
+            },
+            "local_contextual": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0001732999226078391,
+              "encode_seconds": 1.3899989426136017e-05,
+              "write_seconds": 4.900037311017513e-06,
+              "total_seconds": 0.00019209994934499264,
+              "max_rebuild_error": 0.0
+            },
+            "long_late": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.000174800050444901,
+              "encode_seconds": 1.4199991710484028e-05,
+              "write_seconds": 3.4999102354049683e-06,
+              "total_seconds": 0.00019249995239078999,
+              "max_rebuild_error": 0.0
+            },
+            "sticky": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.00010689999908208847,
+              "encode_seconds": 1.4899997040629387e-05,
+              "write_seconds": 3.999914042651653e-06,
+              "total_seconds": 0.0001257999101653695,
+              "max_rebuild_error": 0.0,
+              "group_map": [
+                [
+                  "test-0_2",
+                  "test-0_10"
+                ]
+              ]
+            },
+            "content_anchored": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.00017040001694113016,
+              "encode_seconds": 1.7200014553964138e-05,
+              "write_seconds": 4.600035026669502e-06,
+              "total_seconds": 0.0001922000665217638,
+              "max_rebuild_error": 0.0,
+              "group_map": [
+                [
+                  "test-0_2",
+                  "test-0_10"
+                ]
+              ]
+            }
+          }
+        }
+      },
+      "middle": {
+        "edited_chunk_id": "test-0_10",
+        "inserted_chunk_id": "test-0_10:pilot-insert-1",
+        "original_target_tokens": 6,
+        "replacement_tokens": 6,
+        "insertion_tokens": 6,
+        "initial_build": {
+          "naive": {
+            "refreshed_groups": 2,
+            "refreshed_input_tokens": 17,
+            "encoder_calls": 1,
+            "rewritten_vectors": 2,
+            "removed_vectors": 0,
+            "regroup_seconds": 0.00021850003395229578,
+            "encode_seconds": 0.033059499925002456,
+            "write_seconds": 0.00035170000046491623,
+            "total_seconds": 0.03362969995941967
+          },
+          "naive_prefix": {
+            "refreshed_groups": 2,
+            "refreshed_input_tokens": 31,
+            "encoder_calls": 1,
+            "rewritten_vectors": 2,
+            "removed_vectors": 0,
+            "regroup_seconds": 0.0006183999357745051,
+            "encode_seconds": 0.04691510007251054,
+            "write_seconds": 0.00037679995875805616,
+            "total_seconds": 0.0479102999670431
+          },
+          "late": {
+            "refreshed_groups": 1,
+            "refreshed_input_tokens": 15,
+            "encoder_calls": 1,
+            "rewritten_vectors": 2,
+            "removed_vectors": 0,
+            "regroup_seconds": 0.0002601000014692545,
+            "encode_seconds": 0.032794400001876056,
+            "write_seconds": 0.0003502999898046255,
+            "total_seconds": 0.033404799993149936
+          },
+          "local_contextual": {
+            "refreshed_groups": 1,
+            "refreshed_input_tokens": 15,
+            "encoder_calls": 1,
+            "rewritten_vectors": 2,
+            "removed_vectors": 0,
+            "regroup_seconds": 0.00029559992253780365,
+            "encode_seconds": 0.031013800064101815,
+            "write_seconds": 0.00040549994446337223,
+            "total_seconds": 0.03171489993110299
+          },
+          "long_late": {
+            "refreshed_groups": 1,
+            "refreshed_input_tokens": 15,
+            "encoder_calls": 1,
+            "rewritten_vectors": 2,
+            "removed_vectors": 0,
+            "regroup_seconds": 0.00028689997270703316,
+            "encode_seconds": 0.030378199997358024,
+            "write_seconds": 0.00044460000935941935,
+            "total_seconds": 0.031109699979424477
+          },
+          "sticky": {
+            "refreshed_groups": 1,
+            "refreshed_input_tokens": 15,
+            "encoder_calls": 1,
+            "rewritten_vectors": 2,
+            "removed_vectors": 0,
+            "regroup_seconds": 0.00033870001789182425,
+            "encode_seconds": 0.028286000015214086,
+            "write_seconds": 0.00035099999513477087,
+            "total_seconds": 0.02897570002824068,
+            "group_map": [
+              [
+                "test-0_2",
+                "test-0_10"
+              ]
+            ]
+          },
+          "content_anchored": {
+            "refreshed_groups": 1,
+            "refreshed_input_tokens": 15,
+            "encoder_calls": 1,
+            "rewritten_vectors": 2,
+            "removed_vectors": 0,
+            "regroup_seconds": 0.0002145998878404498,
+            "encode_seconds": 0.01790380000602454,
+            "write_seconds": 0.00020890007726848125,
+            "total_seconds": 0.01832729997113347,
+            "group_map": [
+              [
+                "test-0_2",
+                "test-0_10"
+              ]
+            ]
+          }
+        },
+        "events": {
+          "noop_before": {
+            "naive": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.00014749995898455381,
+              "encode_seconds": 1.9000028260052204e-05,
+              "write_seconds": 3.900029696524143e-06,
+              "total_seconds": 0.00017040001694113016,
+              "max_rebuild_error": 0.0
+            },
+            "naive_prefix": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0006365999579429626,
+              "encode_seconds": 3.1800009310245514e-05,
+              "write_seconds": 1.0199961252510548e-05,
+              "total_seconds": 0.0006785999285057187,
+              "max_rebuild_error": 0.0
+            },
+            "late": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.00035889993887394667,
+              "encode_seconds": 2.8499984182417393e-05,
+              "write_seconds": 6.700051017105579e-06,
+              "total_seconds": 0.00039409997407346964,
+              "max_rebuild_error": 0.0
+            },
+            "local_contextual": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.00031260005198419094,
+              "encode_seconds": 2.9399991035461426e-05,
+              "write_seconds": 7.4999406933784485e-06,
+              "total_seconds": 0.0003494999837130308,
+              "max_rebuild_error": 0.0
+            },
+            "long_late": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.00019079993944615126,
+              "encode_seconds": 1.7700018361210823e-05,
+              "write_seconds": 3.700028173625469e-06,
+              "total_seconds": 0.00021219998598098755,
+              "max_rebuild_error": 0.0
+            },
+            "sticky": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 8.140003774315119e-05,
+              "encode_seconds": 9.399955160915852e-06,
+              "write_seconds": 1.700012944638729e-06,
+              "total_seconds": 9.250000584870577e-05,
+              "max_rebuild_error": 0.0,
+              "group_map": [
+                [
+                  "test-0_2",
+                  "test-0_10"
+                ]
+              ]
+            },
+            "content_anchored": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.00016259995754808187,
+              "encode_seconds": 1.9400031305849552e-05,
+              "write_seconds": 3.00002284348011e-06,
+              "total_seconds": 0.00018500001169741154,
+              "max_rebuild_error": 0.0,
+              "group_map": [
+                [
+                  "test-0_2",
+                  "test-0_10"
+                ]
+              ]
+            }
+          },
+          "replace": {
+            "naive": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 8,
+              "encoder_calls": 1,
+              "rewritten_vectors": 1,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.00034440006129443645,
+              "encode_seconds": 0.024577699950896204,
+              "write_seconds": 0.00028769997879862785,
+              "total_seconds": 0.025209799990989268,
+              "max_rebuild_error": 4.0978193283081055e-08
+            },
+            "naive_prefix": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 15,
+              "encoder_calls": 1,
+              "rewritten_vectors": 1,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0006837000837549567,
+              "encode_seconds": 0.02852239995263517,
+              "write_seconds": 0.00028360006399452686,
+              "total_seconds": 0.029489700100384653,
+              "max_rebuild_error": 5.21540641784668e-08
+            },
+            "late": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 15,
+              "encoder_calls": 1,
+              "rewritten_vectors": 2,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.00011289992835372686,
+              "encode_seconds": 0.010881500085815787,
+              "write_seconds": 0.00019779999274760485,
+              "total_seconds": 0.011192200006917119,
+              "max_rebuild_error": 0.0
+            },
+            "local_contextual": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 15,
+              "encoder_calls": 1,
+              "rewritten_vectors": 2,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.00016649998724460602,
+              "encode_seconds": 0.01767979993019253,
+              "write_seconds": 0.00016850000247359276,
+              "total_seconds": 0.01801479991991073,
+              "max_rebuild_error": 0.0
+            },
+            "long_late": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 15,
+              "encoder_calls": 1,
+              "rewritten_vectors": 2,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.00012890005018562078,
+              "encode_seconds": 0.016966299968771636,
+              "write_seconds": 0.0003429999342188239,
+              "total_seconds": 0.01743819995317608,
+              "max_rebuild_error": 0.0
+            },
+            "sticky": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 15,
+              "encoder_calls": 1,
+              "rewritten_vectors": 2,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.00022219994571059942,
+              "encode_seconds": 0.02538740006275475,
+              "write_seconds": 0.00029250001534819603,
+              "total_seconds": 0.025902100023813546,
+              "max_rebuild_error": 0.0,
+              "group_map": [
+                [
+                  "test-0_2",
+                  "test-0_10"
+                ]
+              ]
+            },
+            "content_anchored": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 15,
+              "encoder_calls": 1,
+              "rewritten_vectors": 2,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0001743000466376543,
+              "encode_seconds": 0.023574399994686246,
+              "write_seconds": 0.0002272999845445156,
+              "total_seconds": 0.023976000025868416,
+              "max_rebuild_error": 0.0,
+              "group_map": [
+                [
+                  "test-0_2",
+                  "test-0_10"
+                ]
+              ]
+            }
+          },
+          "insert": {
+            "naive": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 8,
+              "encoder_calls": 1,
+              "rewritten_vectors": 1,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.00024339999072253704,
+              "encode_seconds": 0.032724699936807156,
+              "write_seconds": 0.0007343000033870339,
+              "total_seconds": 0.03370239993091673,
+              "max_rebuild_error": 4.842877388000488e-08
+            },
+            "naive_prefix": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 15,
+              "encoder_calls": 1,
+              "rewritten_vectors": 1,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0005571000510826707,
+              "encode_seconds": 0.03003319993149489,
+              "write_seconds": 0.00027489999774843454,
+              "total_seconds": 0.030865199980325997,
+              "max_rebuild_error": 5.21540641784668e-08
+            },
+            "late": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 21,
+              "encoder_calls": 1,
+              "rewritten_vectors": 3,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.000835500075481832,
+              "encode_seconds": 0.05679999990388751,
+              "write_seconds": 0.0006608000257983804,
+              "total_seconds": 0.05829630000516772,
+              "max_rebuild_error": 0.0
+            },
+            "local_contextual": {
+              "refreshed_groups": 2,
+              "refreshed_input_tokens": 35,
+              "encoder_calls": 1,
+              "rewritten_vectors": 2,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0005333999870344996,
+              "encode_seconds": 0.07815620000474155,
+              "write_seconds": 0.0004941000370308757,
+              "total_seconds": 0.07918370002880692,
+              "max_rebuild_error": 5.960464477539063e-08
+            },
+            "long_late": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 21,
+              "encoder_calls": 1,
+              "rewritten_vectors": 3,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.00030990003142505884,
+              "encode_seconds": 0.03636769996955991,
+              "write_seconds": 0.001020899973809719,
+              "total_seconds": 0.037698499974794686,
+              "max_rebuild_error": 0.0
+            },
+            "sticky": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 21,
+              "encoder_calls": 1,
+              "rewritten_vectors": 3,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.00033459998667240143,
+              "encode_seconds": 0.04168680007569492,
+              "write_seconds": 0.0005898999515920877,
+              "total_seconds": 0.04261130001395941,
+              "max_rebuild_error": 0.0,
+              "group_map": [
+                [
+                  "test-0_2",
+                  "test-0_10",
+                  "test-0_10:pilot-insert-1"
+                ]
+              ]
+            },
+            "content_anchored": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 21,
+              "encoder_calls": 1,
+              "rewritten_vectors": 3,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.00031349994242191315,
+              "encode_seconds": 0.041782099986448884,
+              "write_seconds": 0.0010181000689044595,
+              "total_seconds": 0.04311369999777526,
+              "max_rebuild_error": 0.0,
+              "group_map": [
+                [
+                  "test-0_2",
+                  "test-0_10",
+                  "test-0_10:pilot-insert-1"
+                ]
+              ]
+            }
+          },
+          "delete": {
+            "naive": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 1,
+              "regroup_seconds": 0.0002482999116182327,
+              "encode_seconds": 2.9999995604157448e-05,
+              "write_seconds": 1.3499986380338669e-05,
+              "total_seconds": 0.00029179989360272884,
+              "max_rebuild_error": 4.0978193283081055e-08
+            },
+            "naive_prefix": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 1,
+              "regroup_seconds": 0.0006388999754562974,
+              "encode_seconds": 7.870001718401909e-05,
+              "write_seconds": 2.150004729628563e-05,
+              "total_seconds": 0.0007391000399366021,
+              "max_rebuild_error": 5.21540641784668e-08
+            },
+            "late": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 15,
+              "encoder_calls": 1,
+              "rewritten_vectors": 2,
+              "removed_vectors": 1,
+              "regroup_seconds": 0.0002691000699996948,
+              "encode_seconds": 0.03644149994943291,
+              "write_seconds": 0.000541800050996244,
+              "total_seconds": 0.03725240007042885,
+              "max_rebuild_error": 0.0
+            },
+            "local_contextual": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 1,
+              "removed_vectors": 1,
+              "regroup_seconds": 0.0003469999646767974,
+              "encode_seconds": 3.9499951526522636e-05,
+              "write_seconds": 0.00033279997296631336,
+              "total_seconds": 0.0007192998891696334,
+              "max_rebuild_error": 0.0
+            },
+            "long_late": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 15,
+              "encoder_calls": 1,
+              "rewritten_vectors": 2,
+              "removed_vectors": 1,
+              "regroup_seconds": 0.0002535999519750476,
+              "encode_seconds": 0.0513436000328511,
+              "write_seconds": 0.0006092999828979373,
+              "total_seconds": 0.052206499967724085,
+              "max_rebuild_error": 0.0
+            },
+            "sticky": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 15,
+              "encoder_calls": 1,
+              "rewritten_vectors": 2,
+              "removed_vectors": 1,
+              "regroup_seconds": 0.00039270007982850075,
+              "encode_seconds": 0.04353719996288419,
+              "write_seconds": 0.0011206000344827771,
+              "total_seconds": 0.045050500077195466,
+              "max_rebuild_error": 0.0,
+              "group_map": [
+                [
+                  "test-0_2",
+                  "test-0_10"
+                ]
+              ]
+            },
+            "content_anchored": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 15,
+              "encoder_calls": 1,
+              "rewritten_vectors": 2,
+              "removed_vectors": 1,
+              "regroup_seconds": 0.0006417999975383282,
+              "encode_seconds": 0.04551069997251034,
+              "write_seconds": 0.0005734000587835908,
+              "total_seconds": 0.04672590002883226,
+              "max_rebuild_error": 0.0,
+              "group_map": [
+                [
+                  "test-0_2",
+                  "test-0_10"
+                ]
+              ]
+            }
+          },
+          "noop_after": {
+            "naive": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0003397000255063176,
+              "encode_seconds": 4.279997665435076e-05,
+              "write_seconds": 8.399947546422482e-06,
+              "total_seconds": 0.00039089994970709085,
+              "max_rebuild_error": 4.0978193283081055e-08
+            },
+            "naive_prefix": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0007944999961182475,
+              "encode_seconds": 3.250001464039087e-05,
+              "write_seconds": 1.109996810555458e-05,
+              "total_seconds": 0.000838099978864193,
+              "max_rebuild_error": 5.21540641784668e-08
+            },
+            "late": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0002666999353095889,
+              "encode_seconds": 2.9699993319809437e-05,
+              "write_seconds": 7.100054062902927e-06,
+              "total_seconds": 0.0003034999826923013,
+              "max_rebuild_error": 0.0
+            },
+            "local_contextual": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0002609000075608492,
+              "encode_seconds": 2.1400046534836292e-05,
+              "write_seconds": 6.400048732757568e-06,
+              "total_seconds": 0.00028870010282844305,
+              "max_rebuild_error": 0.0
+            },
+            "long_late": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0002253999700769782,
+              "encode_seconds": 1.8600025214254856e-05,
+              "write_seconds": 5.199923180043697e-06,
+              "total_seconds": 0.00024919991847127676,
+              "max_rebuild_error": 0.0
+            },
+            "sticky": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.00014220003504306078,
+              "encode_seconds": 2.3099943064153194e-05,
+              "write_seconds": 5.00003807246685e-06,
+              "total_seconds": 0.00017030001617968082,
+              "max_rebuild_error": 0.0,
+              "group_map": [
+                [
+                  "test-0_2",
+                  "test-0_10"
+                ]
+              ]
+            },
+            "content_anchored": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.00031859998125582933,
+              "encode_seconds": 2.359994687139988e-05,
+              "write_seconds": 6.400048732757568e-06,
+              "total_seconds": 0.0003485999768599868,
+              "max_rebuild_error": 0.0,
+              "group_map": [
+                [
+                  "test-0_2",
+                  "test-0_10"
+                ]
+              ]
+            }
+          },
+          "title_prefix": {
+            "naive": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.00031409994699060917,
+              "encode_seconds": 2.9799994081258774e-05,
+              "write_seconds": 1.0899966582655907e-05,
+              "total_seconds": 0.00035479990765452385,
+              "max_rebuild_error": 4.0978193283081055e-08
+            },
+            "naive_prefix": {
+              "refreshed_groups": 2,
+              "refreshed_input_tokens": 39,
+              "encoder_calls": 1,
+              "rewritten_vectors": 2,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0007287999615073204,
+              "encode_seconds": 0.11243620002642274,
+              "write_seconds": 0.0005339999916031957,
+              "total_seconds": 0.11369899997953326,
+              "max_rebuild_error": 0.0
+            },
+            "late": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0004053999437019229,
+              "encode_seconds": 4.199997056275606e-05,
+              "write_seconds": 9.900075383484364e-06,
+              "total_seconds": 0.0004572999896481633,
+              "max_rebuild_error": 0.0
+            },
+            "local_contextual": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.00031849998049438,
+              "encode_seconds": 2.929999027401209e-05,
+              "write_seconds": 8.500064723193645e-06,
+              "total_seconds": 0.00035630003549158573,
+              "max_rebuild_error": 0.0
+            },
+            "long_late": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0002932000206783414,
+              "encode_seconds": 2.1700048819184303e-05,
+              "write_seconds": 7.1999384090304375e-06,
+              "total_seconds": 0.00032210000790655613,
+              "max_rebuild_error": 0.0
+            },
+            "sticky": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.00020150002092123032,
+              "encode_seconds": 2.329994458705187e-05,
+              "write_seconds": 6.200047209858894e-06,
+              "total_seconds": 0.00023100001271814108,
+              "max_rebuild_error": 0.0,
+              "group_map": [
+                [
+                  "test-0_2",
+                  "test-0_10"
+                ]
+              ]
+            },
+            "content_anchored": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0004059999482706189,
+              "encode_seconds": 3.120000474154949e-05,
+              "write_seconds": 8.800067007541656e-06,
+              "total_seconds": 0.00044600002001971006,
+              "max_rebuild_error": 0.0,
+              "group_map": [
+                [
+                  "test-0_2",
+                  "test-0_10"
+                ]
+              ]
+            }
+          },
+          "noop_title": {
+            "naive": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.000219699926674366,
+              "encode_seconds": 2.0600040443241596e-05,
+              "write_seconds": 6.9999368861317635e-06,
+              "total_seconds": 0.00024729990400373936,
+              "max_rebuild_error": 4.0978193283081055e-08
+            },
+            "naive_prefix": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0006923000328242779,
+              "encode_seconds": 2.319994382560253e-05,
+              "write_seconds": 6.700051017105579e-06,
+              "total_seconds": 0.000722200027666986,
+              "max_rebuild_error": 0.0
+            },
+            "late": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0003090000245720148,
+              "encode_seconds": 2.510007470846176e-05,
+              "write_seconds": 6.9999368861317635e-06,
+              "total_seconds": 0.00034110003616660833,
+              "max_rebuild_error": 0.0
+            },
+            "local_contextual": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.000215600011870265,
+              "encode_seconds": 1.6300007700920105e-05,
+              "write_seconds": 5.599926225841045e-06,
+              "total_seconds": 0.00023749994579702616,
+              "max_rebuild_error": 0.0
+            },
+            "long_late": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.00024089997168630362,
+              "encode_seconds": 2.0200037397444248e-05,
+              "write_seconds": 5.399924702942371e-06,
+              "total_seconds": 0.00026649993378669024,
+              "max_rebuild_error": 0.0
+            },
+            "sticky": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.00013149995356798172,
+              "encode_seconds": 1.6900012269616127e-05,
+              "write_seconds": 4.900037311017513e-06,
+              "total_seconds": 0.00015330000314861536,
+              "max_rebuild_error": 0.0,
+              "group_map": [
+                [
+                  "test-0_2",
+                  "test-0_10"
+                ]
+              ]
+            },
+            "content_anchored": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0002578999847173691,
+              "encode_seconds": 2.0400038920342922e-05,
+              "write_seconds": 7.00005330145359e-06,
+              "total_seconds": 0.0002853000769391656,
+              "max_rebuild_error": 0.0,
+              "group_map": [
+                [
+                  "test-0_2",
+                  "test-0_10"
+                ]
+              ]
+            }
+          }
+        }
+      },
+      "late": {
+        "edited_chunk_id": "test-0_10",
+        "inserted_chunk_id": "test-0_10:pilot-insert-1",
+        "original_target_tokens": 6,
+        "replacement_tokens": 6,
+        "insertion_tokens": 6,
+        "initial_build": {
+          "naive": {
+            "refreshed_groups": 2,
+            "refreshed_input_tokens": 17,
+            "encoder_calls": 1,
+            "rewritten_vectors": 2,
+            "removed_vectors": 0,
+            "regroup_seconds": 0.00030720001086592674,
+            "encode_seconds": 0.048350200057029724,
+            "write_seconds": 0.000524599920026958,
+            "total_seconds": 0.04918199998792261
+          },
+          "naive_prefix": {
+            "refreshed_groups": 2,
+            "refreshed_input_tokens": 31,
+            "encoder_calls": 1,
+            "rewritten_vectors": 2,
+            "removed_vectors": 0,
+            "regroup_seconds": 0.0006685000844299793,
+            "encode_seconds": 0.06527769996318966,
+            "write_seconds": 0.0004547999706119299,
+            "total_seconds": 0.06640100001823157
+          },
+          "late": {
+            "refreshed_groups": 1,
+            "refreshed_input_tokens": 15,
+            "encoder_calls": 1,
+            "rewritten_vectors": 2,
+            "removed_vectors": 0,
+            "regroup_seconds": 0.0003288999432697892,
+            "encode_seconds": 0.055418599979020655,
+            "write_seconds": 0.0006039000581949949,
+            "total_seconds": 0.05635139998048544
+          },
+          "local_contextual": {
+            "refreshed_groups": 1,
+            "refreshed_input_tokens": 15,
+            "encoder_calls": 1,
+            "rewritten_vectors": 2,
+            "removed_vectors": 0,
+            "regroup_seconds": 0.0004105999832972884,
+            "encode_seconds": 0.061296200030483305,
+            "write_seconds": 0.0006941000465303659,
+            "total_seconds": 0.06240090006031096
+          },
+          "long_late": {
+            "refreshed_groups": 1,
+            "refreshed_input_tokens": 15,
+            "encoder_calls": 1,
+            "rewritten_vectors": 2,
+            "removed_vectors": 0,
+            "regroup_seconds": 0.000521700014360249,
+            "encode_seconds": 0.06385579996276647,
+            "write_seconds": 0.0009885999606922269,
+            "total_seconds": 0.06536609993781894
+          },
+          "sticky": {
+            "refreshed_groups": 1,
+            "refreshed_input_tokens": 15,
+            "encoder_calls": 1,
+            "rewritten_vectors": 2,
+            "removed_vectors": 0,
+            "regroup_seconds": 0.00047749991063028574,
+            "encode_seconds": 0.08364680001977831,
+            "write_seconds": 0.0009951000101864338,
+            "total_seconds": 0.08511939994059503,
+            "group_map": [
+              [
+                "test-0_2",
+                "test-0_10"
+              ]
+            ]
+          },
+          "content_anchored": {
+            "refreshed_groups": 1,
+            "refreshed_input_tokens": 15,
+            "encoder_calls": 1,
+            "rewritten_vectors": 2,
+            "removed_vectors": 0,
+            "regroup_seconds": 0.00040710007306188345,
+            "encode_seconds": 0.044244499993510544,
+            "write_seconds": 0.0005300999619066715,
+            "total_seconds": 0.0451817000284791,
+            "group_map": [
+              [
+                "test-0_2",
+                "test-0_10"
+              ]
+            ]
+          }
+        },
+        "events": {
+          "noop_before": {
+            "naive": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0004221999552100897,
+              "encode_seconds": 4.279997665435076e-05,
+              "write_seconds": 9.70007386058569e-06,
+              "total_seconds": 0.00047470000572502613,
+              "max_rebuild_error": 0.0
+            },
+            "naive_prefix": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0014903999399393797,
+              "encode_seconds": 5.8699981309473515e-05,
+              "write_seconds": 1.5199999324977398e-05,
+              "total_seconds": 0.0015642999205738306,
+              "max_rebuild_error": 0.0
+            },
+            "late": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0005431000608950853,
+              "encode_seconds": 5.1999930292367935e-05,
+              "write_seconds": 0.00012690003495663404,
+              "total_seconds": 0.0007220000261440873,
+              "max_rebuild_error": 0.0
+            },
+            "local_contextual": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0004808000521734357,
+              "encode_seconds": 4.39999857917428e-05,
+              "write_seconds": 9.899958968162537e-06,
+              "total_seconds": 0.000534699996933341,
+              "max_rebuild_error": 0.0
+            },
+            "long_late": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.00042669998947530985,
+              "encode_seconds": 3.330002073198557e-05,
+              "write_seconds": 7.3999399319291115e-06,
+              "total_seconds": 0.00046739995013922453,
+              "max_rebuild_error": 0.0
+            },
+            "sticky": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.00038759992457926273,
+              "encode_seconds": 4.0100072510540485e-05,
+              "write_seconds": 8.299946784973145e-06,
+              "total_seconds": 0.00043599994387477636,
+              "max_rebuild_error": 0.0,
+              "group_map": [
+                [
+                  "test-0_2",
+                  "test-0_10"
+                ]
+              ]
+            },
+            "content_anchored": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0009107000660151243,
+              "encode_seconds": 7.319997530430555e-05,
+              "write_seconds": 4.950002767145634e-05,
+              "total_seconds": 0.0010334000689908862,
+              "max_rebuild_error": 0.0,
+              "group_map": [
+                [
+                  "test-0_2",
+                  "test-0_10"
+                ]
+              ]
+            }
+          },
+          "replace": {
+            "naive": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 8,
+              "encoder_calls": 1,
+              "rewritten_vectors": 1,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0005682000191882253,
+              "encode_seconds": 0.04956279997713864,
+              "write_seconds": 0.0006871999939903617,
+              "total_seconds": 0.050818199990317225,
+              "max_rebuild_error": 4.0978193283081055e-08
+            },
+            "naive_prefix": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 15,
+              "encoder_calls": 1,
+              "rewritten_vectors": 1,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0018845000304281712,
+              "encode_seconds": 0.07659910002257675,
+              "write_seconds": 0.0006101999897509813,
+              "total_seconds": 0.0790938000427559,
+              "max_rebuild_error": 5.21540641784668e-08
+            },
+            "late": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 15,
+              "encoder_calls": 1,
+              "rewritten_vectors": 2,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0003437000559642911,
+              "encode_seconds": 0.0508886999450624,
+              "write_seconds": 0.0010357999708503485,
+              "total_seconds": 0.05226819997187704,
+              "max_rebuild_error": 0.0
+            },
+            "local_contextual": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 15,
+              "encoder_calls": 1,
+              "rewritten_vectors": 2,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0006649999413639307,
+              "encode_seconds": 0.05827120004687458,
+              "write_seconds": 0.001165500027127564,
+              "total_seconds": 0.06010170001536608,
+              "max_rebuild_error": 0.0
+            },
+            "long_late": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 15,
+              "encoder_calls": 1,
+              "rewritten_vectors": 2,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.00040419993456453085,
+              "encode_seconds": 0.055577400024048984,
+              "write_seconds": 0.0015666000545024872,
+              "total_seconds": 0.057548200013116,
+              "max_rebuild_error": 0.0
+            },
+            "sticky": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 15,
+              "encoder_calls": 1,
+              "rewritten_vectors": 2,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0004285000031813979,
+              "encode_seconds": 0.05430359998717904,
+              "write_seconds": 0.0010766000486910343,
+              "total_seconds": 0.05580870003905147,
+              "max_rebuild_error": 0.0,
+              "group_map": [
+                [
+                  "test-0_2",
+                  "test-0_10"
+                ]
+              ]
+            },
+            "content_anchored": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 15,
+              "encoder_calls": 1,
+              "rewritten_vectors": 2,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0003657999914139509,
+              "encode_seconds": 0.04052319994661957,
+              "write_seconds": 0.0004317000275477767,
+              "total_seconds": 0.0413206999655813,
+              "max_rebuild_error": 0.0,
+              "group_map": [
+                [
+                  "test-0_2",
+                  "test-0_10"
+                ]
+              ]
+            }
+          },
+          "insert": {
+            "naive": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 8,
+              "encoder_calls": 1,
+              "rewritten_vectors": 1,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.00033219996839761734,
+              "encode_seconds": 0.029631100012920797,
+              "write_seconds": 0.000269099953584373,
+              "total_seconds": 0.030232399934902787,
+              "max_rebuild_error": 4.842877388000488e-08
+            },
+            "naive_prefix": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 15,
+              "encoder_calls": 1,
+              "rewritten_vectors": 1,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0009018999990075827,
+              "encode_seconds": 0.040932999923825264,
+              "write_seconds": 0.00034300005063414574,
+              "total_seconds": 0.04217789997346699,
+              "max_rebuild_error": 5.21540641784668e-08
+            },
+            "late": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 21,
+              "encoder_calls": 1,
+              "rewritten_vectors": 3,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.00038579991087317467,
+              "encode_seconds": 0.042789900093339384,
+              "write_seconds": 0.00028959999326616526,
+              "total_seconds": 0.043465299997478724,
+              "max_rebuild_error": 0.0
+            },
+            "local_contextual": {
+              "refreshed_groups": 2,
+              "refreshed_input_tokens": 35,
+              "encoder_calls": 1,
+              "rewritten_vectors": 2,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.000604800065048039,
+              "encode_seconds": 0.06747649994213134,
+              "write_seconds": 0.000278300023637712,
+              "total_seconds": 0.06835960003081709,
+              "max_rebuild_error": 5.960464477539063e-08
+            },
+            "long_late": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 21,
+              "encoder_calls": 1,
+              "rewritten_vectors": 3,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0006693999748677015,
+              "encode_seconds": 0.1827843999490142,
+              "write_seconds": 0.006245300057344139,
+              "total_seconds": 0.18969909998122603,
+              "max_rebuild_error": 0.0
+            },
+            "sticky": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 21,
+              "encoder_calls": 1,
+              "rewritten_vectors": 3,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.002951500006020069,
+              "encode_seconds": 0.13355349993798882,
+              "write_seconds": 0.0023034000769257545,
+              "total_seconds": 0.13880840002093464,
+              "max_rebuild_error": 0.0,
+              "group_map": [
+                [
+                  "test-0_2",
+                  "test-0_10",
+                  "test-0_10:pilot-insert-1"
+                ]
+              ]
+            },
+            "content_anchored": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 21,
+              "encoder_calls": 1,
+              "rewritten_vectors": 3,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0009071000386029482,
+              "encode_seconds": 0.18351650005206466,
+              "write_seconds": 0.0014464999549090862,
+              "total_seconds": 0.1858701000455767,
+              "max_rebuild_error": 0.0,
+              "group_map": [
+                [
+                  "test-0_2",
+                  "test-0_10",
+                  "test-0_10:pilot-insert-1"
+                ]
+              ]
+            }
+          },
+          "delete": {
+            "naive": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 1,
+              "regroup_seconds": 0.0006581000052392483,
+              "encode_seconds": 7.090007420629263e-05,
+              "write_seconds": 2.859998494386673e-05,
+              "total_seconds": 0.0007576000643894076,
+              "max_rebuild_error": 4.0978193283081055e-08
+            },
+            "naive_prefix": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 1,
+              "regroup_seconds": 0.0012903999304398894,
+              "encode_seconds": 6.690004374831915e-05,
+              "write_seconds": 0.000685199978761375,
+              "total_seconds": 0.0020424999529495835,
+              "max_rebuild_error": 5.21540641784668e-08
+            },
+            "late": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 15,
+              "encoder_calls": 1,
+              "rewritten_vectors": 2,
+              "removed_vectors": 1,
+              "regroup_seconds": 0.0006148999091237783,
+              "encode_seconds": 0.09460670000407845,
+              "write_seconds": 0.0013383000623434782,
+              "total_seconds": 0.0965598999755457,
+              "max_rebuild_error": 0.0
+            },
+            "local_contextual": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 1,
+              "removed_vectors": 1,
+              "regroup_seconds": 0.000771900056861341,
+              "encode_seconds": 5.819997750222683e-05,
+              "write_seconds": 0.0005777999758720398,
+              "total_seconds": 0.0014079000102356076,
+              "max_rebuild_error": 0.0
+            },
+            "long_late": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 15,
+              "encoder_calls": 1,
+              "rewritten_vectors": 2,
+              "removed_vectors": 1,
+              "regroup_seconds": 0.0005821000086143613,
+              "encode_seconds": 0.09809290000703186,
+              "write_seconds": 0.0010972999734804034,
+              "total_seconds": 0.09977229998912662,
+              "max_rebuild_error": 0.0
+            },
+            "sticky": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 15,
+              "encoder_calls": 1,
+              "rewritten_vectors": 2,
+              "removed_vectors": 1,
+              "regroup_seconds": 0.0007547000423073769,
+              "encode_seconds": 0.09461309993639588,
+              "write_seconds": 0.0009762999834492803,
+              "total_seconds": 0.09634409996215254,
+              "max_rebuild_error": 0.0,
+              "group_map": [
+                [
+                  "test-0_2",
+                  "test-0_10"
+                ]
+              ]
+            },
+            "content_anchored": {
+              "refreshed_groups": 1,
+              "refreshed_input_tokens": 15,
+              "encoder_calls": 1,
+              "rewritten_vectors": 2,
+              "removed_vectors": 1,
+              "regroup_seconds": 0.0007592999609187245,
+              "encode_seconds": 0.0968286000424996,
+              "write_seconds": 0.0015490000369027257,
+              "total_seconds": 0.09913690004032105,
+              "max_rebuild_error": 0.0,
+              "group_map": [
+                [
+                  "test-0_2",
+                  "test-0_10"
+                ]
+              ]
+            }
+          },
+          "noop_after": {
+            "naive": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0006988999666646123,
+              "encode_seconds": 7.770000956952572e-05,
+              "write_seconds": 1.4699995517730713e-05,
+              "total_seconds": 0.0007912999717518687,
+              "max_rebuild_error": 4.0978193283081055e-08
+            },
+            "naive_prefix": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0016528000123798847,
+              "encode_seconds": 7.239996921271086e-05,
+              "write_seconds": 2.189993392676115e-05,
+              "total_seconds": 0.0017470999155193567,
+              "max_rebuild_error": 5.21540641784668e-08
+            },
+            "late": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0006055000703781843,
+              "encode_seconds": 4.6600005589425564e-05,
+              "write_seconds": 1.1599971912801266e-05,
+              "total_seconds": 0.0006637000478804111,
+              "max_rebuild_error": 0.0
+            },
+            "local_contextual": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0007735000690445304,
+              "encode_seconds": 5.809997674077749e-05,
+              "write_seconds": 1.2899981811642647e-05,
+              "total_seconds": 0.0008445000275969505,
+              "max_rebuild_error": 0.0
+            },
+            "long_late": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0008000999223440886,
+              "encode_seconds": 6.410002242773771e-05,
+              "write_seconds": 1.1899974197149277e-05,
+              "total_seconds": 0.0008760999189689755,
+              "max_rebuild_error": 0.0
+            },
+            "sticky": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0005436999490484595,
+              "encode_seconds": 6.240000948309898e-05,
+              "write_seconds": 1.1299969628453255e-05,
+              "total_seconds": 0.0006173999281600118,
+              "max_rebuild_error": 0.0,
+              "group_map": [
+                [
+                  "test-0_2",
+                  "test-0_10"
+                ]
+              ]
+            },
+            "content_anchored": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0007084000390022993,
+              "encode_seconds": 5.519995465874672e-05,
+              "write_seconds": 1.4399993233382702e-05,
+              "total_seconds": 0.0007779999868944287,
+              "max_rebuild_error": 0.0,
+              "group_map": [
+                [
+                  "test-0_2",
+                  "test-0_10"
+                ]
+              ]
+            }
+          },
+          "title_prefix": {
+            "naive": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0007377000292763114,
+              "encode_seconds": 7.98000255599618e-05,
+              "write_seconds": 1.71000137925148e-05,
+              "total_seconds": 0.000834600068628788,
+              "max_rebuild_error": 4.0978193283081055e-08
+            },
+            "naive_prefix": {
+              "refreshed_groups": 2,
+              "refreshed_input_tokens": 39,
+              "encoder_calls": 1,
+              "rewritten_vectors": 2,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0015516000567004085,
+              "encode_seconds": 0.22566439991351217,
+              "write_seconds": 0.0011278000893071294,
+              "total_seconds": 0.2283438000595197,
+              "max_rebuild_error": 0.0
+            },
+            "late": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0006779999239370227,
+              "encode_seconds": 8.970010094344616e-05,
+              "write_seconds": 1.9799917936325073e-05,
+              "total_seconds": 0.0007874999428167939,
+              "max_rebuild_error": 0.0
+            },
+            "local_contextual": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0006035000551491976,
+              "encode_seconds": 5.779997445642948e-05,
+              "write_seconds": 1.3199984095990658e-05,
+              "total_seconds": 0.0006745000137016177,
+              "max_rebuild_error": 0.0
+            },
+            "long_late": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0005959999980404973,
+              "encode_seconds": 4.000007174909115e-05,
+              "write_seconds": 8.599949069321156e-06,
+              "total_seconds": 0.0006446000188589096,
+              "max_rebuild_error": 0.0
+            },
+            "sticky": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0003282000543549657,
+              "encode_seconds": 4.5599997974932194e-05,
+              "write_seconds": 9.599956683814526e-06,
+              "total_seconds": 0.0003834000090137124,
+              "max_rebuild_error": 0.0,
+              "group_map": [
+                [
+                  "test-0_2",
+                  "test-0_10"
+                ]
+              ]
+            },
+            "content_anchored": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0006541999755427241,
+              "encode_seconds": 6.980006583034992e-05,
+              "write_seconds": 7.059995550662279e-05,
+              "total_seconds": 0.0007945999968796968,
+              "max_rebuild_error": 0.0,
+              "group_map": [
+                [
+                  "test-0_2",
+                  "test-0_10"
+                ]
+              ]
+            }
+          },
+          "noop_title": {
+            "naive": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0007478999905288219,
+              "encode_seconds": 7.020006887614727e-05,
+              "write_seconds": 1.95999164134264e-05,
+              "total_seconds": 0.0008376999758183956,
+              "max_rebuild_error": 4.0978193283081055e-08
+            },
+            "naive_prefix": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.001537000061944127,
+              "encode_seconds": 7.309997454285622e-05,
+              "write_seconds": 1.9000028260052204e-05,
+              "total_seconds": 0.0016291000647470355,
+              "max_rebuild_error": 0.0
+            },
+            "late": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0005049000028520823,
+              "encode_seconds": 6.120000034570694e-05,
+              "write_seconds": 1.3199984095990658e-05,
+              "total_seconds": 0.0005792999872937799,
+              "max_rebuild_error": 0.0
+            },
+            "local_contextual": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0005429000593721867,
+              "encode_seconds": 4.2199972085654736e-05,
+              "write_seconds": 1.2399978004395962e-05,
+              "total_seconds": 0.0005975000094622374,
+              "max_rebuild_error": 0.0
+            },
+            "long_late": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0004905000096186996,
+              "encode_seconds": 3.609992563724518e-05,
+              "write_seconds": 7.6000578701496124e-06,
+              "total_seconds": 0.0005341999931260943,
+              "max_rebuild_error": 0.0
+            },
+            "sticky": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.00030800001695752144,
+              "encode_seconds": 5.159992724657059e-05,
+              "write_seconds": 8.400063961744308e-06,
+              "total_seconds": 0.00036800000816583633,
+              "max_rebuild_error": 0.0,
+              "group_map": [
+                [
+                  "test-0_2",
+                  "test-0_10"
+                ]
+              ]
+            },
+            "content_anchored": {
+              "refreshed_groups": 0,
+              "refreshed_input_tokens": 0,
+              "encoder_calls": 0,
+              "rewritten_vectors": 0,
+              "removed_vectors": 0,
+              "regroup_seconds": 0.0005298000760376453,
+              "encode_seconds": 4.5599997974932194e-05,
+              "write_seconds": 1.279998105019331e-05,
+              "total_seconds": 0.0005882000550627708,
+              "max_rebuild_error": 0.0,
+              "group_map": [
+                [
+                  "test-0_2",
+                  "test-0_10"
+                ]
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

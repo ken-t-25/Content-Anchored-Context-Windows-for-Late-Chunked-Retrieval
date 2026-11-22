@@ -1,0 +1,427 @@
+{
+  "config": {
+    "context_cap": 1024,
+    "overlap": 64,
+    "anchor_k": 4,
+    "local_radius": 1,
+    "batch_size": 16,
+    "query_batch_size": 64,
+    "k": 10,
+    "long_late_special_tokens": "wrap",
+    "target_pooling": "mean_of_original_chunk_span_then_l2",
+    "context_cap_counts_special_tokens": true,
+    "oversize_chunk_policy": "whole_chunk_singleton_at_matched_cap_when_model_allows",
+    "independent_prefix": "document_title_or_first_chunk_lead_up_to_64_tokens_in_prompt_only"
+  },
+  "dataset": "conteb-transfer-fixture",
+  "split": "test",
+  "evaluation_level": "chunk",
+  "coverage": {
+    "document_limit": null,
+    "source_documents": 2,
+    "candidate_documents": 2,
+    "eligible_documents": 2,
+    "candidate_chunks": 4,
+    "eligible_chunks": 4,
+    "excluded_documents": {},
+    "source_queries": 2,
+    "eligible_queries": 2,
+    "eligible_query_source_documents": 2,
+    "excluded_queries": {},
+    "eligible_positive_qrels": 2,
+    "source_positive_qrels": 2
+  },
+  "fingerprints": {
+    "source": "1aae7fbe069a6af20aae87428c64460caf4ab78954281f3f418d25542caec9c1",
+    "corpus": "becfb2c4609f8eb07c15517e482cdc0e47f8247b39f17db3828a3e2c7a83ed21",
+    "chunks": "82be6bd976cc071cca6951f3ed50edcf1d1a7ea9c89bd26d1cc162a44b50001d",
+    "queries": "84dd6d4afc5bde138be554145350727ac86d2e02a6f6a7a344e8ca3dd80c8845",
+    "qrels": "c70f7efe47942ecdc7167df40c9259a2c5a85c2024df8a610745acac07534e34"
+  },
+  "encoder": {
+    "model": "jinaai/jina-embeddings-v2-small-en",
+    "model_revision": "44e7d1d6caec8c883c2d4b207588504d519788d0",
+    "code_revision": "f3ec4cf7de7e561007f27c9efc7148b0bd713f81",
+    "tokenizer": "jinaai/jina-embeddings-v2-small-en",
+    "tokenizer_revision": "44e7d1d6caec8c883c2d4b207588504d519788d0",
+    "tokenizer_class": "BertTokenizerFast",
+    "tokenizer_sha256": "ee0b14dbe12a2d982076140491b1015609cd7a8730483583218651a84f0a0f49",
+    "max_length": 8192
+  },
+  "runtime": {
+    "device": "cpu",
+    "python": "3.11.1",
+    "torch": "2.10.0+cpu",
+    "transformers": "4.57.0",
+    "project_revision": "a9c256994af3b6aaca473ace17763d048082b56e"
+  },
+  "status": "complete",
+  "timing": {
+    "method_scope": "standalone_corpus_planning_encoding_and_pooling_no_cross_policy_cache",
+    "shared_query_encode_seconds": 0.19058840000070632,
+    "shared_query_batch_size": 64
+  },
+  "methods": {
+    "naive": {
+      "ndcg@10": 1.0,
+      "recall@10": 1.0,
+      "encode_seconds": 0.2495822999626398,
+      "retrieve_evaluate_seconds": 0.032841699896380305,
+      "batch_size": 16,
+      "chunks": 4,
+      "chunk_fingerprint": "82be6bd976cc071cca6951f3ed50edcf1d1a7ea9c89bd26d1cc162a44b50001d",
+      "per_query": {
+        "transfer-0-q": {
+          "source_doc_id": "transfer-0",
+          "ranking": [
+            "transfer-0_2",
+            "transfer-0_10",
+            "transfer-1_10",
+            "transfer-1_2"
+          ],
+          "ndcg@10": 1.0,
+          "recall@10": 1.0
+        },
+        "transfer-1-q": {
+          "source_doc_id": "transfer-1",
+          "ranking": [
+            "transfer-1_2",
+            "transfer-0_10",
+            "transfer-1_10",
+            "transfer-0_2"
+          ],
+          "ndcg@10": 1.0,
+          "recall@10": 1.0
+        }
+      },
+      "deltas": {
+        "naive": {
+          "ndcg@10": 0.0,
+          "recall@10": 0.0
+        },
+        "late": {
+          "ndcg@10": 0.0,
+          "recall@10": 0.0
+        },
+        "long_late": {
+          "ndcg@10": 0.0,
+          "recall@10": 0.0
+        }
+      }
+    },
+    "naive_prefix": {
+      "ndcg@10": 1.0,
+      "recall@10": 1.0,
+      "encode_seconds": 0.43525939993560314,
+      "retrieve_evaluate_seconds": 0.0017322000348940492,
+      "batch_size": 16,
+      "chunks": 4,
+      "chunk_fingerprint": "82be6bd976cc071cca6951f3ed50edcf1d1a7ea9c89bd26d1cc162a44b50001d",
+      "per_query": {
+        "transfer-0-q": {
+          "source_doc_id": "transfer-0",
+          "ranking": [
+            "transfer-0_2",
+            "transfer-0_10",
+            "transfer-1_10",
+            "transfer-1_2"
+          ],
+          "ndcg@10": 1.0,
+          "recall@10": 1.0
+        },
+        "transfer-1-q": {
+          "source_doc_id": "transfer-1",
+          "ranking": [
+            "transfer-1_2",
+            "transfer-1_10",
+            "transfer-0_2",
+            "transfer-0_10"
+          ],
+          "ndcg@10": 1.0,
+          "recall@10": 1.0
+        }
+      },
+      "deltas": {
+        "naive": {
+          "ndcg@10": 0.0,
+          "recall@10": 0.0
+        },
+        "late": {
+          "ndcg@10": 0.0,
+          "recall@10": 0.0
+        },
+        "long_late": {
+          "ndcg@10": 0.0,
+          "recall@10": 0.0
+        }
+      }
+    },
+    "late": {
+      "ndcg@10": 1.0,
+      "recall@10": 1.0,
+      "encode_seconds": 0.20585180004127324,
+      "retrieve_evaluate_seconds": 0.001180600025691092,
+      "batch_size": 16,
+      "chunks": 4,
+      "chunk_fingerprint": "82be6bd976cc071cca6951f3ed50edcf1d1a7ea9c89bd26d1cc162a44b50001d",
+      "per_query": {
+        "transfer-0-q": {
+          "source_doc_id": "transfer-0",
+          "ranking": [
+            "transfer-0_2",
+            "transfer-0_10",
+            "transfer-1_10",
+            "transfer-1_2"
+          ],
+          "ndcg@10": 1.0,
+          "recall@10": 1.0
+        },
+        "transfer-1-q": {
+          "source_doc_id": "transfer-1",
+          "ranking": [
+            "transfer-1_2",
+            "transfer-1_10",
+            "transfer-0_2",
+            "transfer-0_10"
+          ],
+          "ndcg@10": 1.0,
+          "recall@10": 1.0
+        }
+      },
+      "deltas": {
+        "naive": {
+          "ndcg@10": 0.0,
+          "recall@10": 0.0
+        },
+        "late": {
+          "ndcg@10": 0.0,
+          "recall@10": 0.0
+        },
+        "long_late": {
+          "ndcg@10": 0.0,
+          "recall@10": 0.0
+        }
+      }
+    },
+    "long_late": {
+      "ndcg@10": 1.0,
+      "recall@10": 1.0,
+      "encode_seconds": 0.15781050000805408,
+      "retrieve_evaluate_seconds": 0.0008962999563664198,
+      "batch_size": 16,
+      "chunks": 4,
+      "chunk_fingerprint": "82be6bd976cc071cca6951f3ed50edcf1d1a7ea9c89bd26d1cc162a44b50001d",
+      "per_query": {
+        "transfer-0-q": {
+          "source_doc_id": "transfer-0",
+          "ranking": [
+            "transfer-0_2",
+            "transfer-0_10",
+            "transfer-1_10",
+            "transfer-1_2"
+          ],
+          "ndcg@10": 1.0,
+          "recall@10": 1.0
+        },
+        "transfer-1-q": {
+          "source_doc_id": "transfer-1",
+          "ranking": [
+            "transfer-1_2",
+            "transfer-1_10",
+            "transfer-0_2",
+            "transfer-0_10"
+          ],
+          "ndcg@10": 1.0,
+          "recall@10": 1.0
+        }
+      },
+      "deltas": {
+        "naive": {
+          "ndcg@10": 0.0,
+          "recall@10": 0.0
+        },
+        "late": {
+          "ndcg@10": 0.0,
+          "recall@10": 0.0
+        },
+        "long_late": {
+          "ndcg@10": 0.0,
+          "recall@10": 0.0
+        }
+      }
+    },
+    "local_contextual": {
+      "ndcg@10": 1.0,
+      "recall@10": 1.0,
+      "encode_seconds": 0.16581199993379414,
+      "retrieve_evaluate_seconds": 0.0010423999046906829,
+      "batch_size": 16,
+      "chunks": 4,
+      "chunk_fingerprint": "82be6bd976cc071cca6951f3ed50edcf1d1a7ea9c89bd26d1cc162a44b50001d",
+      "per_query": {
+        "transfer-0-q": {
+          "source_doc_id": "transfer-0",
+          "ranking": [
+            "transfer-0_2",
+            "transfer-0_10",
+            "transfer-1_10",
+            "transfer-1_2"
+          ],
+          "ndcg@10": 1.0,
+          "recall@10": 1.0
+        },
+        "transfer-1-q": {
+          "source_doc_id": "transfer-1",
+          "ranking": [
+            "transfer-1_2",
+            "transfer-1_10",
+            "transfer-0_2",
+            "transfer-0_10"
+          ],
+          "ndcg@10": 1.0,
+          "recall@10": 1.0
+        }
+      },
+      "deltas": {
+        "naive": {
+          "ndcg@10": 0.0,
+          "recall@10": 0.0
+        },
+        "late": {
+          "ndcg@10": 0.0,
+          "recall@10": 0.0
+        },
+        "long_late": {
+          "ndcg@10": 0.0,
+          "recall@10": 0.0
+        }
+      }
+    },
+    "sticky": {
+      "ndcg@10": 1.0,
+      "recall@10": 1.0,
+      "encode_seconds": 0.1529238000512123,
+      "retrieve_evaluate_seconds": 0.0009113000705838203,
+      "batch_size": 16,
+      "chunks": 4,
+      "chunk_fingerprint": "82be6bd976cc071cca6951f3ed50edcf1d1a7ea9c89bd26d1cc162a44b50001d",
+      "per_query": {
+        "transfer-0-q": {
+          "source_doc_id": "transfer-0",
+          "ranking": [
+            "transfer-0_2",
+            "transfer-0_10",
+            "transfer-1_10",
+            "transfer-1_2"
+          ],
+          "ndcg@10": 1.0,
+          "recall@10": 1.0
+        },
+        "transfer-1-q": {
+          "source_doc_id": "transfer-1",
+          "ranking": [
+            "transfer-1_2",
+            "transfer-1_10",
+            "transfer-0_2",
+            "transfer-0_10"
+          ],
+          "ndcg@10": 1.0,
+          "recall@10": 1.0
+        }
+      },
+      "deltas": {
+        "naive": {
+          "ndcg@10": 0.0,
+          "recall@10": 0.0
+        },
+        "late": {
+          "ndcg@10": 0.0,
+          "recall@10": 0.0
+        },
+        "long_late": {
+          "ndcg@10": 0.0,
+          "recall@10": 0.0
+        }
+      }
+    },
+    "content_anchored": {
+      "ndcg@10": 1.0,
+      "recall@10": 1.0,
+      "encode_seconds": 0.15497290005441755,
+      "retrieve_evaluate_seconds": 0.0009289999725297093,
+      "batch_size": 16,
+      "chunks": 4,
+      "chunk_fingerprint": "82be6bd976cc071cca6951f3ed50edcf1d1a7ea9c89bd26d1cc162a44b50001d",
+      "per_query": {
+        "transfer-0-q": {
+          "source_doc_id": "transfer-0",
+          "ranking": [
+            "transfer-0_2",
+            "transfer-0_10",
+            "transfer-1_10",
+            "transfer-1_2"
+          ],
+          "ndcg@10": 1.0,
+          "recall@10": 1.0
+        },
+        "transfer-1-q": {
+          "source_doc_id": "transfer-1",
+          "ranking": [
+            "transfer-1_2",
+            "transfer-1_10",
+            "transfer-0_2",
+            "transfer-0_10"
+          ],
+          "ndcg@10": 1.0,
+          "recall@10": 1.0
+        }
+      },
+      "deltas": {
+        "naive": {
+          "ndcg@10": 0.0,
+          "recall@10": 0.0
+        },
+        "late": {
+          "ndcg@10": 0.0,
+          "recall@10": 0.0
+        },
+        "long_late": {
+          "ndcg@10": 0.0,
+          "recall@10": 0.0
+        }
+      }
+    }
+  },
+  "content_anchored_vs_long_late_source_paired_bootstrap": {
+    "ndcg@10": {
+      "estimate": 0.0,
+      "interval_95": [
+        0.0,
+        0.0
+      ],
+      "sources": 2,
+      "replicates": 2000,
+      "seed": 0
+    },
+    "recall@10": {
+      "estimate": 0.0,
+      "interval_95": [
+        0.0,
+        0.0
+      ],
+      "sources": 2,
+      "replicates": 2000,
+      "seed": 0
+    }
+  },
+  "phase": "transfer",
+  "scope": "transfer",
+  "encoder_settings": {
+    "model": "jinaai/jina-embeddings-v2-small-en",
+    "model_revision": "44e7d1d6caec8c883c2d4b207588504d519788d0",
+    "tokenizer_revision": "44e7d1d6caec8c883c2d4b207588504d519788d0",
+    "max_length": 8192
+  },
+  "frozen_config_sha256": "00a85eee0de1bf7fe1b9f953daea0644bf99bfcb1e297e1761576e24522645f7",
+  "retrieval_units": "native_stable_chunks"
+}

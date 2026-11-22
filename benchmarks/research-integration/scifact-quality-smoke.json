@@ -1,0 +1,911 @@
+{
+  "config": {
+    "context_cap": 1024,
+    "overlap": 256,
+    "anchor_k": 4,
+    "local_radius": 1,
+    "batch_size": 16,
+    "query_batch_size": 64,
+    "k": 10,
+    "long_late_special_tokens": "wrap",
+    "target_pooling": "mean_of_original_chunk_span_then_l2",
+    "context_cap_counts_special_tokens": true,
+    "oversize_chunk_policy": "whole_chunk_singleton_at_matched_cap_when_model_allows",
+    "independent_prefix": "document_title_or_first_chunk_lead_up_to_64_tokens_in_prompt_only",
+    "chunk_size": 256
+  },
+  "dataset": "scifact",
+  "split": "test",
+  "evaluation_level": "document",
+  "coverage": {
+    "document_limit": 64,
+    "source_documents": 5183,
+    "candidate_documents": 64,
+    "eligible_documents": 64,
+    "candidate_chunks": 115,
+    "eligible_chunks": 115,
+    "excluded_documents": {},
+    "source_queries": 300,
+    "eligible_queries": 3,
+    "eligible_query_source_documents": 0,
+    "excluded_queries": {
+      "1": "no_positive_eligible_relevance",
+      "3": "no_positive_eligible_relevance",
+      "5": "no_positive_eligible_relevance",
+      "13": "no_positive_eligible_relevance",
+      "36": "no_positive_eligible_relevance",
+      "42": "no_positive_eligible_relevance",
+      "48": "no_positive_eligible_relevance",
+      "49": "no_positive_eligible_relevance",
+      "50": "no_positive_eligible_relevance",
+      "51": "no_positive_eligible_relevance",
+      "53": "no_positive_eligible_relevance",
+      "54": "no_positive_eligible_relevance",
+      "56": "no_positive_eligible_relevance",
+      "57": "no_positive_eligible_relevance",
+      "70": "no_positive_eligible_relevance",
+      "72": "no_positive_eligible_relevance",
+      "75": "no_positive_eligible_relevance",
+      "94": "no_positive_eligible_relevance",
+      "99": "no_positive_eligible_relevance",
+      "100": "no_positive_eligible_relevance",
+      "113": "no_positive_eligible_relevance",
+      "115": "no_positive_eligible_relevance",
+      "118": "no_positive_eligible_relevance",
+      "124": "no_positive_eligible_relevance",
+      "127": "no_positive_eligible_relevance",
+      "128": "no_positive_eligible_relevance",
+      "129": "no_positive_eligible_relevance",
+      "130": "no_positive_eligible_relevance",
+      "132": "no_positive_eligible_relevance",
+      "133": "no_positive_eligible_relevance",
+      "137": "no_positive_eligible_relevance",
+      "141": "no_positive_eligible_relevance",
+      "142": "no_positive_eligible_relevance",
+      "143": "no_positive_eligible_relevance",
+      "146": "no_positive_eligible_relevance",
+      "148": "no_positive_eligible_relevance",
+      "163": "no_positive_eligible_relevance",
+      "171": "no_positive_eligible_relevance",
+      "179": "no_positive_eligible_relevance",
+      "180": "no_positive_eligible_relevance",
+      "183": "no_positive_eligible_relevance",
+      "185": "no_positive_eligible_relevance",
+      "198": "no_positive_eligible_relevance",
+      "208": "no_positive_eligible_relevance",
+      "212": "no_positive_eligible_relevance",
+      "213": "no_positive_eligible_relevance",
+      "216": "no_positive_eligible_relevance",
+      "217": "no_positive_eligible_relevance",
+      "218": "no_positive_eligible_relevance",
+      "219": "no_positive_eligible_relevance",
+      "230": "no_positive_eligible_relevance",
+      "232": "no_positive_eligible_relevance",
+      "233": "no_positive_eligible_relevance",
+      "236": "no_positive_eligible_relevance",
+      "237": "no_positive_eligible_relevance",
+      "238": "no_positive_eligible_relevance",
+      "239": "no_positive_eligible_relevance",
+      "248": "no_positive_eligible_relevance",
+      "249": "no_positive_eligible_relevance",
+      "261": "no_positive_eligible_relevance",
+      "268": "no_positive_eligible_relevance",
+      "269": "no_positive_eligible_relevance",
+      "274": "no_positive_eligible_relevance",
+      "275": "no_positive_eligible_relevance",
+      "279": "no_positive_eligible_relevance",
+      "294": "no_positive_eligible_relevance",
+      "295": "no_positive_eligible_relevance",
+      "298": "no_positive_eligible_relevance",
+      "300": "no_positive_eligible_relevance",
+      "303": "no_positive_eligible_relevance",
+      "312": "no_positive_eligible_relevance",
+      "314": "no_positive_eligible_relevance",
+      "324": "no_positive_eligible_relevance",
+      "327": "no_positive_eligible_relevance",
+      "338": "no_positive_eligible_relevance",
+      "343": "no_positive_eligible_relevance",
+      "350": "no_positive_eligible_relevance",
+      "354": "no_positive_eligible_relevance",
+      "362": "no_positive_eligible_relevance",
+      "380": "no_positive_eligible_relevance",
+      "384": "no_positive_eligible_relevance",
+      "385": "no_positive_eligible_relevance",
+      "386": "no_positive_eligible_relevance",
+      "388": "no_positive_eligible_relevance",
+      "399": "no_positive_eligible_relevance",
+      "410": "no_positive_eligible_relevance",
+      "411": "no_positive_eligible_relevance",
+      "415": "no_positive_eligible_relevance",
+      "421": "no_positive_eligible_relevance",
+      "431": "no_positive_eligible_relevance",
+      "436": "no_positive_eligible_relevance",
+      "437": "no_positive_eligible_relevance",
+      "439": "no_positive_eligible_relevance",
+      "440": "no_positive_eligible_relevance",
+      "443": "no_positive_eligible_relevance",
+      "452": "no_positive_eligible_relevance",
+      "475": "no_positive_eligible_relevance",
+      "478": "no_positive_eligible_relevance",
+      "491": "no_positive_eligible_relevance",
+      "501": "no_positive_eligible_relevance",
+      "502": "no_positive_eligible_relevance",
+      "507": "no_positive_eligible_relevance",
+      "508": "no_positive_eligible_relevance",
+      "513": "no_positive_eligible_relevance",
+      "514": "no_positive_eligible_relevance",
+      "516": "no_positive_eligible_relevance",
+      "517": "no_positive_eligible_relevance",
+      "521": "no_positive_eligible_relevance",
+      "525": "no_positive_eligible_relevance",
+      "527": "no_positive_eligible_relevance",
+      "528": "no_positive_eligible_relevance",
+      "532": "no_positive_eligible_relevance",
+      "533": "no_positive_eligible_relevance",
+      "535": "no_positive_eligible_relevance",
+      "536": "no_positive_eligible_relevance",
+      "539": "no_positive_eligible_relevance",
+      "540": "no_positive_eligible_relevance",
+      "544": "no_positive_eligible_relevance",
+      "549": "no_positive_eligible_relevance",
+      "551": "no_positive_eligible_relevance",
+      "552": "no_positive_eligible_relevance",
+      "554": "no_positive_eligible_relevance",
+      "560": "no_positive_eligible_relevance",
+      "569": "no_positive_eligible_relevance",
+      "575": "no_positive_eligible_relevance",
+      "577": "no_positive_eligible_relevance",
+      "578": "no_positive_eligible_relevance",
+      "587": "no_positive_eligible_relevance",
+      "589": "no_positive_eligible_relevance",
+      "593": "no_positive_eligible_relevance",
+      "597": "no_positive_eligible_relevance",
+      "598": "no_positive_eligible_relevance",
+      "613": "no_positive_eligible_relevance",
+      "619": "no_positive_eligible_relevance",
+      "623": "no_positive_eligible_relevance",
+      "628": "no_positive_eligible_relevance",
+      "636": "no_positive_eligible_relevance",
+      "637": "no_positive_eligible_relevance",
+      "641": "no_positive_eligible_relevance",
+      "644": "no_positive_eligible_relevance",
+      "649": "no_positive_eligible_relevance",
+      "659": "no_positive_eligible_relevance",
+      "660": "no_positive_eligible_relevance",
+      "674": "no_positive_eligible_relevance",
+      "684": "no_positive_eligible_relevance",
+      "690": "no_positive_eligible_relevance",
+      "691": "no_positive_eligible_relevance",
+      "692": "no_positive_eligible_relevance",
+      "693": "no_positive_eligible_relevance",
+      "700": "no_positive_eligible_relevance",
+      "702": "no_positive_eligible_relevance",
+      "715": "no_positive_eligible_relevance",
+      "716": "no_positive_eligible_relevance",
+      "718": "no_positive_eligible_relevance",
+      "721": "no_positive_eligible_relevance",
+      "723": "no_positive_eligible_relevance",
+      "727": "no_positive_eligible_relevance",
+      "728": "no_positive_eligible_relevance",
+      "729": "no_positive_eligible_relevance",
+      "742": "no_positive_eligible_relevance",
+      "743": "no_positive_eligible_relevance",
+      "744": "no_positive_eligible_relevance",
+      "756": "no_positive_eligible_relevance",
+      "759": "no_positive_eligible_relevance",
+      "768": "no_positive_eligible_relevance",
+      "770": "no_positive_eligible_relevance",
+      "775": "no_positive_eligible_relevance",
+      "781": "no_positive_eligible_relevance",
+      "783": "no_positive_eligible_relevance",
+      "784": "no_positive_eligible_relevance",
+      "785": "no_positive_eligible_relevance",
+      "793": "no_positive_eligible_relevance",
+      "800": "no_positive_eligible_relevance",
+      "805": "no_positive_eligible_relevance",
+      "808": "no_positive_eligible_relevance",
+      "811": "no_positive_eligible_relevance",
+      "814": "no_positive_eligible_relevance",
+      "820": "no_positive_eligible_relevance",
+      "821": "no_positive_eligible_relevance",
+      "823": "no_positive_eligible_relevance",
+      "830": "no_positive_eligible_relevance",
+      "831": "no_positive_eligible_relevance",
+      "832": "no_positive_eligible_relevance",
+      "834": "no_positive_eligible_relevance",
+      "837": "no_positive_eligible_relevance",
+      "839": "no_positive_eligible_relevance",
+      "845": "no_positive_eligible_relevance",
+      "847": "no_positive_eligible_relevance",
+      "852": "no_positive_eligible_relevance",
+      "859": "no_positive_eligible_relevance",
+      "870": "no_positive_eligible_relevance",
+      "873": "no_positive_eligible_relevance",
+      "879": "no_positive_eligible_relevance",
+      "880": "no_positive_eligible_relevance",
+      "882": "no_positive_eligible_relevance",
+      "887": "no_positive_eligible_relevance",
+      "903": "no_positive_eligible_relevance",
+      "904": "no_positive_eligible_relevance",
+      "907": "no_positive_eligible_relevance",
+      "911": "no_positive_eligible_relevance",
+      "913": "no_positive_eligible_relevance",
+      "914": "no_positive_eligible_relevance",
+      "921": "no_positive_eligible_relevance",
+      "922": "no_positive_eligible_relevance",
+      "936": "no_positive_eligible_relevance",
+      "956": "no_positive_eligible_relevance",
+      "960": "no_positive_eligible_relevance",
+      "967": "no_positive_eligible_relevance",
+      "971": "no_positive_eligible_relevance",
+      "975": "no_positive_eligible_relevance",
+      "982": "no_positive_eligible_relevance",
+      "985": "no_positive_eligible_relevance",
+      "993": "no_positive_eligible_relevance",
+      "1012": "no_positive_eligible_relevance",
+      "1014": "no_positive_eligible_relevance",
+      "1019": "no_positive_eligible_relevance",
+      "1020": "no_positive_eligible_relevance",
+      "1021": "no_positive_eligible_relevance",
+      "1024": "no_positive_eligible_relevance",
+      "1029": "no_positive_eligible_relevance",
+      "1041": "no_positive_eligible_relevance",
+      "1049": "no_positive_eligible_relevance",
+      "1062": "no_positive_eligible_relevance",
+      "1086": "no_positive_eligible_relevance",
+      "1088": "no_positive_eligible_relevance",
+      "1089": "no_positive_eligible_relevance",
+      "1099": "no_positive_eligible_relevance",
+      "1100": "no_positive_eligible_relevance",
+      "1104": "no_positive_eligible_relevance",
+      "1107": "no_positive_eligible_relevance",
+      "1110": "no_positive_eligible_relevance",
+      "1121": "no_positive_eligible_relevance",
+      "1130": "no_positive_eligible_relevance",
+      "1132": "no_positive_eligible_relevance",
+      "1140": "no_positive_eligible_relevance",
+      "1144": "no_positive_eligible_relevance",
+      "1146": "no_positive_eligible_relevance",
+      "1150": "no_positive_eligible_relevance",
+      "1163": "no_positive_eligible_relevance",
+      "1175": "no_positive_eligible_relevance",
+      "1179": "no_positive_eligible_relevance",
+      "1180": "no_positive_eligible_relevance",
+      "1185": "no_positive_eligible_relevance",
+      "1187": "no_positive_eligible_relevance",
+      "1191": "no_positive_eligible_relevance",
+      "1194": "no_positive_eligible_relevance",
+      "1196": "no_positive_eligible_relevance",
+      "1197": "no_positive_eligible_relevance",
+      "1199": "no_positive_eligible_relevance",
+      "1200": "no_positive_eligible_relevance",
+      "1202": "no_positive_eligible_relevance",
+      "1204": "no_positive_eligible_relevance",
+      "1207": "no_positive_eligible_relevance",
+      "1213": "no_positive_eligible_relevance",
+      "1216": "no_positive_eligible_relevance",
+      "1221": "no_positive_eligible_relevance",
+      "1225": "no_positive_eligible_relevance",
+      "1226": "no_positive_eligible_relevance",
+      "1232": "no_positive_eligible_relevance",
+      "1241": "no_positive_eligible_relevance",
+      "1245": "no_positive_eligible_relevance",
+      "1259": "no_positive_eligible_relevance",
+      "1262": "no_positive_eligible_relevance",
+      "1266": "no_positive_eligible_relevance",
+      "1270": "no_positive_eligible_relevance",
+      "1271": "no_positive_eligible_relevance",
+      "1272": "no_positive_eligible_relevance",
+      "1273": "no_positive_eligible_relevance",
+      "1274": "no_positive_eligible_relevance",
+      "1278": "no_positive_eligible_relevance",
+      "1279": "no_positive_eligible_relevance",
+      "1280": "no_positive_eligible_relevance",
+      "1281": "no_positive_eligible_relevance",
+      "1282": "no_positive_eligible_relevance",
+      "1290": "no_positive_eligible_relevance",
+      "1292": "no_positive_eligible_relevance",
+      "1298": "no_positive_eligible_relevance",
+      "1303": "no_positive_eligible_relevance",
+      "1316": "no_positive_eligible_relevance",
+      "1319": "no_positive_eligible_relevance",
+      "1320": "no_positive_eligible_relevance",
+      "1332": "no_positive_eligible_relevance",
+      "1335": "no_positive_eligible_relevance",
+      "1336": "no_positive_eligible_relevance",
+      "1337": "no_positive_eligible_relevance",
+      "1339": "no_positive_eligible_relevance",
+      "1344": "no_positive_eligible_relevance",
+      "1352": "no_positive_eligible_relevance",
+      "1359": "no_positive_eligible_relevance",
+      "1362": "no_positive_eligible_relevance",
+      "1363": "no_positive_eligible_relevance",
+      "1368": "no_positive_eligible_relevance",
+      "1370": "no_positive_eligible_relevance",
+      "1379": "no_positive_eligible_relevance",
+      "1382": "no_positive_eligible_relevance",
+      "1389": "no_positive_eligible_relevance",
+      "1395": "no_positive_eligible_relevance"
+    },
+    "eligible_positive_qrels": 3,
+    "source_positive_qrels": 339
+  },
+  "fingerprints": {
+    "source": "862ae09a6450642d0ebf2da04f357d77fb58e3bbd74a9e144570cd109770f3f6",
+    "corpus": "8aafc86c321cad97f0a3a6cb6028d4b065f40b99c5daa70295e323eafcaa9229",
+    "chunks": "28f32b729b38e2bb7f245f4486adc2a08d9c2c1aee417d3aa91a5a784097d22f",
+    "queries": "129479509281afd564c8dec6e03446c2e984b0cb1c8e3afc32feadc9773ecbbe",
+    "qrels": "2093af65d9817aea9ea193f174b901f4d27a34f7c75fe11da87edeb4d0ec7bc8"
+  },
+  "encoder": {
+    "model": "jinaai/jina-embeddings-v2-small-en",
+    "model_revision": "44e7d1d6caec8c883c2d4b207588504d519788d0",
+    "code_revision": "f3ec4cf7de7e561007f27c9efc7148b0bd713f81",
+    "tokenizer": "jinaai/jina-embeddings-v2-small-en",
+    "tokenizer_revision": "44e7d1d6caec8c883c2d4b207588504d519788d0",
+    "tokenizer_class": "BertTokenizerFast",
+    "tokenizer_sha256": "ee0b14dbe12a2d982076140491b1015609cd7a8730483583218651a84f0a0f49",
+    "max_length": 8192
+  },
+  "runtime": {
+    "device": "cpu",
+    "python": "3.11.1",
+    "torch": "2.10.0+cpu",
+    "transformers": "4.57.0",
+    "project_revision": "da27c75aa8baab561f3b5d56a3cda91dcc8f982f"
+  },
+  "status": "complete",
+  "timing": {
+    "method_scope": "standalone_corpus_planning_encoding_and_pooling_no_cross_policy_cache",
+    "shared_query_encode_seconds": 0.14538840006571263,
+    "shared_query_batch_size": 64
+  },
+  "methods": {
+    "naive": {
+      "ndcg@10": 1.0,
+      "recall@10": 1.0,
+      "encode_seconds": 16.920119700022042,
+      "retrieve_evaluate_seconds": 0.005151799996383488,
+      "batch_size": 16,
+      "chunks": 115,
+      "chunk_fingerprint": "28f32b729b38e2bb7f245f4486adc2a08d9c2c1aee417d3aa91a5a784097d22f",
+      "per_query": {
+        "957": {
+          "source_doc_id": null,
+          "ranking": [
+            "123859",
+            "104130",
+            "243694",
+            "152245",
+            "238409",
+            "106301",
+            "253672",
+            "97884",
+            "317204",
+            "92308"
+          ],
+          "ndcg@10": 1.0,
+          "recall@10": 1.0
+        },
+        "1137": {
+          "source_doc_id": null,
+          "ranking": [
+            "33370",
+            "207972",
+            "238409",
+            "236204",
+            "219475",
+            "213017",
+            "317204",
+            "143251",
+            "266641",
+            "343052"
+          ],
+          "ndcg@10": 1.0,
+          "recall@10": 1.0
+        },
+        "1385": {
+          "source_doc_id": null,
+          "ranking": [
+            "306006",
+            "5836",
+            "188911",
+            "213017",
+            "219475",
+            "72159",
+            "343052",
+            "140874",
+            "301838",
+            "143251"
+          ],
+          "ndcg@10": 1.0,
+          "recall@10": 1.0
+        }
+      },
+      "deltas": {
+        "naive": {
+          "ndcg@10": 0.0,
+          "recall@10": 0.0
+        },
+        "late": {
+          "ndcg@10": 0.0,
+          "recall@10": 0.0
+        },
+        "long_late": {
+          "ndcg@10": 0.0,
+          "recall@10": 0.0
+        }
+      }
+    },
+    "naive_prefix": {
+      "ndcg@10": 1.0,
+      "recall@10": 1.0,
+      "encode_seconds": 17.593576100072823,
+      "retrieve_evaluate_seconds": 0.0011023000115528703,
+      "batch_size": 16,
+      "chunks": 115,
+      "chunk_fingerprint": "28f32b729b38e2bb7f245f4486adc2a08d9c2c1aee417d3aa91a5a784097d22f",
+      "per_query": {
+        "957": {
+          "source_doc_id": null,
+          "ranking": [
+            "123859",
+            "104130",
+            "243694",
+            "238409",
+            "152245",
+            "106301",
+            "97884",
+            "92499",
+            "188911",
+            "335029"
+          ],
+          "ndcg@10": 1.0,
+          "recall@10": 1.0
+        },
+        "1137": {
+          "source_doc_id": null,
+          "ranking": [
+            "33370",
+            "207972",
+            "219475",
+            "213017",
+            "266641",
+            "313403",
+            "238409",
+            "143251",
+            "293661",
+            "5836"
+          ],
+          "ndcg@10": 1.0,
+          "recall@10": 1.0
+        },
+        "1385": {
+          "source_doc_id": null,
+          "ranking": [
+            "306006",
+            "5836",
+            "219475",
+            "213017",
+            "72159",
+            "188911",
+            "301838",
+            "143251",
+            "140874",
+            "343052"
+          ],
+          "ndcg@10": 1.0,
+          "recall@10": 1.0
+        }
+      },
+      "deltas": {
+        "naive": {
+          "ndcg@10": 0.0,
+          "recall@10": 0.0
+        },
+        "late": {
+          "ndcg@10": 0.0,
+          "recall@10": 0.0
+        },
+        "long_late": {
+          "ndcg@10": 0.0,
+          "recall@10": 0.0
+        }
+      }
+    },
+    "late": {
+      "ndcg@10": 1.0,
+      "recall@10": 1.0,
+      "encode_seconds": 21.21863629994914,
+      "retrieve_evaluate_seconds": 0.0008885000133886933,
+      "batch_size": 16,
+      "chunks": 115,
+      "chunk_fingerprint": "28f32b729b38e2bb7f245f4486adc2a08d9c2c1aee417d3aa91a5a784097d22f",
+      "per_query": {
+        "957": {
+          "source_doc_id": null,
+          "ranking": [
+            "123859",
+            "104130",
+            "243694",
+            "106301",
+            "152245",
+            "335029",
+            "238409",
+            "92499",
+            "188911",
+            "317204"
+          ],
+          "ndcg@10": 1.0,
+          "recall@10": 1.0
+        },
+        "1137": {
+          "source_doc_id": null,
+          "ranking": [
+            "33370",
+            "207972",
+            "219475",
+            "213017",
+            "266641",
+            "293661",
+            "164985",
+            "5836",
+            "143251",
+            "36474"
+          ],
+          "ndcg@10": 1.0,
+          "recall@10": 1.0
+        },
+        "1385": {
+          "source_doc_id": null,
+          "ranking": [
+            "306006",
+            "213017",
+            "188911",
+            "72159",
+            "219475",
+            "143251",
+            "301838",
+            "5836",
+            "236204",
+            "327319"
+          ],
+          "ndcg@10": 1.0,
+          "recall@10": 1.0
+        }
+      },
+      "deltas": {
+        "naive": {
+          "ndcg@10": 0.0,
+          "recall@10": 0.0
+        },
+        "late": {
+          "ndcg@10": 0.0,
+          "recall@10": 0.0
+        },
+        "long_late": {
+          "ndcg@10": 0.0,
+          "recall@10": 0.0
+        }
+      }
+    },
+    "long_late": {
+      "ndcg@10": 1.0,
+      "recall@10": 1.0,
+      "encode_seconds": 22.314844000036828,
+      "retrieve_evaluate_seconds": 0.0014674999983981252,
+      "batch_size": 16,
+      "chunks": 115,
+      "chunk_fingerprint": "28f32b729b38e2bb7f245f4486adc2a08d9c2c1aee417d3aa91a5a784097d22f",
+      "per_query": {
+        "957": {
+          "source_doc_id": null,
+          "ranking": [
+            "123859",
+            "104130",
+            "243694",
+            "106301",
+            "152245",
+            "335029",
+            "238409",
+            "92499",
+            "188911",
+            "317204"
+          ],
+          "ndcg@10": 1.0,
+          "recall@10": 1.0
+        },
+        "1137": {
+          "source_doc_id": null,
+          "ranking": [
+            "33370",
+            "207972",
+            "219475",
+            "213017",
+            "266641",
+            "293661",
+            "164985",
+            "5836",
+            "143251",
+            "36474"
+          ],
+          "ndcg@10": 1.0,
+          "recall@10": 1.0
+        },
+        "1385": {
+          "source_doc_id": null,
+          "ranking": [
+            "306006",
+            "213017",
+            "188911",
+            "72159",
+            "219475",
+            "143251",
+            "301838",
+            "5836",
+            "236204",
+            "327319"
+          ],
+          "ndcg@10": 1.0,
+          "recall@10": 1.0
+        }
+      },
+      "deltas": {
+        "naive": {
+          "ndcg@10": 0.0,
+          "recall@10": 0.0
+        },
+        "late": {
+          "ndcg@10": 0.0,
+          "recall@10": 0.0
+        },
+        "long_late": {
+          "ndcg@10": 0.0,
+          "recall@10": 0.0
+        }
+      }
+    },
+    "local_contextual": {
+      "ndcg@10": 1.0,
+      "recall@10": 1.0,
+      "encode_seconds": 26.84994799993001,
+      "retrieve_evaluate_seconds": 0.002089100074954331,
+      "batch_size": 16,
+      "chunks": 115,
+      "chunk_fingerprint": "28f32b729b38e2bb7f245f4486adc2a08d9c2c1aee417d3aa91a5a784097d22f",
+      "per_query": {
+        "957": {
+          "source_doc_id": null,
+          "ranking": [
+            "123859",
+            "104130",
+            "243694",
+            "106301",
+            "335029",
+            "238409",
+            "92499",
+            "152245",
+            "188911",
+            "317204"
+          ],
+          "ndcg@10": 1.0,
+          "recall@10": 1.0
+        },
+        "1137": {
+          "source_doc_id": null,
+          "ranking": [
+            "33370",
+            "207972",
+            "219475",
+            "213017",
+            "266641",
+            "293661",
+            "164985",
+            "5836",
+            "143251",
+            "36474"
+          ],
+          "ndcg@10": 1.0,
+          "recall@10": 1.0
+        },
+        "1385": {
+          "source_doc_id": null,
+          "ranking": [
+            "306006",
+            "213017",
+            "188911",
+            "72159",
+            "219475",
+            "143251",
+            "301838",
+            "5836",
+            "236204",
+            "327319"
+          ],
+          "ndcg@10": 1.0,
+          "recall@10": 1.0
+        }
+      },
+      "deltas": {
+        "naive": {
+          "ndcg@10": 0.0,
+          "recall@10": 0.0
+        },
+        "late": {
+          "ndcg@10": 0.0,
+          "recall@10": 0.0
+        },
+        "long_late": {
+          "ndcg@10": 0.0,
+          "recall@10": 0.0
+        }
+      }
+    },
+    "sticky": {
+      "ndcg@10": 1.0,
+      "recall@10": 1.0,
+      "encode_seconds": 27.448877100017853,
+      "retrieve_evaluate_seconds": 0.0019133000168949366,
+      "batch_size": 16,
+      "chunks": 115,
+      "chunk_fingerprint": "28f32b729b38e2bb7f245f4486adc2a08d9c2c1aee417d3aa91a5a784097d22f",
+      "per_query": {
+        "957": {
+          "source_doc_id": null,
+          "ranking": [
+            "123859",
+            "104130",
+            "243694",
+            "106301",
+            "152245",
+            "335029",
+            "238409",
+            "92499",
+            "188911",
+            "317204"
+          ],
+          "ndcg@10": 1.0,
+          "recall@10": 1.0
+        },
+        "1137": {
+          "source_doc_id": null,
+          "ranking": [
+            "33370",
+            "207972",
+            "219475",
+            "213017",
+            "266641",
+            "293661",
+            "164985",
+            "5836",
+            "143251",
+            "36474"
+          ],
+          "ndcg@10": 1.0,
+          "recall@10": 1.0
+        },
+        "1385": {
+          "source_doc_id": null,
+          "ranking": [
+            "306006",
+            "213017",
+            "188911",
+            "72159",
+            "219475",
+            "143251",
+            "301838",
+            "5836",
+            "236204",
+            "327319"
+          ],
+          "ndcg@10": 1.0,
+          "recall@10": 1.0
+        }
+      },
+      "deltas": {
+        "naive": {
+          "ndcg@10": 0.0,
+          "recall@10": 0.0
+        },
+        "late": {
+          "ndcg@10": 0.0,
+          "recall@10": 0.0
+        },
+        "long_late": {
+          "ndcg@10": 0.0,
+          "recall@10": 0.0
+        }
+      }
+    },
+    "content_anchored": {
+      "ndcg@10": 1.0,
+      "recall@10": 1.0,
+      "encode_seconds": 27.26124689995777,
+      "retrieve_evaluate_seconds": 0.0013684999430552125,
+      "batch_size": 16,
+      "chunks": 115,
+      "chunk_fingerprint": "28f32b729b38e2bb7f245f4486adc2a08d9c2c1aee417d3aa91a5a784097d22f",
+      "per_query": {
+        "957": {
+          "source_doc_id": null,
+          "ranking": [
+            "123859",
+            "104130",
+            "243694",
+            "253672",
+            "106301",
+            "317204",
+            "92308",
+            "152245",
+            "335029",
+            "238409"
+          ],
+          "ndcg@10": 1.0,
+          "recall@10": 1.0
+        },
+        "1137": {
+          "source_doc_id": null,
+          "ranking": [
+            "33370",
+            "207972",
+            "219475",
+            "213017",
+            "317204",
+            "266641",
+            "293661",
+            "164985",
+            "5836",
+            "143251"
+          ],
+          "ndcg@10": 1.0,
+          "recall@10": 1.0
+        },
+        "1385": {
+          "source_doc_id": null,
+          "ranking": [
+            "306006",
+            "213017",
+            "188911",
+            "72159",
+            "219475",
+            "143251",
+            "301838",
+            "5836",
+            "236204",
+            "327319"
+          ],
+          "ndcg@10": 1.0,
+          "recall@10": 1.0
+        }
+      },
+      "deltas": {
+        "naive": {
+          "ndcg@10": 0.0,
+          "recall@10": 0.0
+        },
+        "late": {
+          "ndcg@10": 0.0,
+          "recall@10": 0.0
+        },
+        "long_late": {
+          "ndcg@10": 0.0,
+          "recall@10": 0.0
+        }
+      }
+    }
+  },
+  "content_anchored_vs_long_late_source_paired_bootstrap": {
+    "ndcg@10": null,
+    "recall@10": null
+  },
+  "phase": "exploratory",
+  "scope": "smoke",
+  "encoder_settings": {
+    "model": "jinaai/jina-embeddings-v2-small-en",
+    "model_revision": "44e7d1d6caec8c883c2d4b207588504d519788d0",
+    "tokenizer_revision": "44e7d1d6caec8c883c2d4b207588504d519788d0",
+    "max_length": 8192
+  },
+  "frozen_config_sha256": null,
+  "retrieval_units": "scifact_fixed_title_plus_body_tokens"
+}
