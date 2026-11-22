@@ -174,3 +174,51 @@ counts, and regrouping, encoding, and vector write times.
 python scripts/pilot_sticky.py --limit-docs 20 --min-chunks 4 --token-cap 1024 --device cpu \
   --out results/sticky-pilot/cs256-cap1024-min4.json
 ```
+
+## Content-Anchored Context Windows
+
+Each chunk's UTF-8 text gets a fixed 64-bit BLAKE2b hash. A chunk closes its group when the hash is
+divisible by `k`. Groups also close before the next whole chunk would exceed the token cap, including
+special tokens. The title-prefix variant adds up to 64 title tokens within that budget. The encoder
+reads each group jointly, and pooling produces one vector per original retrieval chunk.
+
+Incremental refresh derives the grouping from the current snapshot. It reuses a cached group when
+the full encoder input and the pooling spans match under the same encoder and tokenizer. The original
+chunk IDs identify which vectors to rewrite or remove. An unchanged anchor lets subsequent grouping
+start at the same content boundary after an edit.
+
+```bash
+python scripts/reproduce_late_chunking.py --methods content_anchored content_anchored_prefix \
+  --anchor-k 4 --anchor-token-cap 1024 --device cpu --out-dir results/scifact-anchored-k4
+python scripts/compare_anchored.py --device cpu
+python scripts/pilot_anchored.py --limit-docs 20 --edit-position early --device cpu
+```
+
+The full comparison evaluates `k=4` and `k=8`, with and without title prefixes, for 256-, 128-, and
+64-token chunks. It uses the archived scores for all six baselines at each size. The comparison encodes
+identical token sequences once across the 12 settings, then pools each setting's original spans. The
+reported encoding time covers this shared sweep.
+
+| Chunk size (tokens) | Best Content-Anchored setting by nDCG@10 | nDCG@10 (×100) | Recall@10 | Δ nDCG@10 vs. Long Late (points) |
+|---:|---|---:|---:|---:|
+| 256 | `k=8` | 65.86 | 77.59% | +0.82 |
+| 128 | `k=8` with title prefix | 66.30 | 80.53% | +1.06 |
+| 64 | `k=4` with title prefix | 66.76 | 80.16% | +0.85 |
+
+Content-Anchored had the highest nDCG@10 at 256 and 128 tokens. At 64 tokens, Local Contextual led
+with 67.87 nDCG@10 and 80.26% Recall@10. The [full comparison](benchmarks/scifact-content-anchored/comparison.json)
+records all methods, exact scores, and group coverage.
+
+The edit pilot compares Content-Anchored, Sticky ID Groups, and Long Late Chunking on the same chunk
+snapshots. At 256 tokens per retrieval chunk, it applies a replacement, insertion, and deletion to each
+of 20 SciFact documents. It checks incremental vectors against a full rebuild under each policy.
+
+| Method | Replacement tokens | Insertion tokens | Deletion tokens | Total refreshed tokens | Median CPU refresh (s) |
+|---|---:|---:|---:|---:|---:|
+| Long Late | 5,120 | 25,393 | 18,417 | 48,930 | 0.73 |
+| Sticky | 17,034 | 22,194 | 10,280 | 49,508 | 1.27 |
+| Content-Anchored `k=4` | 15,579 | 20,264 | 15,118 | 50,961 | 1.19 |
+| Content-Anchored `k=8` | 16,709 | 21,914 | 16,764 | 55,387 | 1.32 |
+
+The [edit pilot record](benchmarks/scifact-content-anchored/edit-pilot.json) includes per-document encoder
+calls, vector updates, refresh times, and rebuild errors. This synthetic workload measures refresh cost.

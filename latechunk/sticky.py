@@ -8,10 +8,10 @@ from types import MappingProxyType
 from typing import Mapping, Sequence
 
 import torch
-import torch.nn.functional as F
 
 from .chunking import ChunkedDoc
-from .encoding import Encoder, pool_spans
+from .encoding import Encoder
+from .group_encoding import encode_group_inputs, group_input
 
 
 @dataclass(frozen=True)
@@ -78,29 +78,8 @@ def _pack(chunks: Sequence[StickyChunk], budget: int, model_budget: int) -> list
 
 
 def _encode_groups(encoder: Encoder, groups: Sequence[Group], batch_size: int) -> list[torch.Tensor]:
-    if not groups:
-        return []
-    wrap = encoder.tokenizer.build_inputs_with_special_tokens
-    # Locate the content start in the tokenizer's single-sequence template.
-    leading_specials = wrap([-1]).index(-1)
-    inputs, spans = [], []
-    for group in groups:
-        content, pooled_spans = [], []
-        for chunk in group:
-            start = leading_specials + len(content)
-            content.extend(chunk.token_ids)
-            pooled_spans.append((start, leading_specials + len(content)))
-        inputs.append(wrap(content))
-        spans.append(pooled_spans)
-
-    order = sorted(range(len(groups)), key=lambda index: len(inputs[index]))
-    encoded = {}
-    for start in range(0, len(order), batch_size):
-        batch = order[start : start + batch_size]
-        outputs = encoder.token_embeddings([inputs[index] for index in batch])
-        for index, token_vectors in zip(batch, outputs, strict=True):
-            encoded[index] = F.normalize(pool_spans(token_vectors, spans[index]), dim=-1)
-    return [encoded[index] for index in range(len(groups))]
+    inputs = [group_input(encoder.tokenizer, [chunk.token_ids for chunk in group]) for group in groups]
+    return encode_group_inputs(encoder, inputs, batch_size)
 
 
 def encode_sticky(

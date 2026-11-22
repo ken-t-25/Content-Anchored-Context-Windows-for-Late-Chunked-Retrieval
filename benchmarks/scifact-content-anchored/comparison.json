@@ -1,0 +1,610 @@
+{
+  "config": {
+    "dataset": "scifact",
+    "documents": 5183,
+    "queries": 300,
+    "model": "jinaai/jina-embeddings-v2-small-en",
+    "device": "cpu",
+    "batch_size": 16,
+    "max_length": 8192,
+    "token_cap": 1024,
+    "anchor_divisors": [
+      4,
+      8
+    ],
+    "title_plus_body": true
+  },
+  "shared_encoder": {
+    "distinct_inputs": 43195,
+    "encoded_input_tokens": 9341719,
+    "encoder_calls": 2700,
+    "encoder_seconds": 6505.609851099434,
+    "encoding_and_pooling_seconds": 6573.788470000029,
+    "standalone_variant_timing": false,
+    "planning_seconds": 50.51936959999148,
+    "groups_before_sharing": 91651,
+    "input_tokens_before_sharing": 22038691
+  },
+  "sizes": {
+    "256": {
+      "chunks": 9356,
+      "methods": {
+        "naive": {
+          "ndcg@10": 0.6418124977208295,
+          "recall@10": 0.7658888888888888,
+          "n_queries": 300,
+          "encode_seconds": 421.42543172836304
+        },
+        "naive_prefix": {
+          "ndcg@10": 0.6453387301322848,
+          "recall@10": 0.7650555555555555,
+          "n_queries": 300,
+          "encode_seconds": 522.4357101917267
+        },
+        "late": {
+          "ndcg@10": 0.6578370981352855,
+          "recall@10": 0.7675555555555555,
+          "n_queries": 300,
+          "encode_seconds": 578.5563960075378
+        },
+        "long_late": {
+          "ndcg@10": 0.6504414080356534,
+          "recall@10": 0.7658888888888888,
+          "n_queries": 300,
+          "encode_seconds": 798.563973903656
+        },
+        "local_contextual": {
+          "ndcg@10": 0.6564046549419248,
+          "recall@10": 0.7725555555555556,
+          "n_queries": 300,
+          "encode_seconds": 686.2260394096375
+        },
+        "sticky": {
+          "ndcg@10": 0.6577608519560365,
+          "recall@10": 0.7675555555555555,
+          "n_queries": 300,
+          "encode_seconds": 953.4064679145813
+        },
+        "content_anchored_k4": {
+          "ndcg@10": 0.6476468857178803,
+          "recall@10": 0.7675555555555555,
+          "n_queries": 300,
+          "groups": 6205,
+          "input_tokens_before_sharing": 1749723,
+          "max_group_tokens": 1021,
+          "full_document_groups": 4198,
+          "full_document_chunks": 7130,
+          "deltas_vs_baselines": {
+            "naive": {
+              "ndcg@10": 0.005834387997050827,
+              "recall@10": 0.0016666666666667052
+            },
+            "naive_prefix": {
+              "ndcg@10": 0.002308155585595495,
+              "recall@10": 0.0025000000000000577
+            },
+            "late": {
+              "ndcg@10": -0.010190212417405142,
+              "recall@10": 0.0
+            },
+            "long_late": {
+              "ndcg@10": -0.002794522317773107,
+              "recall@10": 0.0016666666666667052
+            },
+            "local_contextual": {
+              "ndcg@10": -0.008757769224044476,
+              "recall@10": -0.0050000000000000044
+            },
+            "sticky": {
+              "ndcg@10": -0.010113966238156191,
+              "recall@10": 0.0
+            }
+          },
+          "chunks_with_exact_full_document_input": 7130
+        },
+        "content_anchored_k4_prefix": {
+          "ndcg@10": 0.6480720579300273,
+          "recall@10": 0.7717222222222222,
+          "n_queries": 300,
+          "groups": 6206,
+          "input_tokens_before_sharing": 1885696,
+          "max_group_tokens": 1022,
+          "full_document_groups": 4197,
+          "full_document_chunks": 7126,
+          "deltas_vs_baselines": {
+            "naive": {
+              "ndcg@10": 0.006259560209197823,
+              "recall@10": 0.005833333333333357
+            },
+            "naive_prefix": {
+              "ndcg@10": 0.002733327797742491,
+              "recall@10": 0.00666666666666671
+            },
+            "late": {
+              "ndcg@10": -0.009765040205258146,
+              "recall@10": 0.004166666666666652
+            },
+            "long_late": {
+              "ndcg@10": -0.0023693501056261113,
+              "recall@10": 0.005833333333333357
+            },
+            "local_contextual": {
+              "ndcg@10": -0.00833259701189748,
+              "recall@10": -0.0008333333333333526
+            },
+            "sticky": {
+              "ndcg@10": -0.009688794026009195,
+              "recall@10": 0.004166666666666652
+            }
+          },
+          "chunks_with_exact_full_document_input": 0
+        },
+        "content_anchored_k8": {
+          "ndcg@10": 0.6586040479451144,
+          "recall@10": 0.7758888888888889,
+          "n_queries": 300,
+          "groups": 5694,
+          "input_tokens_before_sharing": 1748701,
+          "max_group_tokens": 1021,
+          "full_document_groups": 4683,
+          "full_document_chunks": 8203,
+          "deltas_vs_baselines": {
+            "naive": {
+              "ndcg@10": 0.016791550224284912,
+              "recall@10": 0.010000000000000009
+            },
+            "naive_prefix": {
+              "ndcg@10": 0.01326531781282958,
+              "recall@10": 0.010833333333333361
+            },
+            "late": {
+              "ndcg@10": 0.0007669498098289429,
+              "recall@10": 0.008333333333333304
+            },
+            "long_late": {
+              "ndcg@10": 0.008162639909460978,
+              "recall@10": 0.010000000000000009
+            },
+            "local_contextual": {
+              "ndcg@10": 0.002199393003189609,
+              "recall@10": 0.0033333333333332993
+            },
+            "sticky": {
+              "ndcg@10": 0.000843195989077894,
+              "recall@10": 0.008333333333333304
+            }
+          },
+          "chunks_with_exact_full_document_input": 8203
+        },
+        "content_anchored_k8_prefix": {
+          "ndcg@10": 0.6514386757664844,
+          "recall@10": 0.7725555555555556,
+          "n_queries": 300,
+          "groups": 5695,
+          "input_tokens_before_sharing": 1872418,
+          "max_group_tokens": 1021,
+          "full_document_groups": 4682,
+          "full_document_chunks": 8199,
+          "deltas_vs_baselines": {
+            "naive": {
+              "ndcg@10": 0.00962617804565491,
+              "recall@10": 0.00666666666666671
+            },
+            "naive_prefix": {
+              "ndcg@10": 0.006099945634199577,
+              "recall@10": 0.007500000000000062
+            },
+            "late": {
+              "ndcg@10": -0.00639842236880106,
+              "recall@10": 0.0050000000000000044
+            },
+            "long_late": {
+              "ndcg@10": 0.0009972677308309752,
+              "recall@10": 0.00666666666666671
+            },
+            "local_contextual": {
+              "ndcg@10": -0.004965979175440394,
+              "recall@10": 0.0
+            },
+            "sticky": {
+              "ndcg@10": -0.006322176189552109,
+              "recall@10": 0.0050000000000000044
+            }
+          },
+          "chunks_with_exact_full_document_input": 0
+        }
+      },
+      "source_results": [
+        "benchmarks/scifact-four-methods.json",
+        "benchmarks/scifact-chunk-size-ablation/cs256-local-contextual.json",
+        "benchmarks/scifact-sticky/cs256.json"
+      ]
+    },
+    "128": {
+      "chunks": 16193,
+      "methods": {
+        "naive": {
+          "ndcg@10": 0.6520637315029202,
+          "recall@10": 0.7881111111111111,
+          "n_queries": 300,
+          "encode_seconds": 388.63868045806885
+        },
+        "naive_prefix": {
+          "ndcg@10": 0.6554986418936235,
+          "recall@10": 0.7803333333333333,
+          "n_queries": 300,
+          "encode_seconds": 494.24400663375854
+        },
+        "late": {
+          "ndcg@10": 0.661228063809834,
+          "recall@10": 0.7853333333333333,
+          "n_queries": 300,
+          "encode_seconds": 578.6526622772217
+        },
+        "long_late": {
+          "ndcg@10": 0.6524052831510885,
+          "recall@10": 0.7586666666666666,
+          "n_queries": 300,
+          "encode_seconds": 798.5186972618103
+        },
+        "local_contextual": {
+          "ndcg@10": 0.6561953236516195,
+          "recall@10": 0.7786666666666666,
+          "n_queries": 300,
+          "encode_seconds": 1174.179405927658
+        },
+        "sticky": {
+          "ndcg@10": 0.6596871916719181,
+          "recall@10": 0.782,
+          "n_queries": 300,
+          "encode_seconds": 917.5350461006165
+        },
+        "content_anchored_k4": {
+          "ndcg@10": 0.6513856475139127,
+          "recall@10": 0.783,
+          "n_queries": 300,
+          "groups": 7891,
+          "input_tokens_before_sharing": 1753095,
+          "max_group_tokens": 952,
+          "full_document_groups": 2962,
+          "full_document_chunks": 8348,
+          "deltas_vs_baselines": {
+            "naive": {
+              "ndcg@10": -0.000678083989007483,
+              "recall@10": -0.005111111111111066
+            },
+            "naive_prefix": {
+              "ndcg@10": -0.004112994379710799,
+              "recall@10": 0.002666666666666706
+            },
+            "late": {
+              "ndcg@10": -0.009842416295921308,
+              "recall@10": -0.0023333333333332984
+            },
+            "long_late": {
+              "ndcg@10": -0.0010196356371757753,
+              "recall@10": 0.02433333333333343
+            },
+            "local_contextual": {
+              "ndcg@10": -0.004809676137706775,
+              "recall@10": 0.004333333333333411
+            },
+            "sticky": {
+              "ndcg@10": -0.008301544158005436,
+              "recall@10": 0.0010000000000000009
+            }
+          },
+          "chunks_with_exact_full_document_input": 8348
+        },
+        "content_anchored_k4_prefix": {
+          "ndcg@10": 0.6543223959585622,
+          "recall@10": 0.7953333333333333,
+          "n_queries": 300,
+          "groups": 7891,
+          "input_tokens_before_sharing": 1926967,
+          "max_group_tokens": 980,
+          "full_document_groups": 2962,
+          "full_document_chunks": 8348,
+          "deltas_vs_baselines": {
+            "naive": {
+              "ndcg@10": 0.0022586644556420454,
+              "recall@10": 0.007222222222222241
+            },
+            "naive_prefix": {
+              "ndcg@10": -0.0011762459350612708,
+              "recall@10": 0.015000000000000013
+            },
+            "late": {
+              "ndcg@10": -0.0069056678512717795,
+              "recall@10": 0.010000000000000009
+            },
+            "long_late": {
+              "ndcg@10": 0.0019171128074737531,
+              "recall@10": 0.036666666666666736
+            },
+            "local_contextual": {
+              "ndcg@10": -0.001872927693057247,
+              "recall@10": 0.01666666666666672
+            },
+            "sticky": {
+              "ndcg@10": -0.005364795713355908,
+              "recall@10": 0.013333333333333308
+            }
+          },
+          "chunks_with_exact_full_document_input": 0
+        },
+        "content_anchored_k8": {
+          "ndcg@10": 0.6617329155675646,
+          "recall@10": 0.7936666666666666,
+          "n_queries": 300,
+          "groups": 6561,
+          "input_tokens_before_sharing": 1750435,
+          "max_group_tokens": 977,
+          "full_document_groups": 3932,
+          "full_document_chunks": 11667,
+          "deltas_vs_baselines": {
+            "naive": {
+              "ndcg@10": 0.009669184064644454,
+              "recall@10": 0.005555555555555536
+            },
+            "naive_prefix": {
+              "ndcg@10": 0.0062342736739411375,
+              "recall@10": 0.013333333333333308
+            },
+            "late": {
+              "ndcg@10": 0.0005048517577306288,
+              "recall@10": 0.008333333333333304
+            },
+            "long_late": {
+              "ndcg@10": 0.009327632416476161,
+              "recall@10": 0.03500000000000003
+            },
+            "local_contextual": {
+              "ndcg@10": 0.005537591915945161,
+              "recall@10": 0.015000000000000013
+            },
+            "sticky": {
+              "ndcg@10": 0.0020457238956465007,
+              "recall@10": 0.011666666666666603
+            }
+          },
+          "chunks_with_exact_full_document_input": 11667
+        },
+        "content_anchored_k8_prefix": {
+          "ndcg@10": 0.6630345902103466,
+          "recall@10": 0.8053333333333333,
+          "n_queries": 300,
+          "groups": 6561,
+          "input_tokens_before_sharing": 1893587,
+          "max_group_tokens": 1021,
+          "full_document_groups": 3932,
+          "full_document_chunks": 11667,
+          "deltas_vs_baselines": {
+            "naive": {
+              "ndcg@10": 0.010970858707426423,
+              "recall@10": 0.01722222222222225
+            },
+            "naive_prefix": {
+              "ndcg@10": 0.007535948316723107,
+              "recall@10": 0.025000000000000022
+            },
+            "late": {
+              "ndcg@10": 0.001806526400512598,
+              "recall@10": 0.020000000000000018
+            },
+            "long_late": {
+              "ndcg@10": 0.01062930705925813,
+              "recall@10": 0.046666666666666745
+            },
+            "local_contextual": {
+              "ndcg@10": 0.006839266558727131,
+              "recall@10": 0.026666666666666727
+            },
+            "sticky": {
+              "ndcg@10": 0.00334739853842847,
+              "recall@10": 0.023333333333333317
+            }
+          },
+          "chunks_with_exact_full_document_input": 0
+        }
+      },
+      "source_results": [
+        "benchmarks/scifact-chunk-size-ablation/cs128.json",
+        "benchmarks/scifact-sticky/cs128.json"
+      ]
+    },
+    "64": {
+      "chunks": 29726,
+      "methods": {
+        "naive": {
+          "ndcg@10": 0.6649421585969321,
+          "recall@10": 0.7789444444444443,
+          "n_queries": 300,
+          "encode_seconds": 425.04406666755676
+        },
+        "naive_prefix": {
+          "ndcg@10": 0.6701604774934926,
+          "recall@10": 0.800611111111111,
+          "n_queries": 300,
+          "encode_seconds": 591.1793179512024
+        },
+        "late": {
+          "ndcg@10": 0.6605236056843359,
+          "recall@10": 0.7858888888888889,
+          "n_queries": 300,
+          "encode_seconds": 588.7406008243561
+        },
+        "long_late": {
+          "ndcg@10": 0.6590884826734781,
+          "recall@10": 0.767,
+          "n_queries": 300,
+          "encode_seconds": 801.4868683815002
+        },
+        "local_contextual": {
+          "ndcg@10": 0.678704297065112,
+          "recall@10": 0.8025555555555555,
+          "n_queries": 300,
+          "encode_seconds": 1212.7504527568817
+        },
+        "sticky": {
+          "ndcg@10": 0.6605236056843359,
+          "recall@10": 0.7858888888888889,
+          "n_queries": 300,
+          "encode_seconds": 810.7843279838562
+        },
+        "content_anchored_k4": {
+          "ndcg@10": 0.6642141265363481,
+          "recall@10": 0.7758888888888889,
+          "n_queries": 300,
+          "groups": 11282,
+          "input_tokens_before_sharing": 1759877,
+          "max_group_tokens": 986,
+          "full_document_groups": 1576,
+          "full_document_chunks": 7511,
+          "deltas_vs_baselines": {
+            "naive": {
+              "ndcg@10": -0.0007280320605839163,
+              "recall@10": -0.003055555555555478
+            },
+            "naive_prefix": {
+              "ndcg@10": -0.005946350957144464,
+              "recall@10": -0.0247222222222222
+            },
+            "late": {
+              "ndcg@10": 0.003690520852012269,
+              "recall@10": -0.010000000000000009
+            },
+            "long_late": {
+              "ndcg@10": 0.005125643862870066,
+              "recall@10": 0.008888888888888835
+            },
+            "local_contextual": {
+              "ndcg@10": -0.01449017052876389,
+              "recall@10": -0.026666666666666616
+            },
+            "sticky": {
+              "ndcg@10": 0.003690520852012269,
+              "recall@10": -0.010000000000000009
+            }
+          },
+          "chunks_with_exact_full_document_input": 7511
+        },
+        "content_anchored_k4_prefix": {
+          "ndcg@10": 0.6676239569677722,
+          "recall@10": 0.8015555555555556,
+          "n_queries": 300,
+          "groups": 11282,
+          "input_tokens_before_sharing": 2010660,
+          "max_group_tokens": 995,
+          "full_document_groups": 1576,
+          "full_document_chunks": 7511,
+          "deltas_vs_baselines": {
+            "naive": {
+              "ndcg@10": 0.0026817983708401494,
+              "recall@10": 0.02261111111111125
+            },
+            "naive_prefix": {
+              "ndcg@10": -0.002536520525720398,
+              "recall@10": 0.0009444444444445255
+            },
+            "late": {
+              "ndcg@10": 0.007100351283436335,
+              "recall@10": 0.015666666666666718
+            },
+            "long_late": {
+              "ndcg@10": 0.008535474294294132,
+              "recall@10": 0.03455555555555556
+            },
+            "local_contextual": {
+              "ndcg@10": -0.011080340097339825,
+              "recall@10": -0.0009999999999998899
+            },
+            "sticky": {
+              "ndcg@10": 0.007100351283436335,
+              "recall@10": 0.015666666666666718
+            }
+          },
+          "chunks_with_exact_full_document_input": 0
+        },
+        "content_anchored_k8": {
+          "ndcg@10": 0.6628891672138341,
+          "recall@10": 0.7858888888888889,
+          "n_queries": 300,
+          "groups": 8191,
+          "input_tokens_before_sharing": 1753695,
+          "max_group_tokens": 1021,
+          "full_document_groups": 2855,
+          "full_document_chunks": 14932,
+          "deltas_vs_baselines": {
+            "naive": {
+              "ndcg@10": -0.0020529913830980018,
+              "recall@10": 0.006944444444444531
+            },
+            "naive_prefix": {
+              "ndcg@10": -0.007271310279658549,
+              "recall@10": -0.014722222222222192
+            },
+            "late": {
+              "ndcg@10": 0.0023655615294981835,
+              "recall@10": 0.0
+            },
+            "long_late": {
+              "ndcg@10": 0.003800684540355981,
+              "recall@10": 0.018888888888888844
+            },
+            "local_contextual": {
+              "ndcg@10": -0.015815129851277976,
+              "recall@10": -0.016666666666666607
+            },
+            "sticky": {
+              "ndcg@10": 0.0023655615294981835,
+              "recall@10": 0.0
+            }
+          },
+          "chunks_with_exact_full_document_input": 14932
+        },
+        "content_anchored_k8_prefix": {
+          "ndcg@10": 0.6591680334670627,
+          "recall@10": 0.7898888888888889,
+          "n_queries": 300,
+          "groups": 8192,
+          "input_tokens_before_sharing": 1933837,
+          "max_group_tokens": 999,
+          "full_document_groups": 2855,
+          "full_document_chunks": 14932,
+          "deltas_vs_baselines": {
+            "naive": {
+              "ndcg@10": -0.005774125129869412,
+              "recall@10": 0.010944444444444534
+            },
+            "naive_prefix": {
+              "ndcg@10": -0.01099244402642996,
+              "recall@10": -0.010722222222222189
+            },
+            "late": {
+              "ndcg@10": -0.0013555722172732265,
+              "recall@10": 0.0040000000000000036
+            },
+            "long_late": {
+              "ndcg@10": 7.955079358457073e-05,
+              "recall@10": 0.022888888888888848
+            },
+            "local_contextual": {
+              "ndcg@10": -0.019536263598049386,
+              "recall@10": -0.012666666666666604
+            },
+            "sticky": {
+              "ndcg@10": -0.0013555722172732265,
+              "recall@10": 0.0040000000000000036
+            }
+          },
+          "chunks_with_exact_full_document_input": 0
+        }
+      },
+      "source_results": [
+        "benchmarks/scifact-chunk-size-ablation/cs64.json",
+        "benchmarks/scifact-sticky/cs64.json"
+      ]
+    }
+  }
+}
