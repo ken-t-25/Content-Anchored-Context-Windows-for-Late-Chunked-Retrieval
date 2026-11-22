@@ -8,7 +8,7 @@ from typing import Iterator, Mapping, Sequence
 import torch
 import torch.nn.functional as F
 
-from .encoding import Encoder, pool_spans
+from .encoding import Encoder, _template_special_counts, _validate_batch_size, pool_spans
 
 
 @dataclass(frozen=True)
@@ -19,15 +19,17 @@ class GroupInput:
 
 def group_input(tokenizer, chunks: Sequence[Sequence[int]], prefix: Sequence[int] = ()) -> GroupInput:
     wrap = tokenizer.build_inputs_with_special_tokens
-    # A sentinel locates the leading special tokens in the single-input template.
-    offset = wrap([-1]).index(-1)
+    offset, trailing = _template_special_counts(tokenizer)
     content = list(prefix)
     spans = []
     for tokens in chunks:
         start = offset + len(content)
         content.extend(tokens)
         spans.append((start, offset + len(content)))
-    return GroupInput(tuple(wrap(content)), tuple(spans))
+    wrapped = wrap(content)
+    if len(wrapped) != offset + len(content) + trailing or wrapped[offset:offset + len(content)] != content:
+        raise ValueError("Expected contiguous content in the tokenizer single-sequence template")
+    return GroupInput(tuple(wrapped), tuple(spans))
 
 
 @dataclass(frozen=True, eq=False)
@@ -67,8 +69,7 @@ def encoder_cache_identity(encoder: Encoder) -> tuple:
 def _token_batches(
     encoder: Encoder, inputs: Sequence[tuple[int, ...]], batch_size: int
 ) -> Iterator[tuple[tuple[int, ...], torch.Tensor]]:
-    if batch_size <= 0:
-        raise ValueError("batch_size must be positive")
+    _validate_batch_size(batch_size)
     ordered = sorted(inputs, key=len)
     for start in range(0, len(ordered), batch_size):
         batch = ordered[start : start + batch_size]

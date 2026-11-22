@@ -12,7 +12,7 @@ import torch
 import torch.nn.functional as F
 
 from .chunking import ChunkedDoc
-from .encoding import MAX_PREFIX_TOKENS, Encoder
+from .encoding import MAX_PREFIX_TOKENS, Encoder, _template_special_counts, _validate_batch_size
 from .group_encoding import GroupInput, encode_group_inputs, encoder_cache_identity, group_input, refresh_token_inputs
 from .sticky import RefreshStats
 
@@ -57,10 +57,10 @@ def _plan(
     if len({chunk.chunk_id for chunk in chunks}) != len(chunks):
         raise ValueError("Duplicate chunk ID")
     tok = encoder.tokenizer
-    specials = tok.num_special_tokens_to_add(pair=False)
+    specials = sum(_template_special_counts(tok))
     model_budget = encoder.max_length - specials
     budget = min(token_cap, encoder.max_length) - specials
-    prefix_ids = tok(prefix, add_special_tokens=False)["input_ids"][:MAX_PREFIX_TOKENS] if prefix else []
+    prefix_ids = tok(prefix, add_special_tokens=False, truncation=False)["input_ids"][:MAX_PREFIX_TOKENS] if prefix else []
     body_budget = budget - len(prefix_ids)
     groups = []
     members: list[AnchoredChunk] = []
@@ -114,8 +114,7 @@ def encode_content_anchored(
     anchor_k: int = 4,
     prefixes: Mapping[str, str] | None = None,
 ) -> torch.Tensor:
-    if batch_size <= 0:
-        raise ValueError("batch_size must be positive")
+    _validate_batch_size(batch_size)
     groups = plan_content_anchored(encoder, docs, token_cap=token_cap, anchor_k=anchor_k, prefixes=prefixes)
     if not groups:
         return torch.empty(0, encoder.model.config.hidden_size)
@@ -135,8 +134,7 @@ class AnchoredGroups:
         batch_size: int = 16,
         prefix: str = "",
     ) -> None:
-        if batch_size <= 0:
-            raise ValueError("batch_size must be positive")
+        _validate_batch_size(batch_size)
         self._encoder = encoder
         self._token_cap = token_cap
         self._anchor_k = anchor_k

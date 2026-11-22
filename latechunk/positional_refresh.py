@@ -10,9 +10,13 @@ import torch
 import torch.nn.functional as F
 
 from .chunking import ChunkedDoc
-from .encoding import Encoder, plan_long_windows, validate_long_window
+from .encoding import (
+    Encoder, _template_special_counts, _validate_batch_size, _validate_doc_spans, plan_long_windows,
+    validate_long_window,
+)
 from .group_encoding import encoder_cache_identity, refresh_token_inputs
 from .sticky import RefreshStats
+from .study_refresh import long_late_parts
 
 
 WindowInput = tuple[int, ...]
@@ -33,30 +37,43 @@ class PositionalRefresh:
 
     def __init__(
         self, encoder: Encoder, *, window: int = 256, overlap: int = 64, batch_size: int = 16,
-        special_tokens: str = "raw",
+        special_tokens: str = "raw", oversized_singleton: bool = False,
     ):
         validate_long_window(window, overlap, encoder.max_length, special_tokens)
-        if batch_size <= 0:
-            raise ValueError("batch_size must be positive")
+        _validate_batch_size(batch_size)
+        if oversized_singleton and special_tokens != "wrap":
+            raise ValueError("Oversized singleton handling requires the wrapped study window policy")
         self._encoder = encoder
         self._window = window
         self._overlap = overlap
         self._batch_size = batch_size
         self._special_tokens = special_tokens
+        self._oversized_singleton = oversized_singleton
         self._identity = None
         self._outputs: dict[WindowInput, torch.Tensor] = {}
         self._dependencies: dict[str, ChunkDependencies] = {}
         self.vectors: dict[str, torch.Tensor] = {}
 
-    def _plan(self, input_ids: Sequence[int]) -> list[_Window]:
+    def _plan(self, doc: ChunkedDoc) -> list[_Window]:
         tokenizer = self._encoder.tokenizer
-        return [
-            _Window(start, end, owned, offset, tuple(ids))
-            for start, end, owned, offset, ids in plan_long_windows(
-                input_ids, self._window, self._overlap, self._special_tokens,
-                getattr(tokenizer, "cls_token_id", None), getattr(tokenizer, "sep_token_id", None),
-            )
-        ]
+        leading, trailing = _template_special_counts(tokenizer)
+        _validate_doc_spans(doc, leading, trailing)
+        if self._special_tokens == "wrap" and (leading, trailing) != (1, 1):
+            raise ValueError("'wrap' mode requires a single [CLS] prefix and a single [SEP] suffix")
+        parts = (long_late_parts(doc, self._window, leading, trailing) if self._oversized_singleton else [(0, doc, False)])
+        windows = []
+        for origin, part, oversized in parts:
+            if oversized:
+                if len(part.input_ids) > self._encoder.max_length:
+                    raise ValueError(f"Oversized retrieval chunk in {doc.doc_id!r} exceeds the encoder model limit")
+                start, end = part.spans[0]
+                windows.append(_Window(start + origin, end + origin, start + origin, start, tuple(part.input_ids)))
+                continue
+            plan = plan_long_windows(part.input_ids, self._window, self._overlap, self._special_tokens,
+                                     getattr(tokenizer, "cls_token_id", None), getattr(tokenizer, "sep_token_id", None))
+            windows.extend(_Window(start + origin, end + origin, owned + origin, offset, tuple(ids))
+                           for start, end, owned, offset, ids in plan)
+        return windows
 
     def refresh(self, doc: ChunkedDoc, chunk_ids: Sequence[str]) -> RefreshStats:
         """Update only windows and chunk vectors with changed inputs or ownership."""
@@ -67,7 +84,7 @@ class PositionalRefresh:
             raise ValueError("The positional window exceeds the encoder model limit")
         identity = encoder_cache_identity(self._encoder)
         same_encoder = identity == self._identity
-        windows = self._plan(doc.input_ids) if chunk_ids else []
+        windows = self._plan(doc) if chunk_ids else []
 
         # Record both each owning window's input and the exact local slice to pool.
         # The first window owns its whole output, and subsequent windows drop their overlap.

@@ -11,7 +11,7 @@ import torch
 import torch.nn.functional as F
 
 from .chunking import ChunkedDoc
-from .encoding import Encoder
+from .encoding import Encoder, _template_special_counts, _validate_batch_size
 from .group_encoding import GroupInput, encode_group_inputs, encoder_cache_identity, group_input, refresh_token_inputs
 
 
@@ -53,9 +53,10 @@ def sticky_chunks(doc: ChunkedDoc) -> tuple[StickyChunk, ...]:
 
 
 def _budgets(encoder: Encoder, token_cap: int, batch_size: int) -> tuple[int, int, int]:
-    if token_cap <= 0 or batch_size <= 0:
-        raise ValueError("Sticky grouping requires a positive token_cap and batch_size")
-    special_count = encoder.tokenizer.num_special_tokens_to_add(pair=False)
+    _validate_batch_size(batch_size)
+    if token_cap <= 0:
+        raise ValueError("Sticky grouping requires a positive token_cap")
+    special_count = sum(_template_special_counts(encoder.tokenizer))
     return min(token_cap, encoder.max_length) - special_count, encoder.max_length - special_count, special_count
 
 
