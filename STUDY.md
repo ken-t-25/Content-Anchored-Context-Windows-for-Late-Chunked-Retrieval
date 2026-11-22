@@ -15,7 +15,7 @@ python scripts/prepare_conteb.py --repo illuin-conteb/insurance --source-split t
 
 COVID-QA and Insurance publish their evaluation data under the upstream split name `train`. Here `test` designates their study role. The exporter reads the published `documents` and `queries` configurations. The loader sorts native chunks by their numeric suffix and preserves chunk text and IDs. When title metadata is absent, Independent + Prefix uses up to 64 tokens from the lead chunk. The target span is pooled even when its text is also present in the prefix.
 
-Published datasets: [MLDR training](https://huggingface.co/datasets/illuin-conteb/mldr-conteb-train), [MLDR evaluation](https://huggingface.co/datasets/illuin-conteb/mldr-conteb-eval), [COVID-QA](https://huggingface.co/datasets/illuin-conteb/covid-qa), [Insurance](https://huggingface.co/datasets/illuin-conteb/insurance).
+The publisher documents the native fields and split names. [MLDR training](https://huggingface.co/datasets/illuin-conteb/mldr-conteb-train), [MLDR evaluation](https://huggingface.co/datasets/illuin-conteb/mldr-conteb-eval), [COVID-QA](https://huggingface.co/datasets/illuin-conteb/covid-qa), [Insurance](https://huggingface.co/datasets/illuin-conteb/insurance).
 
 ## Select settings on MLDR train and freeze them
 
@@ -38,10 +38,12 @@ Record which configuration was selected for each context cap and the development
 
 ## Evaluate the frozen selection
 
-Set `$Trial` to a configuration selected on development data, then repeat for the other selected caps. The held-out quality run emits per-query rankings, nDCG@10, Recall@10, explicit coverage, and a source-document paired bootstrap for Content-Anchored minus Long Late. The proposal's noninferiority threshold is a 95% confidence interval lower bound greater than −0.02 nDCG. A dataset with one source document supports descriptive results only.
+Enter a recorded development trial ID, then repeat for the other selected caps. The held-out quality run emits per-query rankings, nDCG@10, Recall@10, explicit coverage, and a source-document paired bootstrap for Content-Anchored minus Long Late. The proposal's noninferiority threshold is a 95% confidence interval lower bound greater than −0.02 nDCG. A dataset with one source document supports descriptive results only.
 
 ```powershell
+$Trial = Read-Host 'Trial ID selected on MLDR train'
 $Frozen = "$Run/dev/$Trial.frozen.json"
+if (-not (Test-Path -LiteralPath $Frozen)) { throw "Missing frozen configuration $Frozen" }
 python scripts/run_study.py --native "$Run/mldr-test.json" --phase held-out --frozen-config $Frozen --out "$Run/test/$Trial.json"
 python scripts/run_study_edits.py --native "$Run/mldr-test.json" --frozen-config $Frozen --limit-docs 20 --edit-position all --out "$Run/edits/$Trial.json"
 python scripts/run_study.py --native "$Run/covid-qa.json" --phase transfer --frozen-config $Frozen --out "$Run/transfer/covid-qa-$Trial.json"
