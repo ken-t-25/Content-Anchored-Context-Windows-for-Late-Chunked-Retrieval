@@ -8,10 +8,11 @@ from types import MappingProxyType
 from typing import Mapping, Sequence
 
 import torch
+import torch.nn.functional as F
 
 from .chunking import ChunkedDoc
 from .encoding import Encoder
-from .group_encoding import encode_group_inputs, group_input
+from .group_encoding import GroupInput, encode_group_inputs, encoder_cache_identity, group_input, refresh_token_inputs
 
 
 @dataclass(frozen=True)
@@ -30,6 +31,8 @@ Group = tuple[StickyChunk, ...]
 
 @dataclass(frozen=True)
 class RefreshStats:
+    """Measure distinct model inputs, actual batches, and chunk vector writes."""
+
     refreshed_groups: int = 0
     refreshed_input_tokens: int = 0
     encoder_calls: int = 0
@@ -95,7 +98,7 @@ def encode_sticky(
 
 
 class StickyGroups:
-    """Mutable groups and vectors for one document, tied to a fixed encoder and tokenizer."""
+    """Mutable groups and vectors for one document, scoped to the current encoder and tokenizer."""
 
     def __init__(
         self,
@@ -109,7 +112,13 @@ class StickyGroups:
         started = perf_counter()
         self._encoder = encoder
         self._batch_size = batch_size
-        self._budget, self._model_budget, self._special_count = _budgets(encoder, token_cap, batch_size)
+        self._token_cap = token_cap
+        budget, model_budget, _ = _budgets(encoder, token_cap, batch_size)
+        self._limits = (budget, model_budget)
+        self._identity = None
+        self._group_inputs: dict[Group, GroupInput] = {}
+        self._outputs: dict[tuple[int, ...], torch.Tensor] = {}
+        self._locations: dict[str, tuple[tuple[int, ...], tuple[int, int]]] = {}
         self._groups: tuple[Group, ...] = ()
         self._vectors: dict[str, torch.Tensor] = {}
         chunks = tuple(chunks)
@@ -118,13 +127,13 @@ class StickyGroups:
             raise ValueError("Duplicate chunk ID")
 
         if group_map is None:
-            groups = _pack(chunks, self._budget, self._model_budget)
+            groups = _pack(chunks, budget, model_budget)
         else:
             ids = tuple(tuple(group) for group in group_map)
             if any(not group for group in ids) or tuple(chunk_id for group in ids for chunk_id in group) != tuple(by_id):
                 raise ValueError("The group map must partition the chunks in document order")
             groups = [tuple(by_id[chunk_id] for chunk_id in group) for group in ids]
-            if any(len(_pack(group, self._budget, self._model_budget)) != 1 for group in groups):
+            if any(len(_pack(group, budget, model_budget)) != 1 for group in groups):
                 raise ValueError("A stored group exceeds its token budget")
         self._commit(groups, started)
 
@@ -149,7 +158,8 @@ class StickyGroups:
         raise KeyError(chunk_id)
 
     def _put(self, group_index: int, members: Group, started: float) -> RefreshStats:
-        packed = _pack(members, self._budget, self._model_budget)
+        budget, model_budget, _ = _budgets(self._encoder, self._token_cap, self._batch_size)
+        packed = _pack(members, budget, model_budget)
         groups = self._groups[:group_index] + tuple(packed) + self._groups[group_index + 1 :]
         return self._commit(groups, started)
 
@@ -181,43 +191,63 @@ class StickyGroups:
         else:
             groups[group_index] = kept
             # Merge below half capacity, preferring the left adjacent group.
-            if 2 * _content_length(kept) < self._budget:
+            budget, _, _ = _budgets(self._encoder, self._token_cap, self._batch_size)
+            if 2 * _content_length(kept) < budget:
                 for neighbour in (group_index - 1, group_index + 1):
-                    if 0 <= neighbour < len(groups) and _content_length(kept + groups[neighbour]) <= self._budget:
+                    if 0 <= neighbour < len(groups) and _content_length(kept + groups[neighbour]) <= budget:
                         left = min(group_index, neighbour)
                         groups[left : left + 2] = [groups[left] + groups[left + 1]]
                         break
         return self._commit(groups, started)
 
     def refresh(self) -> RefreshStats:
-        """Refresh with no edits. The current group inputs and vectors still agree."""
-        self.stats = RefreshStats()
-        return self.stats
+        """Refresh the current groups, rebuilding if the encoder namespace changed."""
+        return self._commit(self._groups, perf_counter())
 
     def _commit(self, groups: Sequence[Group], started: float) -> RefreshStats:
-        # Equal groups have the same ordered IDs, full token input and pooling spans.
-        previous = set(self._groups)
-        pending = [group for group in groups if group not in previous]
-        removed = self._vectors.keys() - {chunk.chunk_id for group in groups for chunk in group}
-        input_tokens = sum(_content_length(group) + self._special_count for group in pending)
+        identity = encoder_cache_identity(self._encoder)
+        same_encoder = identity == self._identity
+        budget, model_budget, _ = _budgets(self._encoder, self._token_cap, self._batch_size)
+        if (budget, model_budget) != self._limits:
+            groups = [part for group in groups for part in _pack(group, budget, model_budget)]
+
+        previous_groups = self._group_inputs if same_encoder else {}
+        group_inputs = {}
+        locations = {}
+        for group in groups:
+            item = previous_groups.get(group)
+            if item is None:
+                item = group_input(self._encoder.tokenizer, [chunk.token_ids for chunk in group])
+            group_inputs[group] = item
+            for chunk, span in zip(group, item.spans, strict=True):
+                locations[chunk.chunk_id] = (item.token_ids, span)
+        rewritten = [
+            chunk_id for chunk_id, address in locations.items()
+            if not same_encoder or self._locations.get(chunk_id) != address
+        ]
+        removed = self._locations.keys() - locations.keys()
         encode_started = perf_counter()
-        encoded = _encode_groups(self._encoder, pending, self._batch_size)
+        outputs, pending = refresh_token_inputs(
+            self._encoder, [item.token_ids for item in group_inputs.values()], self._batch_size,
+            self._outputs if same_encoder else None,
+        )
         write_started = perf_counter()
 
         vectors = self._vectors.copy()
         for chunk_id in removed:
             del vectors[chunk_id]
-        for group, rows in zip(pending, encoded, strict=True):
-            for chunk, row in zip(group, rows, strict=True):
-                vectors[chunk.chunk_id] = row
+        for chunk_id in rewritten:
+            ids, (start, end) = locations[chunk_id]
+            vectors[chunk_id] = F.normalize(outputs[ids][start:end].mean(dim=0), dim=0)
+        self._identity, self._limits = identity, (budget, model_budget)
         self._groups, self._vectors = tuple(groups), vectors
-
+        self._outputs, self._locations, self._group_inputs = outputs, locations, group_inputs
         finished = perf_counter()
         self.stats = RefreshStats(
             refreshed_groups=len(pending),
-            refreshed_input_tokens=input_tokens,
+            refreshed_input_tokens=sum(map(len, pending)),
             encoder_calls=(len(pending) + self._batch_size - 1) // self._batch_size,
-            rewritten_vectors=sum(len(group) for group in pending),
+            rewritten_vectors=len(rewritten),
             removed_vectors=len(removed),
             regroup_seconds=encode_started - started,
             encode_seconds=write_started - encode_started,

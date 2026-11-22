@@ -9,10 +9,11 @@ from types import MappingProxyType
 from typing import Mapping, Sequence
 
 import torch
+import torch.nn.functional as F
 
 from .chunking import ChunkedDoc
 from .encoding import MAX_PREFIX_TOKENS, Encoder
-from .group_encoding import GroupInput, encode_group_inputs, group_input
+from .group_encoding import GroupInput, encode_group_inputs, encoder_cache_identity, group_input, refresh_token_inputs
 from .sticky import RefreshStats
 
 
@@ -116,15 +117,13 @@ def encode_content_anchored(
     if batch_size <= 0:
         raise ValueError("batch_size must be positive")
     groups = plan_content_anchored(encoder, docs, token_cap=token_cap, anchor_k=anchor_k, prefixes=prefixes)
-    inputs = list(dict.fromkeys(group.input for group in groups))
-    encoded = dict(zip(inputs, encode_group_inputs(encoder, inputs, batch_size), strict=True))
     if not groups:
         return torch.empty(0, encoder.model.config.hidden_size)
-    return torch.cat([encoded[group.input] for group in groups])
+    return torch.cat(encode_group_inputs(encoder, [group.input for group in groups], batch_size))
 
 
 class AnchoredGroups:
-    """One document's cache, scoped to a fixed encoder, tokenizer and input template."""
+    """One document's cache, scoped to the current encoder and tokenizer."""
 
     def __init__(
         self,
@@ -143,8 +142,9 @@ class AnchoredGroups:
         self._anchor_k = anchor_k
         self._batch_size = batch_size
         self._prefix = prefix
-        self._cache: dict[GroupInput, torch.Tensor] = {}
-        self._locations: dict[str, tuple[GroupInput, int]] = {}
+        self._identity = None
+        self._outputs: dict[tuple[int, ...], torch.Tensor] = {}
+        self._locations: dict[str, tuple[tuple[int, ...], tuple[int, int]]] = {}
         self._vectors: dict[str, torch.Tensor] = {}
         self.refresh(chunks)
 
@@ -162,33 +162,38 @@ class AnchoredGroups:
         started = perf_counter()
         prefix = self._prefix if prefix is None else prefix
         groups = _plan(self._encoder, chunks, self._token_cap, self._anchor_k, prefix)
-        inputs = list(dict.fromkeys(group.input for group in groups))
-        pending = [item for item in inputs if item not in self._cache]
+        identity = encoder_cache_identity(self._encoder)
+        same_encoder = identity == self._identity
         locations = {
-            chunk_id: (group.input, index)
-            for group in groups for index, chunk_id in enumerate(group.chunk_ids)
+            chunk_id: (group.input.token_ids, span)
+            for group in groups for chunk_id, span in zip(group.chunk_ids, group.input.spans, strict=True)
         }
-        rewritten = [chunk_id for chunk_id, address in locations.items() if self._locations.get(chunk_id) != address]
+        rewritten = [
+            chunk_id for chunk_id, address in locations.items()
+            if not same_encoder or self._locations.get(chunk_id) != address
+        ]
         removed = self._locations.keys() - locations.keys()
 
         encode_started = perf_counter()
-        encoded = encode_group_inputs(self._encoder, pending, self._batch_size)
+        outputs, pending = refresh_token_inputs(
+            self._encoder, [group.input.token_ids for group in groups], self._batch_size,
+            self._outputs if same_encoder else None,
+        )
         write_started = perf_counter()
-        cache = {item: self._cache[item] for item in inputs if item in self._cache}
-        cache.update(zip(pending, encoded, strict=True))
         vectors = self._vectors.copy()
         for chunk_id in removed:
             del vectors[chunk_id]
         for chunk_id in rewritten:
-            item, index = locations[chunk_id]
-            vectors[chunk_id] = cache[item][index]
-        self._prefix, self._cache, self._locations, self._vectors = prefix, cache, locations, vectors
+            ids, (start, end) = locations[chunk_id]
+            vectors[chunk_id] = F.normalize(outputs[ids][start:end].mean(dim=0), dim=0)
+        self._identity, self._prefix = identity, prefix
+        self._outputs, self._locations, self._vectors = outputs, locations, vectors
         self._group_map = tuple(group.chunk_ids for group in groups)
 
         finished = perf_counter()
         self.stats = RefreshStats(
             refreshed_groups=len(pending),
-            refreshed_input_tokens=sum(len(item.token_ids) for item in pending),
+            refreshed_input_tokens=sum(map(len, pending)),
             encoder_calls=(len(pending) + self._batch_size - 1) // self._batch_size,
             rewritten_vectors=len(rewritten),
             removed_vectors=len(removed),
