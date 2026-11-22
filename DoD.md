@@ -1,0 +1,8 @@
+# Integration acceptance criteria
+
+- Use three Git worktrees with separate worker branches for encoding, refresh, and experiment infrastructure. Review each branch, integrate it on a local integration branch, and report the worker and integration commits.
+- Preserve valid SciFact reproduction behavior. Reject overlength direct inputs, invalid batch/window/overlap settings, and documents that cannot be encoded by Full Late. Fix Local Contextual's target span offset. Verify these paths with regression tests.
+- Build edited chunks from source text and verify replacement token lengths. Keep retained chunk IDs stable. Verify Sticky splits and merges, Anchored regrouping after edits, and exact incremental vectors against fresh policy builds. Verify zero encoder calls on unchanged input, namespace resets on model or tokenizer changes, and shared prefix invalidation.
+- Run all seven policies on one set of eligible retrieval chunks and record coverage and exclusion reasons. Record resolved configuration, effective batch size, dataset and encoder provenance, and separate standalone and shared timings. Support matched positional window budgets of 1,024, 2,048, and 4,096 with configurable overlap, development selection, and frozen held-out configurations.
+- Run the complete unit suite, a small end-to-end seven-policy quality and refresh check, and a corrected edit pilot with a matched Long Late cap. Record refreshed tokens, encoder calls, updates, and observed latency separately. Preserve archived results and put new runs under new output paths.
+- Report what prior results support, which claims need fresh runs, remaining limitations, and commands for ConTEB/MLDR.
