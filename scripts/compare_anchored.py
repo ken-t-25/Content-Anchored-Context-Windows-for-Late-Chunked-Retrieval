@@ -1,4 +1,4 @@
-"""Compare 12 Content-Anchored settings with the recorded SciFact baselines."""
+"""Exploratory shared Content-Anchored sweep against archived SciFact baselines."""
 
 from __future__ import annotations
 
@@ -21,9 +21,12 @@ from latechunk.chunking import fixed_token_chunks  # noqa: E402
 from latechunk.data import doc_text, download_beir, load_beir  # noqa: E402
 from latechunk.encoding import Encoder, pool_spans  # noqa: E402
 from latechunk.retrieval import evaluate, search_docs  # noqa: E402
+from latechunk.study_data import fingerprint  # noqa: E402
+from latechunk.study_experiment import encoder_provenance  # noqa: E402
 
 MODEL = "jinaai/jina-embeddings-v2-small-en"
 BATCH_SIZE = 16
+QUERY_BATCH_SIZE = 64
 MAX_LENGTH = 8192
 TOKEN_CAP = 1024
 CHUNK_SIZES = (256, 128, 64)
@@ -94,6 +97,9 @@ def plan_variants(encoder: Encoder, corpus: dict, comparison: dict[int, dict]) -
         if len(chunk_owner) != comparison[size]["chunks"]:
             raise ValueError(f"Unexpected chunk count at size {size}")
         owners[size] = chunk_owner
+        comparison[size]["chunk_fingerprint"] = fingerprint([
+            (doc.doc_id, doc.input_ids, doc.spans, doc.texts) for doc in docs
+        ])
         for anchor_k in ANCHOR_DIVISORS:
             for use_prefix in (False, True):
                 key = (size, anchor_k, use_prefix)
@@ -214,7 +220,9 @@ def main() -> None:
     del routes
 
     doc_ids, query_ids = list(corpus), list(queries)
-    query_vectors = encoder.encode_texts([queries[q] for q in query_ids], batch_size=64)
+    query_started = time.perf_counter()
+    query_vectors = encoder.encode_texts([queries[q] for q in query_ids], batch_size=QUERY_BATCH_SIZE)
+    query_seconds = time.perf_counter() - query_started
     for (size, anchor_k, use_prefix), variant in variants.items():
         methods = comparison[size]["methods"]
         name = f"content_anchored_k{anchor_k}" + ("_prefix" if use_prefix else "")
@@ -227,7 +235,23 @@ def main() -> None:
         "config": {"dataset": "scifact", "documents": len(corpus), "queries": len(queries), "model": MODEL,
                    "device": str(encoder.device), "batch_size": BATCH_SIZE, "max_length": MAX_LENGTH,
                    "token_cap": TOKEN_CAP, "anchor_divisors": ANCHOR_DIVISORS, "title_plus_body": True},
-        "shared_encoder": shared,
+        "scope": "exploratory_archived_baseline_comparison",
+        "evaluation_level": "document",
+        "encoder": encoder_provenance(encoder),
+        "fingerprints": {
+            "corpus": fingerprint(list(corpus.items())),
+            "queries": fingerprint(list(queries.items())),
+            "qrels": fingerprint(qrels),
+        },
+        "actual_batch_sizes": {
+            "shared_corpus": BATCH_SIZE, "queries": QUERY_BATCH_SIZE,
+            "archived_corpus_by_method": {name: 64 if name in {"naive", "naive_prefix"} else BATCH_SIZE
+                                          for name in BASELINES},
+        },
+        "shared_encoder": shared | {
+            "scope": "shared_across_content_anchored_sweep_variants",
+            "query_encode_seconds": query_seconds,
+        },
         "sizes": comparison,
     }
     args.out.parent.mkdir(parents=True, exist_ok=True)

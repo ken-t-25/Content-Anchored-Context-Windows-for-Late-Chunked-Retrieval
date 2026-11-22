@@ -32,10 +32,15 @@ from latechunk.encoding import (  # noqa: E402
 )
 from latechunk.retrieval import evaluate, search_docs  # noqa: E402
 from latechunk.sticky import encode_sticky  # noqa: E402
+from latechunk.study_data import fingerprint  # noqa: E402
+from latechunk.study_experiment import encoder_provenance, write_new_json  # noqa: E402
 
 # Reference values (nDCG@10 x100) for jina-embeddings-v2-small-en, fixed 256-token chunks,
 # as reported in the jina-ai/late-chunking README. Check them against Table 2 of the paper.
 REFERENCE = {"scifact": {"naive": 64.20, "late": 66.10}}
+INDEPENDENT_BATCH_SIZE = 64
+QUERY_BATCH_SIZE = 64
+REFERENCE_MODEL = "jinaai/jina-embeddings-v2-small-en"
 
 
 def sanity_checks(enc: Encoder, docs, n: int = 50) -> dict:
@@ -87,7 +92,9 @@ def main():
     p.add_argument("--dataset", default="scifact")
     p.add_argument("--data-dir", type=Path, default=Path("data"))
     p.add_argument("--out-dir", type=Path, default=Path("results"))
-    p.add_argument("--model", default="jinaai/jina-embeddings-v2-small-en")
+    p.add_argument("--model", default=REFERENCE_MODEL)
+    p.add_argument("--model-revision")
+    p.add_argument("--tokenizer-revision")
     p.add_argument("--chunk-size", type=int, default=256)
     p.add_argument("--max-length", type=int, default=8192)
     p.add_argument("--methods", nargs="+", default=["naive", "late", "long_late"],
@@ -104,11 +111,20 @@ def main():
                    help="Content-anchored group token budget, including any prefix and special tokens")
     p.add_argument("--no-title", action="store_true",
                    help="Split body text only. Prefix methods still use the BEIR title as their prefix.")
-    p.add_argument("--batch-size", type=int, default=16)
+    p.add_argument("--batch-size", type=int, default=16, help="Batch size for contextual corpus encoders")
+    p.add_argument("--independent-batch-size", type=int, default=INDEPENDENT_BATCH_SIZE)
+    p.add_argument("--query-batch-size", type=int, default=QUERY_BATCH_SIZE)
     p.add_argument("--limit-docs", type=int, default=None, help="Debug: only use the first N documents")
     p.add_argument("--device", default=None)
     p.add_argument("--skip-sanity", action="store_true")
     args = p.parse_args()
+    if min(args.batch_size, args.independent_batch_size, args.query_batch_size, args.chunk_size) < 1:
+        p.error("Batch and chunk sizes must be positive")
+    if args.limit_docs is not None and args.limit_docs < 1:
+        p.error("--limit-docs must be positive")
+    out = args.out_dir / f"repro_{args.dataset}_cs{args.chunk_size}.json"
+    if out.exists():
+        p.error(f"Output already exists: {out}")
     if {"content_anchored", "content_anchored_prefix"}.intersection(args.methods):
         if args.anchor_k < 1 or args.anchor_token_cap < 1:
             p.error("--anchor-k and --anchor-token-cap must be positive")
@@ -116,9 +132,24 @@ def main():
     torch.manual_seed(0)
     corpus, queries, qrels = load_beir(download_beir(args.dataset, args.data_dir))
     doc_ids = list(corpus)[: args.limit_docs]
-    print(f"{args.dataset}: {len(doc_ids)} docs, {len(queries)} test queries")
+    source_queries = queries
+    source_qrels = qrels
+    if args.limit_docs is not None:
+        included_ids = set(doc_ids)
+        qrels = {
+            q: {doc_id: grade for doc_id, grade in grades.items() if doc_id in included_ids}
+            for q, grades in qrels.items()
+        }
+        queries = {q: value for q, value in queries.items() if any(grade > 0 for grade in qrels[q].values())}
+        qrels = {q: qrels[q] for q in queries}
+    if not queries or not doc_ids:
+        p.error("No documents or judged queries remain in the selected corpus")
+    print(f"{args.dataset}: {len(doc_ids)} docs, {len(queries)} judged test queries")
 
-    enc = Encoder(args.model, device=args.device, max_length=args.max_length)
+    enc = Encoder(
+        args.model, device=args.device, max_length=args.max_length,
+        model_revision=args.model_revision, tokenizer_revision=args.tokenizer_revision,
+    )
     print(f"Model {args.model} on {enc.device}")
 
     t0 = time.time()
@@ -130,21 +161,45 @@ def main():
           f"doc tokens median={lens[len(lens) // 2]} max={lens[-1]}; "
           f"docs with no chunks={sum(not d.spans for d in docs)}")
 
-    results = {"config": {k: str(v) for k, v in vars(args).items()}}
+    method_batches = {
+        method: args.independent_batch_size if method in {"naive", "naive_prefix"} else args.batch_size
+        for method in args.methods
+    }
+    results = {
+        "config": {k: str(v) for k, v in vars(args).items()},
+        "evaluation_level": "document",
+        "scope": "smoke" if args.limit_docs is not None else "exploratory_legacy_reproduction",
+        "encoder": encoder_provenance(enc),
+        "actual_batch_sizes": {"queries": args.query_batch_size, "corpus_by_method": method_batches},
+        "fingerprints": {
+            "source": fingerprint((list(corpus.items()), list(source_queries.items()), source_qrels)),
+            "corpus": fingerprint([(doc.doc_id, doc.input_ids) for doc in docs]),
+            "chunks": fingerprint([(doc.doc_id, doc.spans, doc.texts) for doc in docs]),
+            "queries": fingerprint(list(queries.items())),
+            "qrels": fingerprint(qrels),
+        },
+        "coverage": {
+            "source_documents": len(corpus), "evaluated_documents": len(doc_ids),
+            "source_queries": len(source_queries), "evaluated_queries": len(queries), "chunks": len(chunk_doc),
+        },
+        "timing": {"method_scope": "standalone_corpus_encoding_and_pooling_no_cross_policy_cache"},
+    }
     if not args.skip_sanity:
         results["sanity"] = sanity_checks(enc, docs)
         print("Sanity:", json.dumps(results["sanity"], indent=2))
 
     qids = list(queries)
-    q_emb = enc.encode_texts([queries[q] for q in qids], batch_size=64)
+    started = time.perf_counter()
+    q_emb = enc.encode_texts([queries[q] for q in qids], batch_size=args.query_batch_size)
+    results["timing"]["shared_query_encode_seconds"] = time.perf_counter() - started
 
     for method in args.methods:
-        t0 = time.time()
+        t0 = time.perf_counter()
         if method == "naive":
-            c_emb = encode_naive(enc, docs, batch_size=64)
+            c_emb = encode_naive(enc, docs, batch_size=method_batches[method])
         elif method == "naive_prefix":
             prefixes = {doc_id: corpus[doc_id]["title"] for doc_id in doc_ids}
-            c_emb = encode_naive_prefix(enc, docs, prefixes, batch_size=64)
+            c_emb = encode_naive_prefix(enc, docs, prefixes, batch_size=method_batches[method])
         elif method == "late":
             c_emb = encode_late(enc, docs, batch_size=args.batch_size)
         elif method == "local_contextual":
@@ -163,22 +218,23 @@ def main():
         else:
             c_emb = encode_late(enc, docs, batch_size=args.batch_size, long_window=args.long_window,
                                 long_overlap=args.long_overlap, special_tokens=args.long_special_tokens)
-        enc_time = time.time() - t0
+        enc_time = time.perf_counter() - t0
         assert c_emb.shape[0] == len(chunk_doc)
 
         _, top = search_docs(q_emb, c_emb, chunk_doc, len(docs), top_k=100)
         run = {q: [doc_ids[j] for j in row.tolist()] for q, row in zip(qids, top)}
         m = evaluate(run, qrels, k=10)
         m["encode_seconds"] = enc_time
-        ref = None if args.no_title else REFERENCE.get(args.dataset, {}).get(method)
+        reference_matches = (
+            args.limit_docs is None and not args.no_title and args.chunk_size == 256 and args.model == REFERENCE_MODEL
+        )
+        ref = REFERENCE.get(args.dataset, {}).get(method) if reference_matches else None
         results[method] = m
         print(f"[{method:9s}] nDCG@10={100 * m['ndcg@10']:.2f}  Recall@10={100 * m['recall@10']:.2f}"
               + (f"  (reference nDCG@10={ref:.2f})" if ref is not None else "")
               + f"  encode={enc_time:.0f}s")
 
-    args.out_dir.mkdir(parents=True, exist_ok=True)
-    out = args.out_dir / f"repro_{args.dataset}_cs{args.chunk_size}.json"
-    out.write_text(json.dumps(results, indent=2))
+    write_new_json(out, results)
     print(f"Saved {out}")
 
 
